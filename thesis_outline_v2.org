@@ -1,0 +1,220 @@
+* My Papers
+** Done
+  + =peveler_towards_2018= (ICRES'18)
+  + =arai_cira:_2019= (IntelliSys'18)
+  + =briggs_enabling_2019= (ACHI'19)
+  + =kurosu_translating_2019= (HCI'19)
+  + =peveler_reagent:_2018= (ICJAI'19 Demo)
+** In-Progress
+  + =peveler_toward_2018= (ACS'18)
+  + Reagent Full Paper (Target: AAAI'19)
+  + A Framework For Virtual Mouse Interface For Supporting Multi-User, Multi-Modal Interactions
+  + Formalization of Cognitive Polysolid Framework
+** Proposed
+  + Multi-Modal Intent Resolution Through Planning (Single Step Planning)
+  + Proactive/Reactive Room Agents
+  + Cell-phone based pointing/gesture system
+
+
+Working Title: "Planning and Plan Recognition at a Theory of Mind Level in Cognitive and Immersive Systems"
+
+
+* The Deontic Cognitive Calculus
+Discuss the DCEC, or just the CEC if we do not make use of the deontic operators, though we will probably
+at least make mention of them in the context of multi-"sub-agent" implementations of the CAIS (especially
+with regards to determing which sub-agent of the system is allowed to respond in a given situation).
+
+
+* Requirements for a Cognitive and Immersive System
+In this section, we discuss what a theoretical, full-featured CAIS might look like, is capable of,
+and the properties it would have. We term this set of requirements, *L*. Through these capabilities,
+we realize the following two conditions in any given CAIS:
+
+C Cognitive: 
+    A CAIS should be able to help agents with cognitive tasks and goals. For instance, a system
+    that simply aids in querying a domain /D/ is not cognitive in nature; a system that aids an
+    agent in convincing another agent that some state-of-affairs holds in /D/ isconsidered cognitive.
+
+I Immersive: 
+    There should be some attribute or property of a CAIS that is non-localized and distinguished
+    from agents in the room. Moreover, this property should be *common knowledge*.
+
+To help illustrate these two points, we provide a theoretical situation between three human agents,
+Alvin, Bill, and Charles that are all standing in a CAIS. The CAIS is showing various pieces of 
+different content of several screens. Bill points to one of these pieces of content while looking at
+Alvin and Alvin is looking at Bill, while Charles is looking elsewhere altogether. The CAIS, to be
+sufficient, needs to be able to see all all agents, including their location, where they are looking,
+their facial expressions, their gestures, etc. The CAIS, should be able to reason about how Alvin is
+perceiving the gesture that Bill is doing, and that Bill knows that Alvin is perceiving Bill's gesture,
+and the content that Bill is pointing at. Additionally, Alvin believes that Charles does not perceive
+the gesture. To support this, we have sub-requirements of *L* that we define, such as gestures, position,
+haed pose, emotions, etc, and that from these, we can break these down into further components, such as
+for gestures, we support pointing, clicking on content in some way (such as opening and closing a hand),
+etc.
+
+* Architecture of Cognitive and Immersive Systems
+In this section, we discuss how one might create an architecture *A*
+to support the above requirements of *L*. This is based on the work
+initially done in =arai_cira:_2019=, but far extended. The system is
+constructed using the "Unix Philosophy" of "Do One Thing and Do It
+Well". The system is made up of individual cogs/workers that can be
+combined to handle different domains as well as paradigms. For
+example, assume we have an input of microphone for speech and kinect
+camera for gesture. There is a "transcript-worker" for transcribing
+the Speech-to-Text from the microphone and a "kinect-worker" for
+transcribing the gesture data from the kinect camera into a
+point/gesture on the screen. The "kinect-worker" feeds into a
+"gesture-display-worker" which converts the raw X/Y coordinate into a
+semantic representation of what is on the screen at that
+coordinate. The "fusion-worker" then handles combining the streams
+from "transcript-worker" and "gesture-display-worker" for
+early-fusion. A CAIS agent would be made up of some number of
+cogs/workers where each piece has a formal "contract" of what it will
+accept for input as well as for "output". Through this composition, we
+allow for different levels of agents, e.g. a shopkeeper agent in a
+digital world and a teacher agent that controls what scenes are shown
+in the digital world or a toaster agent in a house and the house
+itself. This composition then makes it easy to build single-agent and
+multi-agent systems off the same base, and that subbing down
+components should be relatively seamless. This section would focus on
+the base set of components that are provided in the system as well as
+how they can be leveraged in a generic fashion across domains and
+supporting the goal of automatic formalization of content (at least
+minimally) on webpages and happening within a CAIS.
+
+Note: Could use formal reasoning to potentially tell us how we could
+put together various agents if so desired, such as composition of API
+services.
+
+Note: For dealing with "micro-agents" (e.g. the shopkeeper), we will
+need to have a system for handling potential concurrent output from
+many of these "micro-agents" and determining on which of these should
+be allowed, which influence the world, etc, potentially something like
+=bayser_specifying_2018=.
+
+* Implementation a CAIS
+For the purposes of this work, having a fully actualized CAIS that
+fully supports all parts of *L* is not possible to fully realize due
+to technological constraints. However, we can present a formalization
+and implementation of a slice of *L*, with a clear path for extending
+it to the non-done parts. For this, we focus principally on pointing
+and some macro gestures which we express in the well-understood
+paradigm of the computer mouse, and includes "clicking" and
+"scrolling" content that is displayed within a CAIS.  For our
+implementation, we focus on usage of a cellphone-based "mouses" which
+a user holds in their hand and can point at anywhere on the screen to
+interact with it. There are Time-of-Flight cameras in tehe ceiling
+that give us positions of all agents within a room, as well as where
+they are facing.  There are microphones in the system that pick up all
+speech input from the users. Where are user is pointing on the screen
+is represented by an icon (with that user's ID in it to differentiante
+them), and which we can use to determine where it is an agent is
+pointing at, as well as helping other agents to know what a given
+agent is pointing at.
+
+* Formalizing the CAIS
+Currently, most systems (to our knowledge) are constructed in a somewhat "ad-hoc" process which prevents
+potential for automatic composition of a domain and the possible actions within it. This creates a 
+duplication of effort in creating domains and interactions within, as well as for hooking up the various
+components. 
+
+By formalizing the actions of the room using a PDDL-like (or extended STRIPS language) structure, the
+room is able to then automatically compose action sequences, as well as help users understand where
+they can go from a given node. This has been applied successfully in straight dialogue systems
+(=botea_generating_2019=), and that adding additional modalities is just additional types within the
+formal logic.
+
+It's important to note also that actions wihtin a room can consist of:
+- Just Speech
+- Just Gesture
+- Speech and Gesture
+
+As well as that actions within the room will refer to prior actions/context of the room.
+
+* Example Domains for the CAIS
+** Cognitive Polysolid World
+** Sticky Notes (see =briggs_enabling_2019= & =kurosu_translating_2019=)
+The sticky notes domain is supposed to resemble the analog version, but happens within a digital framework.
+In the room is a large display that represents the "global view" of the system. Each human agent is
+equipped with a tablet that represents the "personal view". In the personal view, the user sees all
+content that is in the "global view" as well as having an additional space for creating notes that only they
+can see. The use-case is that students would create some number of notes on their personal view, and then
+move the notes to the shared global view, and then creating categories/groupings for the notes. On the global
+view, users can use a combination of speech and gesture to manipulate notes (e.g. "Delete that note" while
+pointing at a note). Formalization of this domain would consist of things like:
+"At time t user x created note y"
+"At time t user x created category z"
+"At time t user x moved note y into category z"
+etc.
+
+Note: This formalization would be done (or at least minimally) as a part of the initial work on 
+intent resolution.
+
+** Naive airplane
+
+This uses the principle of =hayes_naive_1978= and =hayes_second_nodate= in that while planes and the
+physics behind them is very complex, we can largely describe much of their macro behavior in very
+naive and simple ways that the layman would understand. An example would be that if flying at normal
+speed, and pulling up on nose of the plane, the plane will deaccelerate and then stall, and then crash.
+This would be (informally) formalized such that:
+1. if pointed_up(nose) & ~accelerating -> slow_down
+2. if slow_down -> speed -= 10
+3. if speed = <threshold> & pointed_up(nose) -> stall
+
+Similarily, the cockpit of a modern plane is very complex with many buttons, alerts, etc. and that
+we will largely ignore a lot of what these do and operate and just assume naively general interfaces
+for dealing with a plane.
+
+Work here would largely focus on "what would cause a pilot to take a given action" and how
+a plane may attempt to wreckify a pilot's belief state that falls out of sync with the real-world (e.g.
+start alarm light, notify other crew members, take full control away from pilot, etc.).
+
+* Using Planning and Plan Recognition Within a CAIS
+
+Prior work:
++ =sohrabi_plan_2016=
++ =sohrabi_ibm_2018=
+
+However, these use only Predicate/FOL calculus for plans and do not operate at a theory of mind
+level. We can employ Spectra/ShadowProver to take inspiration from the above and apply the principles
+to theory of mind planning.
+
+** Single Step Planning for Intent Resolution
+
+One of the challenges of using a CAIS is that use of purely speech is cumbersome and that humans
+will want to avoid this. Additionally, in some contexts, saying certain elements would be almost
+impossible to do (e.g. =kephart_embodied_2019=) and that humans more naturally want to rely on
+gesture to deal with this. However, in that work, integration between voice and gesture was done
+by hand-creating the link between how to reference the visual content (including
+what views have the content, and how one might interact with it) that a given voice
+command would need. This means that if we add a new view/content, we would have to manually add
+the method of getting that information to all intents that might need it, while also not dealing well
+with information stored in other contexts. By leveraging the type information of the action structures for
+a given intent, the system can leverage planning to automatically put together ways to resolve the
+structure based on historical context, as well as then automatically score the resolution of a given
+intent based on distance of the context from the current intent. For example, if I point at an object
+5 minutes ago, and then issue a command that can make use of that object, the system may compute a low
+confidence that that is what I mean given that it's a good while ago and may want to ask for additional
+context from the user.
+
+** Reaction/Proactive Planning For a CAIS
+
+This would be in the theme of the work done as part of =peveler_toward_2018= as well as
+=chakraborti_mr._2017= where a room should be consistently attempting to figure out
+how a given action ties into larger goals of the space (if they exist). For a reactive stance,
+this means that given an agent's actions, attempt to figure out they fit into the larger goals
+of the room, and provide immediate (or near immediate) response to help guide their actions if
+they're on the wrong track. For proactive, this means detecting the agent's plan, and then
+just carrying out steps along that plan for them. The latter is especially important in situations
+that are potentially life and death (like flying a plane) where the machine must be able
+to step in immediately if they detect a plan that could lead to a plane crash and then
+work with the human to rectify their belief state that might cause them to start that situation.
+For example, if a human believes the plane is going to crash into the ground, they may pull up
+on the flight stick in a panic (without checking with other sensors) which would cause the plane
+to stall and then crash. The plane should attempt to detect such situations, and while showing
+alarms and notices to alert the user and fix their belief state, automatically (or proactively)
+step in and take over control until the human's belief state is fixed.
+
+By leveraging the work done above in formalizing domains and use of the planning structures for
+single-step planning, this should make it possible to handle multi-step planning using similar
+structures without 
