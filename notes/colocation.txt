@@ -1,0 +1,14 @@
+Notes on section in introduction on colation vs digitally distributed meetings
+
+While we believe our work can be applied in many different circumstances, within
+this paper, we principally focus on the use-case of co-located participants. This
+is done so that we can stick with singular, common-sense definitions of what an
+agent might perceive, point at, etc, especially in conjunction with how it affects
+other agents. As shown in ~\cite{greenberg_implications_2016}, a move to digitially
+distributed environments have an acute effect upon participants and their understanding
+of each other. Principally, it becomes harder for agents to fully understand the
+physicality of other agents, and as such it becomes harder for agents to "point out"
+content to each other. Additionally, it is hard for agents to understand where another
+agent's focus may be, versus when co-located. Through this, we stick to co-located
+participants, and which drives our formalizations, and look to future work to tackle
+the case of distributed participants.
