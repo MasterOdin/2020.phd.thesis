@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                 %
+%              ABSTRACT TITLE PAGE and ABSTRACT                   %
+%                         Ph.D. Thesis                            %
+%                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This template file shows how to produce the abstract title page
+% followed by the abstract for a Ph.D. thesis
+% To produce the PDF file in one step, just run pdflatex on this file.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[chap]{thesis}
+\begin{document}
+% Supply information for title page (copied from rpititle-phd.tex):
+\thesistitle{\bf Differential Equations\\On two lines}
+\author{Sir Isaac Newton}
+\degree{Doctor of Philosophy}
+\department{Mathematics} % provide your area of study here; e.g.,
+% "Mechanical Engineering", "Nuclear Engineering", "Physics", etc.
+\signaturelines{4}
+% max number of signature lines is 7
+\thadviser{Galileo}
+%\cothadviser{Second Adviser} % If you have 2 thesis advisers
+\memberone{Fig Newton}
+\membertwo{Copernicus}
+\memberthree{Aristotle}
+%\memberfour,\memberfive, \membersix can also be used (change \signaturelines)
+\submitdate{January 1685\\(For Graduation May 1685)}
+
+% Produce abstract title page:
+\abstitlepage
+
+\pagenumbering{arabic} % numbering of abstract starts with arabic "1"
+\include{rpiabs}
+\end{document}

@@ -5,10 +5,11 @@
   + =briggs_enabling_2019= (ACHI'19)
   + =kurosu_translating_2019= (HCI'19)
   + =peveler_reagent:_2018= (ICJAI'19 Demo)
+  + A virtual mouse interface forsupporting multi-user interactions (HCI'20)
+  + Browser Based Digital Sticky Notes forDesign Thinking (DIS'20 Demo)
 ** In-Progress
   + =peveler_toward_2018= (ACS'18)
   + Reagent Full Paper (Target: AAAI'19)
-  + A Framework For Virtual Mouse Interface For Supporting Multi-User, Multi-Modal Interactions
   + Formalization of Cognitive Polysolid Framework
 ** Proposed
   + Multi-Modal Intent Resolution Through Planning (Single Step Planning)
@@ -30,17 +31,17 @@ In this section, we discuss what a theoretical, full-featured CAIS might look li
 and the properties it would have. We term this set of requirements, *L*. Through these capabilities,
 we realize the following two conditions in any given CAIS:
 
-C Cognitive: 
+C Cognitive:
     A CAIS should be able to help agents with cognitive tasks and goals. For instance, a system
     that simply aids in querying a domain /D/ is not cognitive in nature; a system that aids an
     agent in convincing another agent that some state-of-affairs holds in /D/ isconsidered cognitive.
 
-I Immersive: 
+I Immersive:
     There should be some attribute or property of a CAIS that is non-localized and distinguished
     from agents in the room. Moreover, this property should be *common knowledge*.
 
 To help illustrate these two points, we provide a theoretical situation between three human agents,
-Alvin, Bill, and Charles that are all standing in a CAIS. The CAIS is showing various pieces of 
+Alvin, Bill, and Charles that are all standing in a CAIS. The CAIS is showing various pieces of
 different content of several screens. Bill points to one of these pieces of content while looking at
 Alvin and Alvin is looking at Bill, while Charles is looking elsewhere altogether. The CAIS, to be
 sufficient, needs to be able to see all all agents, including their location, where they are looking,
@@ -114,9 +115,9 @@ agent is pointing at.
 
 * Formalizing the CAIS
 Currently, most systems (to our knowledge) are constructed in a somewhat "ad-hoc" process which prevents
-potential for automatic composition of a domain and the possible actions within it. This creates a 
+potential for automatic composition of a domain and the possible actions within it. This creates a
 duplication of effort in creating domains and interactions within, as well as for hooking up the various
-components. 
+components.
 
 By formalizing the actions of the room using a PDDL-like (or extended STRIPS language) structure, the
 room is able to then automatically compose action sequences, as well as help users understand where
@@ -147,7 +148,7 @@ pointing at a note). Formalization of this domain would consist of things like:
 "At time t user x moved note y into category z"
 etc.
 
-Note: This formalization would be done (or at least minimally) as a part of the initial work on 
+Note: This formalization would be done (or at least minimally) as a part of the initial work on
 intent resolution.
 
 ** Naive airplane
@@ -217,4 +218,4 @@ step in and take over control until the human's belief state is fixed.
 
 By leveraging the work done above in formalizing domains and use of the planning structures for
 single-step planning, this should make it possible to handle multi-step planning using similar
-structures without 
+structures without
