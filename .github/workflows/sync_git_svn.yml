@@ -11,13 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: masterodin/action-vpnc@master
-      with:
-        gateway: ${{ secrets.VPNC_GATEWAY }}
-        id: ${{ secrets.VPNC_ID }}
-        secret: ${{ secrets.VPNC_SECRET }}
-        username: ${{ secrets.VPNC_USERNAME }}
-        password: ${{ secrets.VPNC_PASSWORD }}
-        command: uname -a
+    - run: echo "VPNC_GATEWAY=${{ secrets.VPNC_GATEWAY }}" >> /tmp/.env
+    - run: echo "VPNC_ID=${{ secrets.VPNC_ID }}"" >> /tmp/.env
+    - run: echo "VPNC_SECRET=${{ secrets.VPNC_SECRET }}" >> /tmp/.env
+    - run: echo "VPNC_USERNAME=${{ secrets.VPNC_USERNAME }}" >> /tmp/.env
+    - run: echo "VPNC_PASSWORD=${{ secrets.VPNC_PASSWORD }}" >> /tmp/.env
 
-    # - run: svn co --non-interactive --no-auth-cache --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }} https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis
+    - run: docker run --rm -ti -v $(pwd):/srv --privileged --env-file /tmp/.env --dns 8.8.8.8 masterodin/vpnc:latest "ls -la"
