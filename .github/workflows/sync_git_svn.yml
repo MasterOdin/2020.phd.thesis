@@ -15,7 +15,7 @@ jobs:
         VPNC_ID: ${{ secrets.VPNC_ID }}
         VPNC_SECRET: ${{ secrets.VPNC_SECRET }}
         VPNC_USERNAME: ${{ secrets.VPNC_USERNAME }}
-        VPNC_PASSWORD: ${{ VPNC_PASSWORD }}
+        VPNC_PASSWORD: ${{ secrets.VPNC_PASSWORD }}
         VPNC_DOMAIN: ''
 
     steps:
