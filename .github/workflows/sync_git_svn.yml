@@ -21,5 +21,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: What OS is running
-      run: uname -a
+    - run: bash /entrypoint.sh
+
+    - run: sleep 5
+
+    - run: svn co --non-interactive --no-auth-cache --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }} https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis
