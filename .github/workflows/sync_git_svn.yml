@@ -1,0 +1,25 @@
+name: Git SVN Sync
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    container:
+      image: masterodin/vpnc:latest
+      env:
+        VPNC_GATEWAY: ${{ secrets.VPNC_GATEWAY }}
+        VPNC_ID: ${{ secrets.VPNC_ID }}
+        VPNC_SECRET: ${{ secrets.VPNC_SECRET }}
+        VPNC_USERNAME: ${{ secrets.VPNC_USERNAME }}
+        VPNC_PASSWORD: ${{ VPNC_PASSWORD }}
+        VPNC_DOMAIN: ''
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: What OS is running
+      run: uname -a
