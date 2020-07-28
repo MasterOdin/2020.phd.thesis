@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - run: echo "VPNC_GATEWAY=${{ secrets.VPNC_GATEWAY }}" >> /tmp/.env
-    - run: echo "VPNC_ID=${{ secrets.VPNC_ID }}"" >> /tmp/.env
+    - run: echo "VPNC_ID=${{ secrets.VPNC_ID }}" >> /tmp/.env
     - run: echo "VPNC_SECRET=${{ secrets.VPNC_SECRET }}" >> /tmp/.env
     - run: echo "VPNC_USERNAME=${{ secrets.VPNC_USERNAME }}" >> /tmp/.env
     - run: echo "VPNC_PASSWORD=${{ secrets.VPNC_PASSWORD }}" >> /tmp/.env
