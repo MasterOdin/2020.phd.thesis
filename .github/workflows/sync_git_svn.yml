@@ -8,32 +8,16 @@ jobs:
   sync:
     runs-on: ubuntu-latest
 
-    container:
-      image: masterodin/vpnc:latest
-      env:
-        VPNC_GATEWAY: ${{ secrets.VPNC_GATEWAY }}
-        VPNC_ID: ${{ secrets.VPNC_ID }}
-        VPNC_SECRET: ${{ secrets.VPNC_SECRET }}
-        VPNC_USERNAME: ${{ secrets.VPNC_USERNAME }}
-        VPNC_PASSWORD: ${{ secrets.VPNC_PASSWORD }}
-        VPNC_DOMAIN: ''
-
     steps:
     - uses: actions/checkout@v2
 
-    - run: bash /entrypoint.sh
+    - uses: masterodin/action-vpnc@master
+      with:
+        gateway: ${{ secrets.VPNC_GATEWAY }}
+        id: ${{ secrets.VPNC_ID }}
+        secret: ${{ secrets.VPNC_SECRET }}
+        username: ${{ secrets.VPNC_USERNAME }}
+        password: ${{ secrets.VPNC_PASSWORD }}
+        command: uname -a
 
-    - run: sleep 5
-
-    - run: svn co --non-interactive --no-auth-cache --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }} https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis
-
-  testbox:
-    runs-on: ubuntu-latest
-    container:
-      image: azul/zulu-openjdk-alpine:8-jre
-    steps:
-    - uses: actions/checkout@v2
-    - name: What OS is running
-      run: uname -a
-    - name: What java version do we have
-      run: java -version
+    # - run: svn co --non-interactive --no-auth-cache --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }} https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis
