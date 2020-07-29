@@ -17,4 +17,4 @@ jobs:
     - run: echo "VPNC_USERNAME=${{ secrets.VPNC_USERNAME }}" >> /tmp/.env
     - run: echo "VPNC_PASSWORD=${{ secrets.VPNC_PASSWORD }}" >> /tmp/.env
 
-    - run: docker run --rm -v $(pwd):/thesis --workdir /tmp --privileged --env-file /tmp/.env --dns 8.8.8.8 masterodin/vpnc:latest "svn co --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }} https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis && /bin/cp -R /thesis /tmp && pushd /tmp/thesis && svn status && { svn status | grep "^\?" | awk '{print $2}' | xargs svn add ; } && svn commit -m 'git sync'"
+    - run: docker run --rm -v $(pwd):/thesis --workdir /tmp --privileged --env-file /tmp/.env --dns 8.8.8.8 masterodin/vpnc:latest "svn co --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }} https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis && /bin/cp -R /thesis /tmp && pushd /tmp/thesis && svn status && { svn status | grep ^? | sed 's/?    //' | xargs svn add ; } && svn commit -m 'git sync'"
