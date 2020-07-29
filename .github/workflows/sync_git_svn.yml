@@ -17,4 +17,4 @@ jobs:
     - run: echo "VPNC_USERNAME=${{ secrets.VPNC_USERNAME }}" >> /tmp/.env
     - run: echo "VPNC_PASSWORD=${{ secrets.VPNC_PASSWORD }}" >> /tmp/.env
 
-    - run: docker run --rm -v $(pwd):/srv --privileged --env-file /tmp/.env --dns 8.8.8.8 masterodin/vpnc:latest "ls -la"
+    - run: docker run --rm -v $(pwd):/workdir --workdir /tmp --privileged --env-file /tmp/.env --dns 8.8.8.8 masterodin/vpnc:latest "svn co --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }} https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis"
