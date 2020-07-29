@@ -1,4 +1,4 @@
-name: Git SVN Sync
+name: Sync Git to SVN
 
 on:
   push:
