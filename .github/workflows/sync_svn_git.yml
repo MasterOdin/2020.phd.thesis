@@ -1,0 +1,35 @@
+name: Sync SVN to Git
+
+on:
+  schedule:
+    - cron:  '0 * * * *'
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: echo "VPNC_GATEWAY=${{ secrets.VPNC_GATEWAY }}" >> /tmp/.env
+    - run: echo "VPNC_ID=${{ secrets.VPNC_ID }}" >> /tmp/.env
+    - run: echo "VPNC_SECRET=${{ secrets.VPNC_SECRET }}" >> /tmp/.env
+    - run: echo "VPNC_USERNAME=${{ secrets.VPNC_USERNAME }}" >> /tmp/.env
+    - run: echo "VPNC_PASSWORD=${{ secrets.VPNC_PASSWORD }}" >> /tmp/.env
+
+    - run: docker run --rm -v $(pwd):/thesis --workdir /tmp --privileged --env-file /tmp/.env --dns 8.8.8.8 masterodin/vpnc:latest "svn ${SVN_AUTH} co https://svn3.cs.rpi.edu/rair/papers/2020.Peveler.Thesis/thesis && /bin/cp -R /tmp/thesis /"
+      env:
+        SVN_AUTH: --username ${{ secrets.RPI_USERNAME }} --password ${{ secrets.RPI_PASSWORD }}
+
+    - name: Commit files
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git commit -s -m "sync svn to git" -a || :
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
