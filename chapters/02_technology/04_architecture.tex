@@ -1,1 +1,53 @@
-\subsection{Implemented Architecture}
+\section{Implemented Architecture}
+
+In this section, we provide an overview of what we view as the general
+architecture that a CAIS should follow for its implementation. From our
+experience, we believe that the ideal architecture is one that is principally
+event-driven and modular. By modular, we mean that each component of the system
+should be implemented as a separate piece, following the UNIX philosphy of
+doing one thing and doing it well~\cite{mcilroy_unix_1978}. The advantage of
+this approach is that it allows one to easily substitute out pieces that with
+something else, or not include them at all where it makes sense. To be
+event-driven, we assume that by and large, the components of the system will
+be activated and act upon an incoming event, e.g. the transcript-worker will
+act once it receives an event of someone talking. Important to this model is
+the communication methods which we utilize within our system. Principally, we
+utilize a message queue system, RabbitMQ, where each modules can act as
+subscribers and consumers to the queue, with the exception of edge modules
+which will consume events from hardware sensors and devices (e.g. a microphone).
+With RabbitMQ, we utilize a broadcast model where modules subcribe to event
+topics, where each topic is made up of a number of pieces. Each topic is
+unique to a given event, and that the topic pieces are specified in a manner of
+least specific (e.g. the module name) to most specific (e.g. the event action).
+Any number of consumers can subscribe to a given topic, each receiving the same
+event. For example, the transcript-worker produces output on the topic
+``transcript.result.interim'' (for in-progress speech transcription) and
+``transcript.result.final'' (for finished speech transcription). Any number of
+consumers could then listen to either of those channels, and be activated by
+a transcription event. In rare cases, certain modules utilize RPC communication,
+principally for modules that are hooked to a specific hardware device (e.g.
+speaker-worker which is connected to a system's speakers). However, it's
+expected that while communication to the module itself is done via a single RPC
+queue, the module then broadcasts out events relating to what it is doing. For
+the speaker-worker, this means that it will receive a sentence to output
+via the speakers, and it will issue an event ``speaker.speak.begin'' before
+it starts playing the sound, and ``speaker.speak.end'' when it finishes, which
+any module can subscribe to.
+
+Finally, for services that are not necessarily core to the CAIS itself, but
+rather contain information or outside capabilities, we largely rely upon
+utilizing standard TCP calls to these services. These services are, but not
+limited to, things like databases, prover, external APIs.
+
+A limitation of this approach is that each new link between modules introduces
+additional latency to the system. However, within everything running on a high
+speed connection, the added latency is ~8ms which is largely not felt by the
+user, especially compared to some of the much slower operations within the
+system, such as transcription, which takes up many orders of multitude longer
+of processing time.
+
+We are confident in our approach, and are in good company with  prior work that
+followed a similar approach, such as the work done by
+Brooks~\cite{brooks_intelligent_1997}. However, unlike this prior work, through
+the use of RabbitMQ, the links between modules are that of topics, and not
+necessarily hard coding the links.

@@ -1,0 +1,34 @@
+\subsection{Overview}
+
+We now introduce the \emph{cognitive-polysolid framework} (CPF), a
+class of problems that we use for our experiments. In these problems,
+both human agents and polysolids are represented and questions concern the
+cognitive states of the humans. For our purposes,
+we classify our polysolids as regular 3D shapes, such as cubes, cylinders, spheres, etc.
+that do not contain any holes or gaps in them. Using
+the framework, we can generate a \emph{cognitive-polysolid world
+instantiation}, where an instantiation has some number of polysolids,
+declares how they can be moved, and specifies any agents and their possible
+beliefs or knowledge about the polysolids and other agents.
+
+CPF subsumes the familiar ``blocks world,'' described for instance in
+\cite{nilsson_principles_1982}, which has long been used for reasoning and
+planning tasks.  The framework gives us both a physical and cognitive
+domain unlike the purely physical blocks world domain (The formal
+logic used in \cite{nilsson_principles_1982} is purely extensional, as it is
+simply first-order logic).  Since the physical complexities of blocks
+world problems have been well explored
+\cite{gupta_complexity_1992,slaney_blocks_2001}, we emphasize the cognitive extensions
+of it.
+
+The cognitive-polysolid world instantiation we focus on contains some finite number
+of cubes/blocks and a table large enough to hold all of them.  Each block is
+\texttt{on} one other object; where that object can be another block or the
+table.  A block is said to be \texttt{clear} if there is no block that
+is on top of it.  To move the blocks, an agent can either
+\texttt{stack} (placing a block on the table on top of another block)
+or \texttt{unstack} (taking a block that is on top of another block
+and placing it on the table).  Before stacking a block onto another, both need
+to be clear; when unstacking, the top block must be clear beforehand.
+After stacking the blocks, the bottom block is then not clear, and
+after unstacking, it is then now clear.
