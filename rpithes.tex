@@ -12,6 +12,21 @@
 
 \documentclass[chap]{thesis}
 
+\usepackage{url}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{paralist}
+\usepackage{comment}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+\input{commands.tex}
+
 % Uncomment the following if you want centered-lined captions:
 %\captionsetup{format=plain,justification=centering}
 
@@ -23,10 +38,13 @@
 
 % Use the appropriate example title page.  A senior thesis
 % can be set by changing the thesis name in rpititle-mas.tex.
+
 \include{rpititle-phd}   % titlepage material for PhD thesis
 %\include{rpiack}  % include for acknowledgements
+
 \include{chapters/00_abstract}
-\include{chapters/01_content}
+\input{chapters/01_content}
+
 \include{rpibib} % bibliography
 %\include{rpiapp} % appendix
 

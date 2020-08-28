@@ -1,0 +1,257 @@
+\section{Formalizing the Requirements for a CAIS}
+
+It should be noted that a CAIS to be considered a truly ``intelligent''
+room, it is not sufficient that the room be intelligent about, for
+example, search queries over a domain $D$; the room should also be
+intelligent about cognitive states of agents in the room and their
+cognitive states towards $D$.
+
+Despite there being a significant amount of work done in building
+intelligent environments (of varying levels of intelligence;
+\citealp{coen1998design, brooks1997intelligent,chan2008review}), there
+is no formalization of what constitutes an intelligent room and what
+separates it from an intelligent agent.  Though \citep{coen1998design}
+briefly differentiates an intelligent room from ubiquitous computing
+based on the non-ubiquity of sensors in the former, there is not any
+formal or rigorous discussion of what separates an intelligent room
+from a mobile robot that roams around the room with an array of
+sensors.  We offer below a sketch of informal requirements that an
+immersive room should aim for.  Then we instantiate these requirements
+using \DCEC.
+
+The requirements in question are cognitive in nature and exceed
+intelligent rooms with sensors that can answer queries over simple
+extensional data (e.g.\ a room that can answer financial queries such
+as \textit{``Show me the number of companies with revenue over X?''}).
+At a high-level, we require two conditions below hold:
+
+    \begin{itemize}
+    \item $\mathcal{C}$ \emph{Cognitive}: A CAIS should be able to
+      help agents with cognitive tasks and goals.  For instance, a
+      system that simply aids in querying a domain $D$ is not
+      cognitive in nature; a system that aids an agent in convincing
+      another agent that some state-of-affairs holds in $D$ is
+      considered cognitive. (Please see the appendix for more
+      discussion of our usage of the term ``cognitive.'')
+    \item $\mathcal{I}$ \emph{Immersive}:  There should
+      be some attribute or property of a CAIS that is non-localized
+      and distinguished from agents in the room.  Moreover, this
+      property should be \textbf{common knowledge}.  (Note: this is
+      not easily achievable with a physical robot, and this condition
+      differentiates a CAIS from a cognitive
+      agent.)\footnote{This condition may not strictly be realizable,
+        but the goal is to at a minimum build systems that approach
+        this ideal condition.}
+    \end{itemize}
+
+Assuming that these two conditions hold, we can use them to make determinations
+about the properties of such systems, as well as to help distinguish the various
+classes of intelligent rooms and their capabilities that have been historically created.
+%\subsection{Formal Requirements for a CAIS}
+%\label{sect:freqs}
+From the information requirements, we look to translate them into a formalized version
+for a CAIS $\gamma$.  The formal requirements are show in Table~\ref{formalreqs} and
+explained below.
+
+\begin{table}
+\begin{small}
+\begin{center}
+  \begin{tabular}{lp{12cm}}
+\toprule
+\textbf{Condition} & \textbf{Formula}  \\
+\midrule
+$\mathbf{C}^f_1$ &          \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t, \left[\begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \believes\big(x, t, \lnot \phi)\big)
+                \\ & \hspace{50pt} \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*}
+\\
+\midrule
+
+$\mathbf{C}^f_2$ &     \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t,\left[ \begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \lnot \believes\big(x, t, \phi)\big)
+                \\ &  \hspace{50pt}  \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*} \\
+\midrule
+
+$\mathbf{I}^f_1$ &
+ \begin{equation*} \begin{aligned}
+            \common\Bigg(\forall x, t, f:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \holds(f, t)\big) \rightarrow
+            \holds(\vicinity(x, f), t)\Big]\Bigg)\\
+            \common\Bigg(\forall x, t, e:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \happens(e, t)\big) \rightarrow
+            \holds(\vicinity(x, e), t)\Big]\Bigg)\\
+          \end{aligned}\end{equation*}
+\\
+\midrule
+
+$\mathbf{I}^f_2$ &         \begin{equation*}
+          \common\Big(\forall x, \alpha:  \holds\big(\vicinity(x, \action(a, \alpha)), t\big)\Big)
+        \end{equation*}
+\\
+\midrule
+
+$\mathbf{I}^f_3$ &         \begin{equation*}
+          \begin{aligned}
+       &  (i) \hspace{10pt}  \common\Bigg(\forall  t, f:  \Big[\holds(f, t) \leftrightarrow \perceives\big(\gamma, t, \holds(f, t)\big) \Big]\Bigg)\\
+       & (ii)  \hspace{10pt}   \common\Bigg(\forall  t, e: \Big[\happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \happens(e,
+            t)\big) \Big]\Bigg)\\
+        &   (iii)  \hspace{10pt}   \common\Bigg(\forall  t, f:  \Big[\lnot \holds(f, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \holds(f, t)\big) \Big]\Bigg)\\
+        &   (iv) \hspace{10pt}    \common\Bigg(\forall  t, e:\Big[\lnot \happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \happens(e, t)\big) \Big]\Bigg)
+          \end{aligned}
+        \end{equation*}
+\\
+\bottomrule
+\end{tabular}
+\caption{Formal Requirements}
+\label{formalreqs}
+\end{center}
+\end{small}
+\end{table}
+
+
+    \begin{itemize}
+    \item $\mathbf{C}^f_1$: It is common knowledge that, if an agent
+      $x$ has a false belief $\lnot \phi$, and $\gamma$
+      believes $\phi$, then $\gamma$ communicates to the agent the
+      proposition $\phi$.\footnote{Please note that inference in
+        \DCEC\ is non-monotonic as it includes the event calculus,
+        which is non-monotonic.  If an agent $a$ believes $\phi$ based
+        on prior information, adding new information can cause the
+        agent to not believe $\phi$.}
+
+    \item $\mathbf{C}^f_2$: Parallel to the above condition, it is
+      common knowledge that, if an agent $x$ has a missing belief
+      $\phi$, and $\gamma$ believes $\phi$, then $\gamma$ communicates to
+      the agent the proposition $\phi$.
+
+    \item$\mathbf{I}^f_1$ It is common knowledge that at any point in
+      time $t$ an agent $x$, different from the CAIS system $\gamma$,
+      can observe an event $e$ or condition (fluent) $f$ only in its
+      vicinity. This is formalized using the function symbol
+      $\vicinity(x, e)$ or $\vicinity(x, f)$.
+
+      \item $\mathbf{I}^f_2$: It is common knowledge that actions
+        performed by an agent are in its vicinity.
+
+      \item $\mathbf{I}^f_3$: It is common knowledge that all events
+        and fluents are perceived by $\gamma$.
+     \end{itemize}
+
+The CAIS we present acts as an arbiter when goals of agents conflict,
+and acts to rectify false or missing beliefs.  Assume that enclosed
+within $\gamma$'s space at time $t$ are agents
+$A(t) = \{a_1, \ldots, a_n\}$.  (Note: $\gamma$ is also an agent but
+is not included in $A(t)$.)  Time is assumed to be discrete, as in the
+discrete event calculus presented in \cite{mueller_commonsense_2014}.  There is a
+background set of axioms and propositions $\Gamma(t)$ that is
+operational at time $t$.  We have a fluent $\vicinity$ that tells us
+whether an agent is in the vicinity of a fluent, event, or another
+agent:
+\begin{footnotesize}
+$$\vicinity: \Agent \times \Fluent \cup \Event \cup \Agent \rightarrow
+\Fluent $$
+\end{footnotesize}
+ Only events and fluents in the vicinity of an agent can be
+observed by the agent.
+
+\begin{comment}
+For the cognitive condition $\mathcal{C}$ above, we have the following
+concrete requirements that we implement in our system.  Later, we give
+examples of these requirements in action.
+
+  \begin{footnotesize}
+    \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{C}$ ,
+      frametitlebackgroundcolor=gray!25, nobreak,
+      linecolor=white,backgroundcolor=gray!10]
+      Assume $\Gamma \vdash t < t + \Delta$
+      \begin{enumerate}
+      \item[$\mathbf{C}^f_1:$] It is common knowledge that, if an
+        agent $x$ has a false belief, $\gamma$ informs the agent of
+        the belief:\footnote{Please note that inference in \DCEC\ is
+          non-monotonic as it includes the event calculus, which is
+          non-monotonic.  If an agent $a$ believes $\phi$ based on
+          prior information, adding new information can cause the
+          agent to not believe $\phi$.}
+         \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t, \left[\begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \believes\big(x, t, \lnot \phi)\big)
+                \\ & \hspace{50pt} \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*}
+
+      \item[$\mathbf{C}^f_2:$] It is common knowledge that, if an
+        agent $x$ has a missing belief, $\gamma$ informs the agent of
+        the belief:
+        \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t,\left[ \begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \lnot \believes\big(x, t, \phi)\big)
+                \\ &  \hspace{50pt}  \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*} \end{enumerate}
+    \end{mdframed}
+  \end{footnotesize}
+
+  For the immersive condition $\mathcal{I}$ above, we have the
+  following conditions:
+
+  \begin{footnotesize}
+    \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{I}$ ,
+      frametitlebackgroundcolor=gray!25, nobreak,
+      linecolor=white,backgroundcolor=gray!10]
+      \begin{enumerate}
+      \item[$\mathbf{I}^f_1:$] It is common knowledge that at any
+        point in time $t$ an agent $x$, different from the CAIS system
+        $\gamma$, can observe events or conditions (fluents) only in
+        its vicinity.
+        \begin{equation*}
+          \begin{aligned}
+            \common\Bigg(\forall x, t, f:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \holds(f, t)\big) \rightarrow
+            \holds(\vicinity(x, f), t)\Big]\Bigg)\\
+            \common\Bigg(\forall x, t, e:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \happens(e, t)\big) \rightarrow
+            \holds(\vicinity(x, e), t)\Big]\Bigg)\\
+          \end{aligned}
+        \end{equation*}
+
+      \item[$\mathbf{I}^f_2:$] It is common knowledge that actions
+        performed by the agent are in its vicinity.
+        \begin{equation*}
+          \common\Big(\forall x, \alpha:  \holds\big(\vicinity(x, \action(a, \alpha)), t\big)\Big)
+        \end{equation*}
+      \item[$\mathbf{I}^f_3:$] It is common knowledge that all events
+        and fluents are perceived by $\gamma$.  This is represented by
+        the four conditions below:
+        \begin{equation*}
+          \begin{aligned}
+       &  (i) \hspace{10pt}  \common\Bigg(\forall  t, f:  \Big[\holds(f, t) \leftrightarrow \perceives\big(\gamma, t, \holds(f, t)\big) \Big]\Bigg)\\
+       & (ii)  \hspace{10pt}   \common\Bigg(\forall  t, e: \Big[\happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \happens(e,
+            t)\big) \Big]\Bigg)\\
+        &   (iii)  \hspace{10pt}   \common\Bigg(\forall  t, f:  \Big[\lnot \holds(f, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \holds(f, t)\big) \Big]\Bigg)\\
+        &   (iv) \hspace{10pt}    \common\Bigg(\forall  t, e:\Big[\lnot \happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \happens(e, t)\big) \Big]\Bigg)
+          \end{aligned}
+        \end{equation*}
+      \end{enumerate}
+    \end{mdframed}
+  \end{footnotesize}
+
+\end{comment}
+  %%% Local Variables:
+  %%% mode: latex
+  %%% TeX-master: "main"
+  %%% End:
