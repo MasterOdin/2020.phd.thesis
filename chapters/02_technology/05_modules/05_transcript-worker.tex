@@ -1,0 +1,15 @@
+\subsection{Transcript Worker}
+
+The transcript-worker is responsible for handling incoming speech input from the
+system's microphones, converting into into transcribed text. For this module,
+we utilize the Watson Speech-to-Text service when exposes a number of useful
+properties, and which we believe are necessary for a full formed CAIS. The first
+is the ability for the service to handle many different languages, switching
+the language via a parameter sent as part of the speech payload. Secondly, for
+a given language, we can also provide a custom acoustic model. This allows for
+the module to both work better for specific users of the system, as well as for
+providing an overall general model for a use-case, with training of the service
+for the expected vocabulary of a domain. For example, take an example where
+users of the system are discussing companies and financial data. One could then
+provide a custom acoustic model that includes many of the businesses' names,
+especially those that use made-up words, as well as for ensuring that 
