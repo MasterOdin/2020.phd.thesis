@@ -1,0 +1,29 @@
+\section{Defining Planning}
+
+Before continuing, we explicitly define here the components of planning. Within
+this work, we utilize the STRIPS planning problem, where each problem is the
+tuple $P = \langle F, I, A, G \rangle$. For this tuple, $F$ stands for the set of
+fluents that can define the state of world, $I \subseteq F$ is the initial state of
+fluents, $G \subseteq F$ is the goal state of fluents, and $A$ is the set of actions
+available to an agent. For each action $a \subseteq A$, it has a list
+of preconditions, and then a list of post conditions to change the current
+state of the world. Completion of a planning problem is then the computation of
+an action sequence, $\pi = a_{1}, a_{2}, ..., a_{m}$, where each
+$a_{i} \subseteq A$, and that following the action sequence starting at $I$
+will arrive at $G$.
+
+As stated above, plan recognition on the other hand is planning in reverse,
+wherein we now have only observations of agents to compare against a given plan.
+Any computed $\pi$, be it from a plan library or constructed on the fly, then
+must satisfy a given observation sequence.
+
+From this, we can more regularly define the plan recognition problem. A plan recognition
+problem can be defined as the tuple $R = \langle P, \mathcal{G}, O \rangle$, where
+$P = \langle F, I, A \rangle$ as the planning domain (using the above terms),
+$\mathcal{G}$ is the set of possible goals $G \subseteq F$ and
+$O = o_{1}, o_{2}, ...., o_{n}$ is the observation sequence by agents where each
+$o_{i}$ being an action in $A$. The observation sequence is then a subset
+of a given action sequence wherein each observation matches into the action
+sequence, where they follow the same ordering, but that there may be some missed
+actions. For example, for the given action sequence $\pi = {a,b,c,d,e}$, then
+the sequences ${a,c,e}$ and ${b,d,e}$ are valid, while ${c,a,e}$ is not.

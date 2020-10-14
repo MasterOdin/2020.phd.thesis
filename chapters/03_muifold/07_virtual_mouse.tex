@@ -1,0 +1,55 @@
+\section{Virtual Mouse Interface}
+
+Leveraging the spatial-context and Reagent systems, we enable a \textit{Virtual Mouse Interface} that allows users to interact with content
+as well as to guide multi-modal interactions. This interface gives each user the equivalent of their own personal mouse. The interface itself, under the hood is not one dedicated component, but rather conglomeration of functionality across modules described above. To start, the spatial-context-system provides us with
+an absolute [x,y] coordinate for a given device on
+the screen from a user, which has a unique ID attached to it. This is sent into the
+display-worker, which then displays an icon to
+the user on the screen that represents where they
+are pointing at that time, as well as the mouse
+action they are doing. This icon updates at a
+constant rate for the user, and scales to many concurrent users, where there is (due to RabbitMQ) a delay of about 4-8ms, which is largely imperceptible to users. In addition to the display-worker, the
+spatial-context system sends the pointing and action
+data to the orchestrator. The orchestrator communicates with the display-worker to translate the
+absolute [x,y] coordinate into a relative [x,y] coordinate within a specific webview. From here, it
+communicates with Reagent in a number of ways. For each payload that it sends along, and the subsequent action JavaScript event that Reagent generates against a given WebView, the unique user ID is passed, which Reagent binds to the generated events that are dispatched to the page. First, it is important to denotate that the orchestrator sets a a limiter on the number of actions that can flow through the system, which is roughly 75ms per action type, which allows adequate throughput for the system for a number of users such that they do not notice lag while also not sending too much information to the page and potentially causing a slow-down. Below, we describe the two types of actions with which we concern ourselves with, mouse and scroll.
+
+\subsection{Mouse Actions}
+Mouse actions represent the principle way in which people interact with the
+page. This includes the use of the left and right mouse buttons, though we
+mainly focus on the usage of the left button here. The mosue button itself can
+be thought of as being in three potential states, being held down for any period
+of time (MouseDown), being released after being held down for any period of time
+(MouseUp) and a rapid push down and release of the button (Click). Additionally,
+there is the act of just moving the mouse itself (MouseMove). To start with
+these actions, the orchestrator first sends a MouseMove event to Reagent, which
+then gets dispatched against the webview. From this, Reagent returns the element
+that the mouse is currently over. The orchestrator stores this element and if it
+different from the last stored element, issues to Reagent a leave event
+(MouseOut) on the old element and an enter (MouseEnter) on the new element. This
+chain of events allows for triggering of hover type events on a site for the
+given elements affected as you move your cursor across a page. Finally, it takes
+the mouse action (MouseUp or MouseDown and possibly Click), and sends that to
+Reagent to issue against the page. In all of three of these cases,
+Reagent sends details about the element that was clicked on, such that the
+orchestrator can drive subsequent interactions on it, such as if clicking on a
+form input, can ask the user what value do they want to input, which is picked
+up via voice input.
+
+\subsection{Scroll Actions}
+For scroll actions, a more involved sequence is followed to determine what type
+of scroll is meant by the user. Webpages may implement scroll to mean just
+moving around the content that has overflowed from the available displayed space
+(such as scrolling down on a news article), which is referred to as a
+ScrollEvent. Alternatively, they may use scroll to control zooming in and out of
+the content, or panning (common in graphs or maps), where these are WheelEvents.
+However, for both, we require the difference between the current mouse position
+and the previous mouse position to perform the action, which is stored within
+the orchestrator. To determine the appropriate action (especially on a page that
+includes both overflowed content and a graph), the orchestrator first sends a
+WheelEvent to Reagent. Reagent returns the event that was acted upon, as well as
+if the MutationObserver it attached to the page detected any changes to that
+page. If there are no changes, than the system determines that the user's
+intention was not to zoom or pan, but to simply scroll the page for overflowed
+content, at which point a ScrollEvent is issued to Reagent, and the page content
+is shifted.

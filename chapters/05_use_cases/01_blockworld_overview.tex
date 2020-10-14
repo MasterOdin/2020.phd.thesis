@@ -1,4 +1,4 @@
-\subsection{Overview}
+\section{Cognitive Blockworld}
 
 We now introduce the \emph{cognitive-polysolid framework} (CPF), a
 class of problems that we use for our experiments. In these problems,
@@ -32,3 +32,20 @@ and placing it on the table).  Before stacking a block onto another, both need
 to be clear; when unstacking, the top block must be clear beforehand.
 After stacking the blocks, the bottom block is then not clear, and
 after unstacking, it is then now clear.
+
+\vspace{-0.03in}
+  \begin{equation*}
+    \begin{aligned}\
+      &\Surface \sqsubset \Object \\
+      &\Block \sqsubset \Surface \\
+      &\ctable: \Surface \\
+      &\on: \Block \times \Surface \rightarrow \Fluent
+             \end{aligned} \hspace{30pt}
+ \begin{aligned}
+      &\clear: \Block \rightarrow \Fluent \\
+      &\goal: \Boolean \times \Number \rightarrow \Boolean \\
+      &\stack: \Block \times \Block \rightarrow \ActionType \\
+      &\unstack: \Block \times \Block \rightarrow \ActionType
+    \end{aligned}
+  \end{equation*}
+\vspace{-0.05in}
