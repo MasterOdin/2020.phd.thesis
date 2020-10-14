@@ -1,0 +1,27 @@
+\subsection{spatial-context-bridge}
+
+% TODO: smoothing on x,y coordinate. cite to $1 filter paper.
+
+The spatial-context-bridge provides a generic mapping interface to unify different pointing
+devices, such as kinect or cellphones. At its core, it takes relatively raw information about
+the action, and maps it onto what the mouse equivalent would be, and the appropriate place
+on the screen to place that action. For any input mechanism, we expect to receive a raw
+X,Y coordinate as it corresponds to the overall display-worker's X,Y coordinates. This X,Y
+coordinate is then translated down into a relative X,Y coordinate by examining through the
+open webviews, iterating down the z-index of the display-worker, such that the top displayed
+webviews are examined, going down the line, before looking at webviews that may be stacked
+upon. Through this mechanism, we are guaranteed to get the topmost webview for a given X,Y
+coordinate, regardless of the level of stacking that might exist. From there, we provide
+additional transformations depending on the input source. For example, the input from
+kinect system is in terms of hand orientation, where for one hand, be it right or left, it
+can then be either pointing, open, or closed. An open, closed, open action sequence is
+then translated into a singular mouse click, with smoothing applied to action inputs to
+prevent toggling caused by jitters. For example, we may expect that when a user closes
+their hand, the kinect system may report a closed hand relatively stably, but have brief
+frames where the hand is detected as open. These frames last only for a few frames per
+second before going back to being detected as closed once again. The spatial-context-bridge
+provides mechanisms to handle this case, and leave the hand as closed, freeing the
+developer of the underlying system from implementing this behavior themselves. This also
+has the added benefit wherein calibration in some sense can be done within this module
+and applied immediately to new input mechanisms without the developer of said input
+mechanism having to be involved.

@@ -1,0 +1,13 @@
+\subsection{speaker-worker}
+
+The speaker-worker is responsible for receiving a text sentence and then outputting on the
+system's speakers. It utilizes the Watson Text-to-Speech service to do this. As part of its
+input, it expects the language of the received sentence as well as a voice to use for its
+output. For each supported language, there is minimally a male and female voice that can
+be used, with some languages supporting additional more natural sounding voices that can
+be used. This allows for some slight variation of where the system can take on 2+ roles
+of the environment, such as an overarching system moderator, as well as a specific
+functional avatar for a usecase. Within the module, there is support of setting the volume
+for the output of the module, but it is recommended that users utilize the physical volume
+dial of their speakers or the volume manager within their OS for better compatibility and
+finer volume control and support.

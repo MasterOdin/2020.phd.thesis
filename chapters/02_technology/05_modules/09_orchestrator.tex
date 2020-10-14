@@ -1,0 +1,12 @@
+\subsection{orchestrator}
+
+The orchestrator is responsible for receiving the actionable input from the user, and making
+sure that all necessary pieces are accounted for. Upon receiving an intent input from an
+upstream module, the orchestrator messages the executor via a RPC queue to determine if it
+matches any known available inputs for the current system state. If there is one, as part of
+the response, the executor will include the necessary inputs for executing that action. The orchestrator
+then takes this response and compares the list of necessary inputs to the list of received inputs,
+determining if there are any missing. If there are any missing inputs, the orchestrator is then
+responsible for attempting to reconcile this, and if not possible, surfacing back to the user a
+request for additional context to complete the command. Assuming that all required parts of the
+command have been satisified, the orchestrator outputs that.

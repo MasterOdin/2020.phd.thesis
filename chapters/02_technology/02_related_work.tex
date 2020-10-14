@@ -1,10 +1,25 @@
 \section{Related Work}
 
-Mention the related work of:
-* \cite{bolt_put-that-there:_1980}
-* \cite{brooks_intelligent_1997}
-* \cite{carbini_wizard_2006}
-* \cite{farrell_symbiotic_2016}
-* \cite{arai_cira:_2019}
-* etc...
-    * Other paradigms of multiuser (tables)?
+There is a rich background of work for the design of multimodal systems, and more broadly the intelligent rooms
+in which these systems are situated.
+
+Historically, these systems have fallen into the category of ``smart rooms''
+where multimodal input is much more of a necessity for more ``natural''
+interaction than traditional desktop environments. In these multimodal
+``smart rooms'', various efforts have been shown for picking up
+where a user is pointing and using it in combination with
+their voice to generate a command
+\cite{bolt_put-that-there:_1980,carbini_wizard_2006,langner_multiple_2019,farrell_symbiotic_2016,kephart2018cognitive}.
+However, these systems hand-build their display layer and
+content to embed the necessary instrumentation for combining speech
+and gesture. Alternatively, \cite{coen_design_1998,brooks_intelligent_1997} demonstrate a system that
+hooks into the X display server and could act on the content that was passed through
+it from various applications, such as Netscape. While a very powerful approach, it
+does not easily work across platforms, and that the security model of modern
+applications such as Chrome renders the approach
+increasingly impossible. Perhaps the most radical, \cite{roman_middleware_2002} propose an entire middleware infrastructure, similar to an OS,
+to underpin these multimodal applications, but this approach
+even more readily runs into the aforementioned bottleneck
+in that all applications must be built from the ground up to
+utilize this middleware, rendering it hard to reuse existing
+content and displays.

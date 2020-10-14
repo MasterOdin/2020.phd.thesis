@@ -1,0 +1,12 @@
+\subsection{conversation-worker}
+
+The conversation-worker is responsible for taking in a sentence, usually from the transcript-worker
+and converting into an tuple of intent and entities. The intent is a singular action while the entities
+are a list of elements that can go into this intent.
+
+For our implementation of this component, we utilize the Watson Assistant service. Within this service,
+we define intents, and then provide example sentences that would fit that intent to train the system.
+This has the benefit of allowing the system the capacity to handle slightly differently worded sentences
+than what we might expect, as well as gloss over spelling and grammatical errors that arise from the
+transcription process. For entities, we may utilize built-in system ones (such as numbers), or define
+our ones, where entities are largely detected through simple pattern matching.

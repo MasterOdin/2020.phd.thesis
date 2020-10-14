@@ -1,0 +1,12 @@
+\subsection{executor}
+
+The executor is a relatively simple component where it receives a full command,
+and then executes it pertaining to the defined usecase. The action is defined purely
+by an application developer, and that there is no ``action discoverability'' within
+the system at this time. A result of an action may be displaying content on the
+display-worker, outputting speech to the speaker-worker, or making calls to external
+services. To determine if an incoming action is valid, it makes a call to our planner
+which determines if the action exists and that all pieces are filled-in, as well as that
+any pre-conditions for that action are satisfied. The result of that call is any
+post-conditions that are set within the environment. These steps are further defined
+and formalized in the following chapters.

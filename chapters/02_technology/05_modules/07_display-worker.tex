@@ -1,0 +1,18 @@
+\subsection{display-worker}
+
+The display-worker is responsible for showing content to users on whatever screen that they are using.
+This comopnent must be able to adapt to a variety of different environments, be it the 360 degree
+panoromic screen, a wall of giant monitors, or just a user's desktop machine. Additionally, we aim to
+have something capable of showing a variety of content, both developed in-house as well as arbitrary
+third-party content, allowing for a larger variety of use-cases and usage than some previous art, where
+all content had to be built for their environment.
+
+To accomplish this, we build off the open-source Electron project, which provides a wrapper around the
+Chromium project to build desktop applications. Through this, our content then is displayed as websites
+within the display-worker, where the websites can be pointing at localhost applications, or external
+sites. The display-worker is set-up such that it provides the user with a N by M grid, where N and M are
+configurable beforehand to fit the environment, where a user may open any number of webviews to take
+up X by Y rectangle on the grid. Within each webview, we load a website. Webviews may stack upon each
+other, and be moved as needed by a user. When dealing with multiple displays, we assume that the displays
+are ``continuous'', and share the same dimensions as all other displays within the grid. The grid is then
+divided equally amongst all screens.

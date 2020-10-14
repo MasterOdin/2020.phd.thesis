@@ -1,0 +1,58 @@
+\section{Overarching Goals}\label{ref:overarching_goals}
+
+\subsection{Need for Theory of Mind}
+Independent of the specific formalisms and technology
+that we bring to bear, we need to
+model the mental states of humans in order to engineer AI
+systems that understand and interact well with them.
+For example, work in human-robot teaming has focused on
+the use of planning techniques that take human goals and
+mental states into account~\citep{briggs_multi-modal_2012}.
+%% MATT2: Gotta have a citation here?  Something from Scheutz on
+%% theory of mind in robots would be good.  //S
+%% Done //M
+In addition, work on human-aware task planning for mobile robots
+\citep{cirillo2009human} has used \emph{predicted} plans of humans to
+guide the system's own planning.
+\citep{talamadupula2014coordination,chakraborti2015planning} showed this
+approach more explicitly, representing and reasoning over a subset
+of the humans' mental states relevant to the autonomous system's planning
+problems.
+%% MATT2: The previous sentence is really hard to understand, alas.
+%% Need to rework it to make it clear, and might need two sentences.
+%% //S
+%% Conslidated the sentence so that it reads better //M
+Recent work has adapted these ideas to proactive decision making
+\citep{radar2017aaaifss,kim2017aaaifss} and smart-room environments
+\citep{jones2017aaaifss}.  \cite{pearce_etal_social_planning_aaai2014}
+note the importance of what they call ``social planning,'' which
+includes an agent achieving a goal via the modification of the mental
+states of others.\footnote{Our example here is briefly returned
+to later in ``Prior/Related Work and Novelty.''}
+
+While these papers confirm the importance of formalizing and reasoning
+about mental states, they seem to us to lack the formal and
+computational machinery needed to mechanize a full human-level theory
+of mind --- let alone such a theory of mind \emph{and} the
+requirements of a CAIS that we set out below.\footnote{Note that in
+  the present paper there is a limit to the theory-of-mind-modeling
+  ``power'' we insist an overseeing AI have.  E.g., we don't require
+  that an AI overseeing an environment populated with humans have
+  so-called \textit{phenomenal consciousness}, a form of ``what's it's
+  like to'' consciousness characterized by \cite{bbs.block}, and
+  claimed by \cite{sb_billion_conscious_robot}, to be impossible for a
+  mere machine to possess.  In sharp contrast with phenomenal
+  consciousness, \textit{cognitive consciousness} consists only in the
+  logico-mathematical \emph{structure} of human-level (and, indeed,
+  above) cognition, instantiated through time.  While cognitive
+  consciousness can be characterized axiomatically with help from the
+  formal languages we introduce below for cognitive calculi
+  \citep{axiomatizing_consciousness1}, in the present paper we do not
+  require the AI overseeing a CAIS have even cognitive consciousness,
+  and we specifically do not require, at this early point in our work
+  on cognitive-and-immersive systems, cognitive
+  \emph{self}-consciousness, despite the fact that the latter is
+  something that has been significantly mechanized and implemented
+  \cite{roman2015_robot_self-con,sb_on_knowledge_game}.}  We now turn
+to the presentation of the requisite formal and computational
+machinery.
