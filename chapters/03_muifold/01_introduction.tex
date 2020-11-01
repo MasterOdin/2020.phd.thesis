@@ -1,0 +1,31 @@
+\section{Introduction}\label{sec:03_introduction}
+
+As discussed within earlier chapters, we aim for our CAIS to be as generalizable
+as possible, allowing for both internally and externally developed content.
+Additionally, while our system is able to run on a desktop, we largely expect
+to see it run using large-scale displays. These large displays are increasingly
+ubiquitous in today's world, particularly in classrooms, conference rooms, auditoriums and public spaces. Given their large size and high resolution, they can display vast amounts of information and serve multiple concurrent users, thereby facilitating collaboration among humans very effectively.
+
+In situations where physical contact with the display is acceptable, touchscreens are a viable option for multi-user interaction and collaboration. However, touchscreens of appreciable size can be quite expensive, and they may not stand up to heavy use in high-traffic areas. Moreover, requiring physical proximity to a display may be inconvenient in classroom and conference scenarios where people are accustomed to being seated, it may interfere with the need for human collaborators to remain close to one another while interacting with different areas on the screen. Thus the ability to interact with a large display from a distance can be important in many scenarios. Additionally, using a touchscreen puts limitations on the size of the screen as ideally, all of its dimensions remain reachable by its users.
+
+Consequently, considerable effort has been devoted to developing effective means for {\em remote} interaction with large displays. One approach has been to develop special-purpose hardware and an accompanying special-purpose software platform. For example, the Oblong Optical Wand~\cite{oblong_industries_inc_oblong_2019} uses IR sensors installed in the ceiling of a room to sense the wand's 3D motion, which in conjunction with the g-speak spatial operating environment infers pointing direction and other user actions. Another possibility is use of an OptiTrack system~\cite{nagymate_application_1970,langner_multiple_2019} which uses cameras to capture positional information from LED markers affixed to an object that can be used to act as a pointer. Other authors~\cite{kephart_embodied_2019} have found it possible to appropriate devices originally developed for gaming and/or Virtual Reality applications, such as the HTC Vive controller, which interacts with Base Stations via laser signal pulses from IR photodiodes. These techniques can be expensive, and require installing and calibrating devices in the ceiling or on the walls. Moreover, they may require the user to stand only in certain designated areas that can be reached by the IR signals or captured by the cameras. Finally, they do not provide effective built-in means for distinguishing among different users.
+
+Another approach allows people to use their finger as a pointing device. This entails using a Microsoft KINECT device to obtain 3D locations of skeleton and hand joints and inputting them to an algorithm that has been trained to map the joint positions to an inferred cursor location~\cite{biswas_gesture_2011,ren_robust_2013,zhao_immersive_2018}. The promise of this approach is that it doesn't require the user to hold a special input device. However, like the above-mentioned techniques, it requires installing and calibrating hardware in the room that houses the display, and moreover the present state of the art does not yield a reliably accurate or stable cursor, especially for environments where multiple KINECT devices are necessary to track the user such as for ultra wide displays. Finally, these systems, like the HTC Vive, the users usually must stand within a set area to be picked up accurately by the device, and that moving outside that area leads to rapid degradation of accuracy.
+
+In recent years, smartphones have emerged as an attractive large-display interaction alternative due to their ubiquity, their flexibility, and other advantages. Almost everyone has a smartphone in their pocket that they can take out and use at a moment's notice~\cite{di_geronimo_surveying_2016}. Smartphones can readily be associated with their owners, allowing a system to distinguish inputs from different users. Moreover, smartphones inherently support a variety of functions that augment their use as pointing devices: they can act as a microphone, they can accept text input, and they can support a large vocabulary of gestures and other user actions through their touchscreens --- giving them the potential to satisfy a growing desire for intuitive multi-modal interactions with intelligent systems~\cite{davies_pervasive_2014,kephart_embodied_2019}.
+
+While there has been much research done on creating
+general frameworks for designing interfaces for smartphones,
+these focus principally around building out a single set application at a time. Additionally, each framework's building blocks tend to require the
+application developer to tie all content into it, making it difficult to support interaction with  
+third-party content. Finally, much work in this space violates some of the basic principles of effective collaboration, as will be explored more fully in the next section.
+
+To overcome the above challenges, we present the \textit{Mobile UI 
+Framework for Operating Large Displays} (MUIFOLD). MUIFOLD is an
+open-source web-based framework for developing applications that allow multiple users to interact with a large displays concurrently via their smartphones~\footnote{MUIFOLD is available at 
+\url{https://github.com/redacted/redacted}}. Unlike prior work,
+MUIFOLD aims to be compatible with third-party content right out
+the box, utilizing a pointing based interaction scheme similar to
+the traditional mouse. Moreover, it provides mechanisms whereby
+application developers can create custom mobile UIs that are 
+activated on the fly for specific custom-built webpages to support richer interactions.

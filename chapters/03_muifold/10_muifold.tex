@@ -86,13 +86,6 @@ separation, clients are able to interact with different webviews
 simultaneously if they so choose, or come together on one single
 webview.
 
-\begin{figure}
-\centering
-  \includegraphics[width=0.65\columnwidth]{figures/display_server}
-  \caption{Display Server grid with 3 open webviews where the red lines represent the grid that contains them.}
-  \label{fig:display_server_grid}
-\end{figure}
-
 When opening webviews, the display server injects our
 Reagent~\cite{peveler_reagent:_2019} service onto the page, which
 first opens a WebSocket back to the display server. Reagent then
@@ -204,7 +197,7 @@ overwrite the React root for the generic UI. Figure
 a UI might work for a specific application, in this case one
 to create sticky notes. This UI re-uses the pointer component,
 though shifted to the bottom of the screen, with custom content
-for creating sticky notes. Hitting the ``Canel'' button would
+for creating sticky notes. Hitting the ``Cancel'' button would
 bring the user back to the generic UI.
 
 \begin{figure}
