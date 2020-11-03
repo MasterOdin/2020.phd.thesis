@@ -1,0 +1,18 @@
+\usepackage{tikz}
+\usepackage{pagecolor}% http://ctan.org/pkg/{pagecolor,lipsum}
+\usetikzlibrary{decorations, decorations.text,backgrounds,fit}
+
+\usetikzlibrary{positioning}
+\makeatletter
+\tikzset{
+  auto centering/.style={execute at end picture={
+      \node[fit=(current bounding box),minimum width=#1-2*\tikz@framexsep,inner sep=1,
+      ]{};
+    }},
+  auto centering/.default=0.6\columnwidth,
+}
+\makeatother
+
+\tikzset{block/.style={minimum size=0.65cm,outer sep=0pt,draw,rectangle,node distance=0pt}}
+\tikzset{empty/.style={minimum size=1cm,outer sep=0pt,node distance=0pt}}
+\tikzset{emptyA/.style={minimum size=0.85cm,outer sep=0pt,node distance=0pt}}

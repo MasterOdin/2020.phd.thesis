@@ -1,0 +1,43 @@
+\section{Requirements of CAIS}\label{ref:requirements_cais}
+
+It should be noted that a CAIS to be considered a truly ``intelligent''
+room, it is not sufficient that the room be intelligent about, for
+example, search queries over a domain $D$; the room should also be
+intelligent about cognitive states of agents in the room and their
+cognitive states towards $D$.
+
+Despite there being a significant amount of work done in building
+intelligent environments (of varying levels of intelligence;
+\cite{coen_design_1998,brooks_intelligent_1997,chan_review_2008}), there
+is no formalization of what constitutes an intelligent room and what
+separates it from an intelligent agent.  Though \cite{coen_design_1998}
+briefly differentiates an intelligent room from ubiquitous computing
+based on the non-ubiquity of sensors in the former, there is not any
+formal or rigorous discussion of what separates an intelligent room
+from a mobile robot that roams around the room with an array of
+sensors.
+
+The requirements in question are cognitive in nature and exceed
+intelligent rooms with sensors that can answer queries over simple
+extensional data (e.g.\ a room that can answer financial queries such
+as \textit{``Show me the number of companies with revenue over X?''}).
+At a high-level, we require two conditions below hold:
+
+\begin{itemize}
+    \item $\mathcal{C}$ \emph{Cognitive}: A CAIS should be able to
+      help agents with cognitive tasks and goals.  For instance, a
+      system that simply aids in querying a domain $D$ is not
+      cognitive in nature; a system that aids an agent in convincing
+      another agent that some state-of-affairs holds in $D$ is
+      considered cognitive. (Please see the appendix for more
+      discussion of our usage of the term ``cognitive.'')
+    \item $\mathcal{I}$ \emph{Immersive}:  There should
+      be some attribute or property of a CAIS that is non-localized
+      and distinguished from agents in the room.  Moreover, this
+      property should be \textbf{common knowledge}.  (Note: this is
+      not easily achievable with a physical robot, and this condition
+      differentiates a CAIS from a cognitive
+      agent.)\footnote{This condition may not strictly be realizable,
+        but the goal is to at a minimum build systems that approach
+        this ideal condition.}
+\end{itemize}

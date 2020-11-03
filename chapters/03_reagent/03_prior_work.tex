@@ -9,7 +9,7 @@ interaction than traditional desktop environments. In these multimodal
 ``smart rooms'', various efforts have been shown for picking up
 where a user is pointing and using it in combination with
 their voice to generate a command
-\cite{bolt1980,carbini_wizard_2006,langner_multiple_2019,farrell_symbiotic_2016,kephart_embodied_2019}.
+\cite{bolt_put-that-there:_1980,carbini_wizard_2006,langner_multiple_2019,farrell_symbiotic_2016,kephart_embodied_2019}.
 However, these systems hand-build their display layer and
 content to embed the necessary instrumentation for combining speech
 and gesture. Alternatively, \cite{coen_sodabot:_1994,brooks_intelligent_1997} demonstrate a system that
@@ -26,18 +26,19 @@ content and displays.
 
 Secondly, we look at the rich research on automatic extraction of
 information from webpages and the lessons learned there, especially in how
-they might work with ontology building. \cite{cimiano2004,storey2005} propose frameworks on parsing
+they might work with ontology 
+building. \cite{cimiano_towards_2004,hutchison_ontology_2005} propose frameworks on parsing
 important information from web pages, which would be then encoded into RDF structures.
-\cite{gangemi2013} provides a recent
+\cite{hutchison_comparison_2013} provides a recent
 overview of available technologies in this space.
 However, these approaches generally focus on the use of just natural language understanding over
 the entire page for key terms and relations, and not necessarily leveraging the increasingly
 rich ways the data may be shown in a page that require true DOM traversal and analysis. However,
 in analysis and automatic parsing of the DOM structure, we are informed by prior work on taking
 into account elements that are ``noise'' (e.g. ads and popups) which might look well-structured,
-but that the user most likely does not care about. \cite{gupta2003}
-utilizes the full DOM-tree to determine relevance of elements. \cite{joshi2009} utilizes both
-DOM traversal and NLP to determine salient details. \cite{sun2011} utilize a algorithm that considers
+but that the user most likely does not care about. \cite{gupta_dom-based_2003}
+utilizes the full DOM-tree to determine relevance of elements. \cite{joshi_web_2009} utilizes both
+DOM traversal and NLP to determine salient details. \cite{sun_dom_2011} utilize a algorithm that considers
 content density within nodes. Our current work focuses on automatic analysis of elements that
 rarely, if ever, appear within this ``noisy'' data, but is important to consider as we expand Reagent to further domains. Finally, in the realm of understanding purely
 tabular data, \cite{hackinger_datagorri:_2018} proposes a system similar in some regards to
