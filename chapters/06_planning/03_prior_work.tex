@@ -1,0 +1,32 @@
+\section{Prior Work}
+
+Planning, and more specifically plan recognition, is a rich field of
+research that has a broad range of prior work that we draw from. For planning,
+one branch of work is ``deductive planning'', wherein given a goal and a series 
+of axioms,
+the resulting proof gives a plan structure~\cite{green_application_1969}. This
+approach is attractive as it allows the usage of first-order logic to define
+our world, and the state transitions. Further work was done to handle concepts
+of conditional branching, plan composition, and 
+recursion~\cite{metzing_plan_1989,biundo_deductive_1992,rosenschein_plan_1981}.
+However, through the regular use of FOL, we see a larger potential of ending
+up with side-effects of actions, which can be undesirable for planning. An
+alternative concept is through the usage of STRIPS-style 
+planners~\cite{fikes_strips_1971}. Within these planners, each action is
+defined via a complete structure with pre-conditions and post-conditions for
+each action. This approach is attractive as it provides a useful mechanism for
+dealing with the framing problem~\cite{mccarthy_philosophical_1969}. However,
+these planners generally utilize a predicate calculus that lacks the full
+expressiveness of first-order logic, not to mention higher order logics like
+the \CEC. While STRIPS-styles planners work well across many domains, they
+rely on deterministic planning. Extending the concept, conditional nonlinear
+planners~\cite{peot_conditional_1992} and partial 
+planners~\cite{pryor_planning_1996}
+provide a mechanism for dealing with non-deterministic plans through if-else
+like structures. However, this comes at a cost of increased complexity and
+combinatorial explosion of states without ensuring some limitation on the
+expressivity~\cite{rintanen_constructing_1999}. Given that we aim for increased 
+expressivity, we do not consider these approaches herein. As such, we also do
+not concern ourselves with other extensions to classical planners such as 
+probabilistic 
+planners~\cite{boutilier_decision-theoretic_1999,kaelbling_planning_1998}.

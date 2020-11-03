@@ -1,0 +1,12 @@
+\section{Intent Resolution}
+
+Given our definitions, we may now attack the problem of intent resolution for our CAIS.
+Ideally, any action carried out by our humans within the room would be as explicit
+as possible. Indeed, when using something like MUIFOLD, this explicitness is handled for
+the user under the hood by the app, tying together what note or block they're interacting
+with, and what action they're attempting to accomplish with it. However, through voice,
+providing the full explicit action may be difficult or impossible. For example, within
+our sticky notes domain, we may expect a user to utter "Delete the green note" or "Change
+his note to blue". In the both examples, the exact note ID to be operated on is not given,
+and must be resolved by the system if possible by the context of the sentence, and of the
+known mental states of agents.

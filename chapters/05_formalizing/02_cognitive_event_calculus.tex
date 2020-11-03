@@ -4,15 +4,15 @@ To capture the room in a formal way, we employ the
 \textbf{cognitive event calculus} (\CEC), a cognitive calculus and
 intensional logic.  While the full syntax
 and inference schemata are outside the scope of this paper, we give a
-brief overview.\footnote{For a more in-depth primer on the \DCEC, see
-  the appendix in \cite{nsg_sb_dde_ijcai}.} \DCEC\ is a multi-sorted
+brief overview.\footnote{For a more in-depth primer on the \DCEC, of which the \CEC is a subset of,
+see the appendix in \cite{nsg_sb_dde_ijcai}.} The \CEC\ is a multi-sorted
 quantified modal logic with a well-defined syntax and proof calculus.
-\DCEC\ subsumes the event calculus~\cite{mueller_commonsense_2014}, a first-order
+\CEC\ subsumes the event calculus~\cite{mueller_commonsense_2014}, a first-order
 calculus used for modeling events and actions and their effects upon
-the world.  The proof calculus of \DCEC\ is based on natural deduction
+the world.  The proof calculus of \CEC\ is based on natural deduction
 \cite{gentzen_investigations_1964} and includes all the introduction and elimination
 rules for first-order logic, as well as inference schemata for the
-modal operators and related structures.  \DCEC\ is a sorted system and
+modal operators and related structures.  \CEC\ is a sorted system and
 includes the built-in sorts shown in Table~\ref{syn:sorts}.
 
 Table~\ref{syn:terms} presents the syntax of our language for forming
@@ -23,7 +23,7 @@ formulae in the language, and finally Table~\ref{rules} shows a subset of
 inference schemata needed for our current purpose. The main
 inference schemata needed include $I_{\knows}$ and $I_{\believes}$,
 which state that knowledge and belief are closed under the inference
-system of $\DCEC$.  We also have inference schemata that let us go
+system of \CEC.  We also have inference schemata that let us go
 from perception to knowledge ($I_1$), knowledge to belief ($I_2$),
 common knowledge to knowledge ($I_3$), and from knowledge to
 propositions that hold ($I_4$). Below, we also use \emph{derived
@@ -88,7 +88,7 @@ $ f(t_1,\ldots,t_n)$ & A function expression. E.g. $\action(eating, john) $\\
 %% the reasoner-planner section
 %% to force latex to put them onto the same page and save some space // Matt
 
-To handle reasoning within \DCEC\, we utilize a quantified modal logic
+To handle reasoning within \CEC\, we utilize a quantified modal logic
 theorem prover, \textsf{ShadowProver}, first presented in
 \cite{nsg_sb_dde_ijcai,uncertaintyized_cognitive_calculus}.\footnote{The
   prover is available in both Java and Common Lisp and can be obtained

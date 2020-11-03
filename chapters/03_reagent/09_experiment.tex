@@ -1,0 +1,154 @@
+\section{Experiment}
+
+To assess Reagent's ability to support natural interactions between users and third-party web pages that are typically encountered in the wild, we conducted an experiment involving nearly 200 web pages. We briefly describe the experimental setup and data collection, and then present the experimental results.
+
+\subsection{Experimental Setup and Data Collection}
+In order to obtain a collection of popular websites that contain data in tabular form, we used the Alexa service~\cite{noauthor_top_nodate}, which provides a list of the top sites viewed per month. From that service, we chose the top 10 sites in the ``Sports'' and ``Business'' categories, and filtered out those sites that contained only articles or pictures about the subject material. We crawled each of the remaining websites to generate a list of candidate pages that each contained at least one data table. In some cases, sites contained clusters of pages that were structurally identical but contained different content. For example, each team in the English Football League may have pages containing structurally identical tables, but of course the content is particular to each team. In this case, we randomly select a single representative from that cluster so as not to bias our statistics.
+
+We then measure for each site the following quantities:
+\begin{itemize}
+    \item {\bf Pages.} Number of pages analyzed for the site.
+    \item {\bf Tables.} Number of tables found among the pages analyzed for the site. Only the first table on each page is analyzed further.
+    \item {\bf Failed.} Number of pages that Reagent was unable to parse within a timeout period of 15 seconds. For most pages, parsing takes 1-2 seconds, but for SPA type sites (where the body content dynamically loads after the rest of the page) it can take about another 2-4 seconds. Depending on how content (including ads) is loaded, a few pages take much longer because Reagent re-starts parsing whenever the page content changes.
+    \item {\bf Columns.} Total number of columns among the tables analyzed for a site.
+    \item {\bf Verbatim (V).} Among the columns analyzed for a site, the number for which the visible column headings are directly understandable.
+    \item {\bf Interpretable (I).} Among the columns analyzed for a site, the number that, while not directly understandable, are interpretable through the use of tooltips or other metadata contained within the web page, possibly assisted by WordNet.
+    \item {\bf Non-interpretable (NI).} Among the columns analyzed for a site, the number for which Reagent is unable to associate a human-understandable term, and which must therefore be defined by the user.
+    \item {\bf Verbatim-Strict.} Among the tables analyzed for a site, the number for which {\em all} visible column headings are directly understandable.
+    \item {\bf Interpretable-Strict.} Among the tables analyzed for a site, the number containing at least one {\bf interpretable} column.
+    \item {\bf Non-interpretable-Strict.} Among the tables analyzed for a site, the number for which Reagent is unable to associate a human-understandable term for at least one column.
+    \item {\bf Success Rate}. The percentage of column headers at a given site that can be interpreted correctly by Reagent, either verbatim or by using auxiliary information.
+\end{itemize}
+
+\begin{table*}[hbtp]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|c|c|c|c|c| }
+ \hline
+ Site & Pages & Failed & Cols & V & I & NI & Tables & V-Strict & I-Strict & NI-Strict & Success(\%)\\
+ \hline
+ ESPN & 93 & 19 & 1184 & 199 & 623 & 362 & 196 & 64 & 39 & 93 & 69.4 \\
+% # of Pages: 93
+% # of Pages Failed: 19
+% # of Columns: 1184
+% .  # abbreviated: 985
+% .  # abbreviated, could expand: 623
+% .  # not abbreviated: 199
+% # of Tables: 196
+% .  # of Tables with abbreviations: 132
+% .  # of Tables with abbreviations with titles: 39
+ \hline
+ CricBuzz & 3 & 0 & 63 & 30 & 26 & 7 & 5 & 1 & 3 & 1 & 88.8\\
+% # of Pages: 3
+% # of Pages Failed: 0
+% # of Columns: 63
+% .  # abbreviated: 33
+% .  # abbreviated, could expand: 26
+% .  # not abbreviated: 30
+% # of Tables: 5
+% .  # of Tables with abbreviations: 4
+% .  # of Tables with abbreviations with titles: 3
+ \hline
+ SkySports & 9 & 1 & 86 & 17 & 43 & 26 & 14 & 1 & 9 & 4 & 83.7 \\
+% # of Pages: 9
+% # of Pages Failed: 1
+% # of Columns: 86
+% .  # abbreviated: 69
+% .  # abbreviated, could expand: 43
+% .  # not abbreviated: 17
+% # of Tables: 14
+%    # of Tables with abbreviations: 13
+% .  # of Tables with abbreviations with titles: 9
+ \hline
+ ESPN CricInfo & 6 & 0 & 73 & 9 & 56 & 8 & 8 & 1 & 6 & 1 & 89.0 \\
+% # of Pages: 6
+% # of Pages Failed: 0
+% # of Columns: 73
+% .  # abbreviated: 64
+% .  # abbreviated, could expand: 56
+% .  # not abbreviated: 9
+% # of Tables: 8
+% .  # of Tables with abbreviations: 7
+% .  # of Tables with abbreviations with titles: 6
+ \hline
+ Yahoo Sports & 47 & 5 & 2171 & 719 & 1354 & 98 & 149 & 28 & 110 & 11 & 95.5\\
+% # of Pages: 47
+% # of Pages Failed: 5
+% # of Columns: 2171
+% .  # abbreviated: 1452
+% .  # abbreviated, could expand: 1354
+% .  # not abbreviated: 719
+% # of Tables: 149
+% .  # of Tables with abbreviations: 121
+% .  # of Tables with abbreviations with titles: 110
+
+ \hline
+ NBA.com & 7 & 0 & 263 & 40 & 0 & 223 & 21 & 10 & 0 & 11 & 15.2 \\
+% # of Pages: 7
+% # of Pages Failed: 0
+% # of Columns: 263
+% .  # abbreviated: 223
+% .  # abbreviated, could expand: 0
+% .  # not abbreviated: 40
+% # of Tables: 21
+% .  # of Tables with abbreviations: 11
+% .  # of Tables with abbreviations with titles: 0
+ \hline
+ Yahoo Finance & 11 & 2 & 82 & 72 & 0 & 10 & 14 & 8 & 0 & 6 & 87.8 \\
+% # of Pages: 11
+% # of Pages Failed: 2
+% # of Columns: 82
+% .  # abbreviated: 10
+% .  # abbreviated, could expand: 0
+% .  # not abbreviated: 72
+% # of Tables: 14
+% .  # of Tables with abbreviations: 6
+% .  # of Tables with abbreviations with titles: 0
+ \hline
+ BusinessInsider & 6 & 3 & 50 & 30 & 4 & 16 & 7 & 4 & 2 & 1 & 68.0\\
+% # of Pages: 6
+% # of Pages Failed: 3
+% # of Columns: 50
+% .  # abbreviated: 20
+% .  # abbreviated, could expand: 4
+% .  # not abbreviated: 30
+% # of Tables: 7
+% .  # of Tables with abbreviations: 3
+% .  # of Tables with abbreviations with titles: 2
+ \hline
+ MarketWatch & 2 & 0 & 39 & 22 & 0 & 17 & 7 & 1 & 0 & 6 & 56.4 \\
+ % # of Pages: 2
+% # of Pages Failed: 0
+% # of Columns: 39
+% .  # abbreviated: 17
+% .  # abbreviated, could expand: 0
+% .  # not abbreviated: 22
+% # of Tables: 7
+% .  # of Tables with abbreviations: 6
+% .  # of Tables with abbreviations with titles: 0
+ \hline
+ {\bf Total} & {\bf 184} & {\bf 30} & {\bf 4011} & {\bf 1138} & {\bf 2106} & {\bf 767} & {\bf 421} & {\bf 118} & {\bf 169} & {\bf 134} & {\bf 80.9}\\
+ \hline
+\end{tabular}
+\caption{Experimental Results for 9 sites with 184 pages containing tables. See above for definitions of column headings. V = Verbatim, I = Interpretable, NI = Non-interpretable.}
+\label{table:sites}
+\end{table*}
+
+\subsection{Results}
+
+The process described above yielded 184 web pages across 9 sites.
+The results are summarized in  Table~\ref{table:sites}.
+
+Across all sites, Reagent was able to successfully handle 80.9\% of all column headers. For several of the sites,
+the success rates were well above 80\%, ranging up to over 95\% for Yahoo Sports.
+However, for certain sites such as NBA.com, the success rate was much lower due to the absence of any
+tooltip information. If we judge Reagent by the stricter criterion whereby {\em all} column headers must be
+recognized automatically with no user assistance whatsoever, the overall success rate drops to
+$(118 + 169) / 421 = 68.2\%$, which we feel is still quite good. These results demonstrate the general power of
+Reagent and its ability to generalize across unrelated websites.
+
+Further detailed analysis of failures and several individual cases allows us to make some additional useful observations:
+\begin{enumerate}
+    \item Parse failures are typically due to sites not employing an appropriate DOM structure for the table. For example, some tables do not use the conventional ``$<$th$>$'' tag for table headers, but instead use CSS classes to structure the table. Among tables that use this technique, some conventions appear to have emerged, such as using the ``colhead'' class to designate a header row -- a convention that we can exploit in future generations of Reagent.
+    \item Some sites, like ESPN, constantly load content and alter its DOM over our 15 second timeout window. Currently, we rescan the entire page on a content page, but future iterations of Reagent can be made to analyze the mutation of the page, to better determine if a re-scan is actually necessary, which will prevent it from constantly re-scanning the page until the timeout, and never actually parsing the content that's shown.
+    \item Many abbreviations are commonly used across different sites. For example, for all of the sports sites that we analyzed, the weight and height of a player are denoted by the abbreviations ``WT'' and ``HT''. In future generations of Reagent, we can take advantage of this fact to build a cross-site abbreviation vocabulary that can be used to infer the meaning of an abbreviation even when the web page itself provides no interpretable information.
+\end{enumerate}

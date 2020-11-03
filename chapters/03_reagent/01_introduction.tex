@@ -1,0 +1,53 @@
+\section{Introduction}
+
+With the growing ubiquity of voice-activated assistants like Siri and Alexa, society is
+quickly acclimating to interacting with AI as we do with our fellow humans. Now under development is
+a new generation of more sophisticated assistants centered around 
+cognitive spaces that are designed to help scientists, business users, and students with
+cognitive tasks such as data exploration and analysis~\cite{kephart2018cognitive}, decision making~\cite{farrell2016symbiotic}, and learning languages~\cite{allen_rensselaer_2019}.
+
+Practically all of these cognitive applications entail some sort of interaction with data that
+is based on multi-modal inputs that include speech, pointing and gesture. To date, the assistants have 
+supported such interactions by reading data from a database and displaying it in the form of tables or 
+plots through web pages that are specially instrumented to capture pointing events. A stream of utterances 
+is converted into a text stream by a speech-to-text engine and combined with the stream of pointing events 
+to derive user intent, i.e. a parameterized command that is then executed by orchestrating one or more services 
+and rendering the output on a display and optionally as synthesized speech played through a speaker. A 
+major bottleneck in the creation of such cognitive assistants is that creating specially-instrumented web 
+pages is labor-intensive. Unless this bottleneck can be removed, it seems unlikely that multi-modal cognitive
+assistants will become anywhere near as pervasive as the present generation of less-sophisticated bots.
+
+In this paper, we describe \textit{Reagent}, a novel technology that reduces the above-mentioned bottleneck by
+readily converting ordinary non-instrumented webpages containing structured data into
+software agents with which one can interact naturally, via a combination of speech and
+pointing. \textit{Reagent} combines streams of semantically-meaningful mouse events with
+speech transcriptions to derive and execute parameterized commands that represent user
+requests to visualize, extract, query, sort, filter, analyze, or otherwise manipulate data
+displayed on webpages. Command execution entails displaying the requested information in the
+original webpage or in a dynamically-constructed one, as well as playing synthesized speech.
+\textit{Reagent} automatically infers mappings from event labels to human-friendly terminology,
+or when necessary learns them actively from the user. 
+
+\textit{Reagent} takes advantage of the fact that web pages are highly structured, plus
+emerging website accessibility conventions and standards that embed
+information that helps interpret elements that are displayed on a given web page. 
+For example, there exists a large body of guides on accessibility for sites which include the W3C Standard
+Web Content Accessibility  
+Guidelines\footnote{https://www.w3.org/WAI/standards-guidelines/wcag/} or a
+Voluntary Product Accessibility 
+Template\footnote{https://www.section508.gov/sell/vpat}. This accessibility
+is aimed at improving the experience of people with disabilities, and who might
+not be able to fully see and visualize the content of page. These users rely
+on things like screen readers which traverse the semantic elements of a page
+and speak the contents to the user. To accomplish this, these elements utilize
+hidden, non-visible attributes that help to establish semantic understanding of
+content on the page (e.g. headers and links) as well as showing information on
+hovering on certain elements (e.g. column headers and images). Taking column headers as an example, 
+while they may often be abbreviated when displayed to the end user, the full text is often available
+when the user hovers over the abbreviation, i.e. the information is embedded in the page as a hidden attribute.
+
+The remainder of the paper is organized as follows. After discussing related prior research, we describe
+Reagent and its relationship to a larger immersive systems architecture in which it is embedded. We then describe a use case illustrating
+how Reagent can be used to collaboratively build an ontology from scratch, pulling information from pages as users navigate and interact with them. We then perform an experiment to assess how broadly
+applicable Reagent is to web pages encountered in ordinary use, finding that it works for approximately 80\% of nearly 200 popular web pages that we surveyed.
+We conclude with a summary and some thoughts about future directions for this research.
