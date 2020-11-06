@@ -8,9 +8,7 @@ provide high-level feedback. After playing around with the system,
 each user was given a brief qualitative exit interview about the
 system. Additionally, we note some challenges we faced.
 
-\subsection{Position for Holding the Phone}
-
-Our prototype implementation had a relatively 1-to-1
+\textbf{Position for Holding the Phone} Our prototype implementation had a relatively 1-to-1
 correspondence between change in cursor location to pitch (rotating
 the phone up and down) and yaw (rotating the phone left and right),
 greatly simplifying the mathematical model. Most users, when given
@@ -23,9 +21,7 @@ After some initial confusion, these users were able to successfully
 adapt to holding the phone flat in their hand, but stated afterwards
 that they wish they could have held it at an angle.
 
-\subsection{Location and Size of Buttons}
-
-One of the biggest design challenges was dealing with placement of
+\textbf{Location and Size of UI Buttons} One of the biggest design challenges was dealing with placement of
 buttons for the generic UI, as well as general guidelines for the
 developers of webview specific UIs. The principle goal was that
 users of the system, after some practice, would be able to use
@@ -41,9 +37,7 @@ button, allowing them to know that they hit it. Unfortunately, we
 found during implementation that haptic feedback was only available
 to android users.
 
-\subsection{Permissions}
-
-To utilize many of the underlying sensors or capabilities of the
+\textbf{Permissions} To utilize many of the underlying sensors or capabilities of the
 phone in a web context, permissions are frequently asked, such
 as if attempting to use location, use the camera, etc. However,
 due to historical reasons, this is not true for the DeviceOrientation
@@ -57,9 +51,7 @@ permission to use the sensors, but this is done through system
 settings, which some users found a bit confusing if not provided
 step-by-step instructions. However, in using React, we can utilize the ReactNative library to generate native apps that do not have these issues, at the cost of requiring the user to download and install the app.
 
-\subsection{Providing ``Fluid'' UIs}
-
-Among our 10 subjects, very few shared the same phone model, and each had a different amount of
+\textbf{Providing ``Fluid'' UIs} Among our 10 subjects, very few shared the same phone model, and each had a different amount of
 available screen real estate. To handle such differences,
 there's a paradigm of ``fluid'' layout according to which the content dimensions are based on percentages of available screen real estate. This allowed
 us to deal with the size differences. Unfortunately, when
@@ -73,9 +65,7 @@ fixed sizes and positions. Luckily, it is easy to detect screen
 rotation to re-draw all elements as necessary, but we do not need to
 worry about the screen size otherwise changing.
 
-\subsection{Browser and Device Incompatibilities}
-
-The biggest challenge we faced was in slight browser
+\textbf{Browser and Device Incompatibilities} The biggest challenge we faced was in slight browser
 incompatibilities across a range of devices. The first is that
 each browser provides a different frame of reference for the
 coordinate system used by the DeviceOrientation API. For example,

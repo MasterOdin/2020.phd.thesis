@@ -1,7 +1,33 @@
 \section{Future Work}
 
-We now discuss some promising avenues of future work. As stated in Chapter~\ref{chap:formalizing},
-the cognitive calculus we use here, the \CEC lies towards the base of the cognitive calculi hierarchy.
-This gives then the ability to look at extensions of this base, exploring different calculi to
-fit other means. For example, there is the Deontic Cognitive Event Calculus (\DCEC) adds the deontic
-operator of obligation, which would allow us to
+We now discuss some promising avenues of future work. As stated in
+Chapter~\ref{chap:formalizing}, we purposely used the \CEC\ to form our
+basis, leaving ourselves open to various extensions to it to deal with
+more advanced scenarios. Perhaps the biggest extension is to handle the
+potentially noisiness of incoming data from sensors and feeding it into
+our system. Within this work, we assumed that sensors were providing
+perfect information with perfect confidence. In reality, many of the input
+mechanisms operate with degrees of confidence on their result. For example,
+for each classification that is provided by the conversation-worker, the
+Watson Assistant service provides a confidence of its interpretation. For
+certain actions, lower allowed confidence levels are fine, such as in the
+scenarios presented here, but in more high stakes environments,
+the CAIS may need to conduct certain actions only with high confidence and
+some with low. To handle this, we look to work by Govindarajulu and Bringsjord
+where they incorporate strength factors into a cognitive
+calculus~\cite{govindarajulu_strength_2017}.
+
+
+One area of interest is in dealing with ethical
+issues and matters of privacy. When utilizing these collaborative spaces,
+as information about specific users grows, a user would have a reasonable
+belief that the system will not offer sensitive information to their
+colleagues without prior approval. The ``Deontic Cognitive Event
+Calculus'' (\DCEC) is an attractive logic to handle these cases, adding in the
+deontic operator of obligation on-top of the \CEC. Indeed, Bringsjord et al.
+proposes a ``Tenancular AI'' shows the usefulness of the \DCEC\ with regards
+to these concerns~\cite{bringsjord_tentacular_2018}. Additionally, the \DCEC
+has been used to model the ethical principals of ``Doctrine of Double
+Effect''~\cite{govindarajulu_automating_2017} and ``Doctrine of Triple
+Effect''~\cite{peveler_towards_2018}.
+

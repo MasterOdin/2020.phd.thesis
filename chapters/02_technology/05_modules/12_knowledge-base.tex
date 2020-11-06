@@ -1,0 +1,7 @@
+\subsection{knowledge-base}
+
+Our CAIS utilizes a simple knowledge base store to hold information about the system and its participants.
+The information is in the form of fluents which are formalized under the \CEC\, which will be discussed
+in Chapter~\ref{chap:formalizing}. Each participant that has been registered to the system is tracked
+individually with their own set of fluents. Communication to the module happens both through listening to RabbitMQ for adding information to the knowledge base, as well as exposing a REST API for pulling information
+out.
