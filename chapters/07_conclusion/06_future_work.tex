@@ -1,6 +1,9 @@
 \section{Future Work}
 
-We now discuss some promising avenues of future work. As stated in
+We now discuss some promising avenues of future work. We examine two main
+thrusts here, within each there are a number of possible extensions and
+improvements that may be investigated. The first thrust concerns our
+formalization efforts and how we may build upon it. As stated in
 Chapter~\ref{chap:formalizing}, we purposely used the \CEC\ to form our
 basis, leaving ourselves open to various extensions to it to deal with
 more advanced scenarios. Perhaps the biggest extension is to handle the
@@ -13,13 +16,21 @@ Watson Assistant service provides a confidence of its interpretation. For
 certain actions, lower allowed confidence levels are fine, such as in the
 scenarios presented here, but in more high stakes environments,
 the CAIS may need to conduct certain actions only with high confidence and
-some with low. To handle this, we look to work by Govindarajulu and Bringsjord
-where they incorporate strength factors into a cognitive
-calculus~\cite{govindarajulu_strength_2017}.
+some with low. To handle this, we look to work by Govindarajulu and
+Bringsjord where they incorporate strength factors into a cognitive
+calculus~\cite{govindarajulu_strength_2017}. Strength factors can be viewed
+as a formalization of part of Chisholm’s rational
+belief-fixation~\cite{theory.of.knowledge3.chisholm}. Within the work,
+the belief operator is amended such that it has a coefficient, $\sigma$,
+such that it ranges from one to five, where beliefs are labelled as (1)
+acceptable, (2) some presumption in favor, (3) beyond reasonable doubt,
+(4) evident, and (5) certain. An added benefit of this approach is that
+the presentation of these strength factors may be easier for understanding
+from the layperson versus raw probability values, which people may find
+difficult to parse~\cite{kaye_can_1991}.
 
-
-One area of interest is in dealing with ethical
-issues and matters of privacy. When utilizing these collaborative spaces,
+Another avenue of interest for our formalization efforts is in dealing with 
+ethical issues and matters of privacy. When utilizing these collaborative spaces,
 as information about specific users grows, a user would have a reasonable
 belief that the system will not offer sensitive information to their
 colleagues without prior approval. The ``Deontic Cognitive Event
@@ -31,3 +42,39 @@ has been used to model the ethical principals of ``Doctrine of Double
 Effect''~\cite{govindarajulu_automating_2017} and ``Doctrine of Triple
 Effect''~\cite{peveler_towards_2018}.
 
+The other thrust concerns our technology. First, while we are pleased with
+our preliminary results of MUIFOLD and its effectiveness, from it were
+identified a number of limitations. The most principle of is in making the
+system more robust for how users hold their phones. As identified in
+Section~\ref{chap04:limitations} however, we find that users would prefer to
+hold their phone at an angle, and then point around that angle. However, our
+initial implementation assumed that users were holding their phone flat, which
+allowed for a simplification of detecting angle changes only around pitch and
+yaw. Implementing roll into the equation would expand usability as we look
+to extend our technology into more real-world applications. In that vein,
+the evaluation here was preliminary in nature, and a more robust user study
+is still required for full evaluation of our technology, especially as it
+compares to other mechanisms of relative pointing (e.g. Bluetooth clickers)
+and absolute pointers (e.g. Wii remote) both in our laboratory testing, as
+well as in real-world usage. Perhaps even more importantly is that the
+technology is deployed to real-world usage wherein we may discover additional
+issues or strengths only discovered when users engage the technology in a
+more natural environment than the Fitts' pointing test.
+
+Finally, the technology and formalization presented here focuses on
+co-located environments. This focus was a purposeful one due to the
+inherit differences between co-located and distributed that we were
+not prepared to address here. The first step towards this would be
+working on extending the CAIS implementation we presented here to
+a fully distributed set-up, wherein each participant is running their
+own transcript-worker, speaker-worker, display-worker, etc., and that
+the content to be outputted may be the same, or different per user to
+fit their needs, such as the display-workers may have different content
+open per user, or the content may be arranged differently. All of this
+is to be accounted for within the technology stack, but also must be
+incorporated into formalization efforts herein. However, to accomplish this,
+our first steps would be on deploying the technology to users for a
+given scenario, and perform baseline user studies to understand empirically
+real-world usage. From this, we could then better conceptualize and deal
+with formalization of the environment, and then bring to bear the fruits
+of that formalization effort, such as in intent resolution and plan recognition.
