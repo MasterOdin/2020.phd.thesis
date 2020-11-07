@@ -22,11 +22,11 @@ We then measure for each site the following quantities:
 
 \begin{table*}[hbtp]
 \centering
-\begin{tabular}{ |c|c|c|c|c|c|c|c|c|c|c|c| }
+\begin{tabular}{ |c|c|c|c|c|c|c| }
  \hline
- Site & Pages & Failed & Cols & V & I & NI & Tables & V-Strict & I-Strict & NI-Strict & Success(\%)\\
+ Site & Pages & Failed & Cols & V & I & NI \\
  \hline
- ESPN & 93 & 19 & 1184 & 199 & 623 & 362 & 196 & 64 & 39 & 93 & 69.4 \\
+ ESPN & 93 & 19 & 1184 & 199 & 623 & 362 \\
 % # of Pages: 93
 % # of Pages Failed: 19
 % # of Columns: 1184
@@ -37,7 +37,7 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations: 132
 % .  # of Tables with abbreviations with titles: 39
  \hline
- CricBuzz & 3 & 0 & 63 & 30 & 26 & 7 & 5 & 1 & 3 & 1 & 88.8\\
+ CricBuzz & 3 & 0 & 63 & 30 & 26 & 7\\
 % # of Pages: 3
 % # of Pages Failed: 0
 % # of Columns: 63
@@ -48,7 +48,7 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations: 4
 % .  # of Tables with abbreviations with titles: 3
  \hline
- SkySports & 9 & 1 & 86 & 17 & 43 & 26 & 14 & 1 & 9 & 4 & 83.7 \\
+ SkySports & 9 & 1 & 86 & 17 & 43 & 26 \\
 % # of Pages: 9
 % # of Pages Failed: 1
 % # of Columns: 86
@@ -59,7 +59,7 @@ We then measure for each site the following quantities:
 %    # of Tables with abbreviations: 13
 % .  # of Tables with abbreviations with titles: 9
  \hline
- ESPN CricInfo & 6 & 0 & 73 & 9 & 56 & 8 & 8 & 1 & 6 & 1 & 89.0 \\
+ ESPN CricInfo & 6 & 0 & 73 & 9 & 56 & 8 \\
 % # of Pages: 6
 % # of Pages Failed: 0
 % # of Columns: 73
@@ -70,7 +70,7 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations: 7
 % .  # of Tables with abbreviations with titles: 6
  \hline
- Yahoo Sports & 47 & 5 & 2171 & 719 & 1354 & 98 & 149 & 28 & 110 & 11 & 95.5\\
+ Yahoo Sports & 47 & 5 & 2171 & 719 & 1354 & 98 \\
 % # of Pages: 47
 % # of Pages Failed: 5
 % # of Columns: 2171
@@ -82,7 +82,7 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations with titles: 110
 
  \hline
- NBA.com & 7 & 0 & 263 & 40 & 0 & 223 & 21 & 10 & 0 & 11 & 15.2 \\
+ NBA.com & 7 & 0 & 263 & 40 & 0 & 223 \\
 % # of Pages: 7
 % # of Pages Failed: 0
 % # of Columns: 263
@@ -93,7 +93,7 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations: 11
 % .  # of Tables with abbreviations with titles: 0
  \hline
- Yahoo Finance & 11 & 2 & 82 & 72 & 0 & 10 & 14 & 8 & 0 & 6 & 87.8 \\
+ Yahoo Finance & 11 & 2 & 82 & 72 & 0 & 10 \\
 % # of Pages: 11
 % # of Pages Failed: 2
 % # of Columns: 82
@@ -104,7 +104,7 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations: 6
 % .  # of Tables with abbreviations with titles: 0
  \hline
- BusinessInsider & 6 & 3 & 50 & 30 & 4 & 16 & 7 & 4 & 2 & 1 & 68.0\\
+ BusinessInsider & 6 & 3 & 50 & 30 & 4 & 16 \\
 % # of Pages: 6
 % # of Pages Failed: 3
 % # of Columns: 50
@@ -115,7 +115,7 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations: 3
 % .  # of Tables with abbreviations with titles: 2
  \hline
- MarketWatch & 2 & 0 & 39 & 22 & 0 & 17 & 7 & 1 & 0 & 6 & 56.4 \\
+ MarketWatch & 2 & 0 & 39 & 22 & 0 & 17 \\
  % # of Pages: 2
 % # of Pages Failed: 0
 % # of Columns: 39
@@ -126,7 +126,32 @@ We then measure for each site the following quantities:
 % .  # of Tables with abbreviations: 6
 % .  # of Tables with abbreviations with titles: 0
  \hline
- {\bf Total} & {\bf 184} & {\bf 30} & {\bf 4011} & {\bf 1138} & {\bf 2106} & {\bf 767} & {\bf 421} & {\bf 118} & {\bf 169} & {\bf 134} & {\bf 80.9}\\
+ {\bf Total} & {\bf 184} & {\bf 30} & {\bf 4011} & {\bf 1138} & {\bf 2106} & {\bf 767} \\
+ \hline
+\end{tabular}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+ Site & Tables & V-Strict & I-Strict & NI-Strict & Success(\%)\\
+ \hline
+ ESPN & 196 & 64 & 39 & 93 & 69.4 \\
+ \hline
+ CricBuzz & 5 & 1 & 3 & 1 & 88.8\\
+ \hline
+ SkySports & 14 & 1 & 9 & 4 & 83.7 \\
+ \hline
+ ESPN CricInfo & 8 & 1 & 6 & 1 & 89.0 \\
+ \hline
+ Yahoo Sports & 149 & 28 & 110 & 11 & 95.5\\
+ \hline
+ NBA.com & 21 & 10 & 0 & 11 & 15.2 \\
+ \hline
+ Yahoo Finance & 14 & 8 & 0 & 6 & 87.8 \\
+ \hline
+ BusinessInsider & 7 & 4 & 2 & 1 & 68.0\\
+ \hline
+ MarketWatch & 7 & 1 & 0 & 6 & 56.4 \\
+ \hline
+ {\bf Total} & {\bf 421} & {\bf 118} & {\bf 169} & {\bf 134} & {\bf 80.9}\\
  \hline
 \end{tabular}
 \caption{Experimental Results for 9 sites with 184 pages containing tables. See above for definitions of column headings. V = Verbatim, I = Interpretable, NI = Non-interpretable.}

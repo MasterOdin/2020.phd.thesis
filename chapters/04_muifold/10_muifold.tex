@@ -48,64 +48,10 @@ in-depth interaction.
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.8\columnwidth]{figures/muifold_architecture}
+  \includegraphics[width=0.8\columnwidth]{chapters/04_muifold/figures/muifold_architecture}
   \caption{Architecture of MUIFOLD. The red lines are WebSockets and the dotted line indicates an optional Web Socket depending on application needs.}
   \label{fig:architecture_muifold}
 \end{figure}
-
-\subsection{Display Server}
-
-The display
-server is based on our prior work on developing a virtual mouse
-interface~\cite{peveler_virtual_2020}, which we quickly describe
-here. The server runs an
-Electron~\footnote{https://www.electronjs.org/} application, which
-provides a chromium based engine to render web content. In the
-display, the available screen real estate is divided into a grid,
-and then websites are loaded into so-called ``webviews;; that then
-takes up some amount of that grid. For example, in Figure
-\ref{fig:display_server_grid}, we show a 4x4 grid with 3 open
-webviews that take up differing amounts of the grid.
-
-Manipulating the webviews, be it opening / closing them, moving them
-around, or resizing them, is done through a REST API that accepts
-a JSON object describing the type of change (e.g. open, close), an
-ID of the webview if affecting an existing one, and
-details on the change (e.g. change size to 2x2, move to 3x4 on grid).
-When opening a webview, an additional parameter is accepted that
-tells the system whether or not that component exposes a MUIFOLD
-mobile UI, and a URL to the JavaScript files necessary to load and
-run that UI. Requests to this API can come from the mobile UI or
-from an external server unconnected to MUIFOLD. Communication
-between the clients and display server happens via WebSockets where
-client UIs pass information as to where their current cursor is
-as well as potential actions to take (e.g. clicking or scrolling)
-which the display server carries out on the webview underneath
-the cursor (while leaving all other webviews alone). Through this
-separation, clients are able to interact with different webviews
-simultaneously if they so choose, or come together on one single
-webview.
-
-When opening webviews, the display server injects our
-Reagent~\cite{peveler_reagent:_2019} service onto the page, which
-first opens a WebSocket back to the display server. Reagent then
-captures information about various semantic elements on the page,
-and creates listeners for user interaction with that content. The
-websocket provides a mechanism for the display server to
-programmatically trigger actions like mouse clicks or sending
-input specific to a given mobile device, while Reagent can report
-back to the display service the specifics about an element being
-interacted with, such as if the user clicks on a dropdown, Reagent
-will report all available options for the dropdown. Finally,
-Reagent sets up a monitor to re-bind itself in-case of content
-changes on a page. By utilizing the programmatic interface,
-we allow multiple users to concurrently be able to send events
-and interact simulatenously on the same page as well as
-on totally different open webpages. There is still a potential
-for user collision (e.g. one user clicks on a link on a page or
-scrolls a page while another user is doing something else), but this
-is not a unique problem we face and is solved just through general
-good manners by users.
 
 \subsection{Mobile Client}
 

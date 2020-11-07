@@ -1,4 +1,33 @@
 \section{Formalizing the Modules of our CAIS}
 
 In this section, we now provide formalizations for the modules that exist within our
-CAIS. 
+CAIS that exist across all use-cases. Going back to the discussion in 
+Chapter~\ref{chap:technology}, we assume that a given CAIS implementation will minimally
+feature some ability to point at content and an ability to input intents into the system,
+such as through voice, typing natural language sentences, or clicking on content. We now
+quickly go through these mechanisms here for usage within the \CEC.
+
+\subsection{Pointing}
+
+We first focus on formalizing pointing in our system. While agents may point at anything 
+within the room, we focus principally on agents pointing at content on a screen. To 
+accomplish this,as was discussed earlier we utilize the Reagent system to allow us to
+capture content  shown on arbitrary webpages. For each piece of meaningful content shown on 
+the screen, we  assume that it can be expressed by some fluent. An agent then points at the 
+fluent, and that information is captured by our CAIS. From this, we provide our
+formalization of the point action:
+
+\begin{equation*}
+\begin{aligned}
+  \point: \Agent \times \Object \rightarrow \ActionType
+\end{aligned}
+\end{equation*}
+
+For this to operate without flooding our system within point actions, we only consider
+``meaningful pointing'' events. These events are ones in which a user points at a piece
+of content for a minimum of a second. This is to avoid registering ``interim pointing''
+events, which occur as an agent moves their pointing across the screen to its final
+destination.
+
+\subsection{Inputted Intents}
+

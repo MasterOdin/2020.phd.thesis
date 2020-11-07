@@ -93,6 +93,7 @@
 \defmodality{\mental}{M}
 \defmodality{\requests}{R}
 
+
 \defmodality{\desires}{D}
 \defmodality{\intends}{I}
 \defmodality{\says}{S}
@@ -108,8 +109,6 @@
 \newcommand{\sep}{\ \lvert \ }
 
 
-
-
 \newcommand{\DDE}{\ensuremath{\mathcal{{DDE}}}}
 \newcommand{\DTE}{\ensuremath{\mathcal{{DTE}}}}
 \newcommand{\type}[1]{\textsf{#1}}
@@ -120,6 +119,8 @@
 \newcommand{\Knows}{\ensuremath{\mathbf{K}}}
 
 \newtheorem{assumption}{Assumption}
+
+
 
 \defsort{\Block}{Block}
 \defsort{\Surface}{Surface}
@@ -139,3 +140,12 @@
 \defconstant{\humana}{$h_1$}
 \defconstant{\humanb}{$h_2$}
 \defconstant{\cir}{$\mathit{cais}$}
+
+\defsymbol{\point}{point}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
