@@ -5,7 +5,57 @@ CAIS that exist across all use-cases. Going back to the discussion in
 Chapter~\ref{chap:technology}, we assume that a given CAIS implementation will minimally
 feature some ability to point at content and an ability to input intents into the system,
 such as through voice, typing natural language sentences, or clicking on content. We now
-quickly go through these mechanisms here for usage within the \CEC.
+quickly go through these mechanisms here for usage within the \CEC. Additionally, for
+several of the components, we provide a spectrum of how these formalizations come to bear
+taking into account the potential feature-set of a given CAIS implementation.
+
+\subsection{Users in CAIS}
+
+One thing that is almost universally required in some capacity is understanding who is
+utilizing the system. This is especially important within multi-agent scenarios, so
+as to allow subscribing to each user the appropriate cognitive states from the rest
+of the system. For each of the different environments a CAIS may run in, for each,
+we assume that a mechanism of user registration exists. This mechanism, be it for
+example a camera that utilizes facial recognition as users enter a room or users
+simply announcing their presence triggers a registration action. The result of the
+registration action is that the user is the user is now considered within the CAIS.
+On the opposite side of things, as a lower leaves the CAIS, they will de-register
+with the system, and now be considered outside of the CAIS. For a CAIS that has a
+full compliment of sensors, some of these sensors would also provide positional
+data about where exactly agents are within the system. For simplification of our
+logic system so as to not incorporate axiomatization of mathematics a distance
+fluent which is defined as the straight line distance between two agents as calculated
+through the standard distance formula. From this, we add two
+additional actions and three fluents:
+
+\begin{equation*}
+\begin{aligned}
+  & \register: \Agent \times \Object \rightarrow \ActionType \\
+  & \deregister: \Agent \rightarrow \ActionType \\
+  & \inCAIS: \Agent \rightarrow \Fluent \\
+  & \position: \Agent \times \Number \times \Number \rightarrow \Fluent \\
+  & \distance: \Agent \times \Agent \times \Number \rightarrow \Fluent \\
+\end{aligned}
+\end{equation*}
+
+\subsection{Perception and Vicinity}
+
+From above, our $\textnormal{I}_{1}^{f}$, it is common knowledge that agents perceive
+things that happen within their vicinity. However, we purposely left it vague as to
+what constitutes being in an agent's vicinity. This was done purposefully so as to
+handle the diverse range of environments, where information about an agent within
+the space may be sparse or fine-grained. Take for example an environment with minimal
+sensors, and only such that the CAIS is only able to track users who have registered
+themselves. Here, vicinity is in its weakest form, where any agent who is within the CAIS
+is then in the vicinity of any event or fluent within the CAIS. If the CAIS can track
+positional data, then we may say that the vicinity of an agent is defined as within an
+explicit distance of that agent. In its most strict form, for an environment that is
+able to capture directional head pose information about users (or even more crucially
+eye gaze), we can fully capture a user's perception, and can in some ways not utilize
+vicinity. For our foundational work here, while we mention this case, we do not utilize it
+due to a lack of technology that adequately supports this outside of highly staged
+laboratory environments or the information is so coarse as to be largely equivalent to just
+that the user is in the CAIS for our needs.
 
 \subsection{Pointing}
 
@@ -29,5 +79,4 @@ of content for a minimum of a second. This is to avoid registering ``interim poi
 events, which occur as an agent moves their pointing across the screen to its final
 destination.
 
-\subsection{Inputted Intents}
-
+\subsection{Spoken / Typed Natural English Sentences}
