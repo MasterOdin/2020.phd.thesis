@@ -29,4 +29,24 @@ Under the hood, for each created note, the system records information on who cre
 what color it is, and once on the large screen, its x,y coordinates. The four actions
 available to users are (1) create a note, (2) delete a note, (3) place a note, and (4)
 pick up a note. Finally, for each note that is created, it is given a unique numerical
-ID that increments for each additional note added to the system.
+ID that increments for each additional note added to the system. With our informal definition 
+above, we now proceed to providing our formalization. To begin, we must add two additional
+sorts to our system, one for the note and one for their color. To handle the note's location
+and presence on the screen or on an agent's device, we can add three fluents. Finally,
+for picking up and placing the note, we add two actions.
+
+\begin{equation*}
+    \begin{aligned}\
+        & \Color \sqsubset \Object \\
+        & \Note \sqsubset \Object \\
+        & \onScreen: \Note \rightarrow \Fluent \\
+        & \onDevice: \Note \times \Agent \rightarrow \Fluent \\
+    \end{aligned}
+    \hspace{30pt}
+    \begin{aligned}
+        & \isColor: \Note \times \Color \rightarrow \Fluent \\
+        & \pickUp: \Note \rightarrow \ActionType \\
+        & \place: \Note \rightarrow \ActionType \\
+        & \delete: \Note \rightarrow \ActionType \\ 
+    \end{aligned}
+\end{equation*}

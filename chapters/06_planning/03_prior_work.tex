@@ -23,10 +23,11 @@ rely on deterministic planning. Extending the concept, conditional nonlinear
 planners~\cite{peot_conditional_1992} and partial 
 planners~\cite{pryor_planning_1996}
 provide a mechanism for dealing with non-deterministic plans through if-else
-like structures. However, this comes at a cost of increased complexity and
-combinatorial explosion of states without ensuring some limitation on the
-expressivity~\cite{rintanen_constructing_1999}. Given that we aim for increased 
-expressivity, we do not consider these approaches herein. As such, we also do
+like structures. While we do make usage of elements of these planners for
+intent resolution, we avoid bringing in a full-on non-deterministic planner
+so as to avoid the increased complexity and potential combinatorial explosion
+of states as to do would also call for a limitation on the
+expressivity~\cite{rintanen_constructing_1999}. As such, we also do
 not concern ourselves with other extensions to classical planners such as 
 probabilistic 
 planners~\cite{boutilier_decision-theoretic_1999,kaelbling_planning_1998}.

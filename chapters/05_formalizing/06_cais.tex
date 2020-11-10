@@ -33,8 +33,8 @@ additional actions and three fluents:
   & \register: \Agent \times \Object \rightarrow \ActionType \\
   & \deregister: \Agent \rightarrow \ActionType \\
   & \inCAIS: \Agent \rightarrow \Fluent \\
-  & \position: \Agent \times \Number \times \Number \rightarrow \Fluent \\
-  & \distance: \Agent \times \Agent \times \Number \rightarrow \Fluent \\
+  & \position: \Agent \times \Numeric \times \Numeric \rightarrow \Fluent \\
+  & \distance: \Agent \times \Agent \times \Numeric \rightarrow \Fluent \\
 \end{aligned}
 \end{equation*}
 
@@ -79,4 +79,14 @@ of content for a minimum of a second. This is to avoid registering ``interim poi
 events, which occur as an agent moves their pointing across the screen to its final
 destination.
 
-\subsection{Spoken / Typed Natural English Sentences}
+\subsection{Spoken / Typed Natural Language Sentences and MUIFOLD Input}
+
+Opposite to pointing is the other input mechanisms provided for interacting with our system.
+Here, we focus on input from users that can be spoken or typed as natural language and
+interactions from MUIFOLD to content on the screen. In all of these cases, the underlying
+system translates the input into a formalized action relevant to the domain under study
+and attributes it to the user committing the action. For the natural language sentences,
+our conversation-worker handles converting the sentence into a $<I, E>$ tuple which
+can then be directly matched onto a defined $\ActionType$ in our system. MUIFOLD in turn is
+similarly augmented within our orchestrator to handle inputs from it into appropriate action
+types.
