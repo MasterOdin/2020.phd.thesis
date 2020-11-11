@@ -1,0 +1,203 @@
+#+TITLE: Defense Slidedeck Outline
+
+* Title Slide:
++ Show logos for:
+    + RAIR
+    + CISL
+    + RPI
+    + IBM
+
+"Thank you to IBM for their support of CISL and making this research possible"
+
+* Roadmap
++ Introduction
++ CAIS Technology
++ Reagent
++ Muifold
++ Formalizing the CAIS
++ Planning and Plan Recognition
++ Closing remarks
+
+* Introduction
+** What is a CAIS?
++ A CAIS should broadly be able to fulfill the following two requirements:
+    + C Cognitive
+    + I Immersive
+
+** Motivating Example of Alvin, Betty, and Charlie
+
+** Remarks on Colocated vs Distributed
++ Why are they different?
++ Why can we not just pivot?
+
+** Contributions
++ Create a definition for what constitutes a cognitive and immersive system
++ Define and provide implementation of a generalizable framework for a CAIS
++ Create formalization for a CAIS such that it can operate at theory of mind level
+    + Comment on how we find it important that this formalization stems from a real-world
+        implementation. There's no point (to us) to have a formalization for some theoretical
+        system that will never exist.
++ Utilize items 2 and 3 for purposes of planning and plan recognition
+
+** Requirements for a CAIS implementation
+Figure: =chapters/01_introduction/figures/planning_cais_framework.png=
++ The requirements of a CAIS must be able to support our earlier use-case of Alvin, Bill, and Charlie
++ Must be multi-user and multi-modal
++ Must be able to handle:
+    + speech input
+    + gestural input
+    + headpose input
++ Should be able to operate on a generalizable standpoint, making adoption to others easier
+
+** Prior Work on intelligent rooms
++ =bolt_put-that-there:_1980=
++ =coen_building_1997=
++ =brooks_intelligent_1997=
+(Gap due to CALO project)
++ =farrell_symbiotic_2016=
++ =chakraborti_mr._2017=
++ =arai_cira:_2019=
+
+** Architecture for a CAIS
+Figure: =chapters/02_technology/figures/cais_high_level.png=
++ We have workers that are at a sensor level (e.g. the inputs of the "brain")
++ At the next several levels, the "raw" input is parsed into semantic information as well as can be
+    combined in any way
+    + support for early vs late fusion common in ML multi-modal approaches
+    + we aim for "semantic late fusion"
++ The results of the input are combined as necessary for resolution of the execution engine
+
+** Implementing a CAIS
+Figure: =chapters/02_technology/figures/cais_implementation.png=
++ Provide here open-source implementation of modules "Bishop CAIS" (https://github.com/bishopcais)
++ Briefly discuss these modules in minor detail:
+    + transcript-worker
+    + speaker-worker
+    + executor
+    + conversation-worker
+    + occupancy-tracker
+
+** Implementing a CAIS: display-worker
++ Electron based application which allows us to open webpages on grid system
++ Webpages can point to anywhere, and that through electron, we can reach into open webpages
++ Surfaces RabbitMQ / REST API to pull details out about open webpages (e.g. location on screen)
++ How do we make sense though of what's on the screen?
+
+** Reagent
++ Motivation:
+    + To make possible understanding pointing, we need capacity to understand what is on the screen
+    + Prior work demanded that all content be created in-house and be specially instrumented
+        (e.g. chakraborti_visualizations_2018)
+    + Doable, but of course that would mean our CAIS is probably not going to see real world usage
+
+** Reagent Architecture
+Figure: =chapters/03_reagent/figures/reagent.png=
++ Utilize pre-loading of small JS file on-top of any webview loaded by display-worker
++ Creates a bridge into the page to the Reagent server
++ Creates bindings into the page to detect interaction data, as well as hooks to allow us
+    to query information from the page
+
+** Reagent: Sample ontology use-case
++ Given page of ESPN, talk about how Reagent exposes the table on the page to users
++ Allow querying information about of the table using table names, as well as gestural information
++ Walk through building ontology
+
+** Regaent: Experiment
++ Walkthrough experiment on:
+    + Selecting pages
+    + Composing our evaluation set
+    + Metrics we measure against
+
+** Reagent: Experiment Results
++ Show table
+
+** Reagent: Summary
++ We can use this to understand screen content on the fly
++ Can build out a number of general extensions for a number of generic pages (e.g. tables)
++ Can build out specific extensions for custom content
+
+* MUIFOLD
+
+** Motivation
++ While there exists prior work in pointing in large spaces, they almost always
+    utilize usage range of sensors that are costly to set-up and use
++ Additionally, these solutions had issues of allowed movement zones, Additional
+    hardware, etc.
+
+** Introduction MUIFOLD
++ Framework for building out UI for interacting with CAIS using cellphones
++ Almost everyone has a smart-phone that features powerful accelerometer and gyroscope
++ Does not utilize external sensors or landmarks
++ Allows building out also UIs that are more friendly to a use-case
+
+** MUIFOLD: Sample Use-Case
++ Demonstrate MUIFOLD in intelligent analyst use-case
+
+** MUIFOLD: User Study
++ Walk through experiment
++ Walk through results
+
+** MUIFOLD: Summary
++ Technology works, provides general pointing device we can use in CAIS minimally
++ Maximally provides also alternative input schemes to content beyond just natural
+    language sentences and gestures
+
+* Formalizing the CAIS
+** Introduce CEC
++ Provide brief description
++ Intensional logic so allows for modeling not just B, K of a user, but also that
+    can be B of user of B of another user (or self).
+
+** Formalizing our requirements
++ Walk through one at a time per slide (C1, C2, I1, I2, I3):
+    + Informal textual description of principal
+    + Formalization
+
+** Formalizing the CAIS technology
++ Users within CAIS
++ Perception and Vicinity
++ Pointing
++ Spoken / Typed Natural Language and MUIFOLD Input
+
+** Formalization of sample use-cases
++ Blocks-world
++ Sticky-notes
+
+** Solving the False-Belief Task with our Formalization
+
+** Planning / Plan Recognition
++ Given now that we have both a real-world implementation and formalization,
+    can now attack issues of planning and plan recognition in these spaces
++ Define planning
++ Define goal recognition (stress we are not tackling this here)
++ Define plan recognition and plan recognition as planning
+
+** Define STRIPS-style Action Planners
+
+** Discuss Spectra
+
+** Intent Resolution (2+ slides)
++ Given sentence "Delete the green note"
++ Walk through scenario of resolving it
+    + intent: delete, entities: ["green"]
+    + match against possible action candidate
+    + gain additional information what we're looking for (note)
+    + combine with given entities
+    + see if we have a matching note that is in agents' beliefs (from perception)
+    + if not, launch into dialogue for resolution
+
+** Plan Recognition
++ Given above false-belief scenario, have user continue to operate in it
++ Have user make an action consistent with an incorrect goal state
++ Provide course correction, utilizing the observations of users' action
+    sequence
+
+* Conclusion
+** Outline objectives of dissertation, met
+** Identify future work
++ Extensions to CEC
+    + Strength Factors
+    + Emotional Theory
++ Handling privacy and ethical issues in the space
++ Extensions to technology
++ User studies
