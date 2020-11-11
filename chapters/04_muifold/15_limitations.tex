@@ -1,27 +1,11 @@
 \section{Discussion of Limitations}\label{chap04:limitations}
 
 In this section, we provide some lessons learned about certain
-aspects of the technology after running a small pilot study on
-it. The pilot study consisted of 10 participants who were simply
-asked to play with the system using their own smartphone and
-provide high-level feedback. After playing around with the system,
-each user was given a brief qualitative exit interview about the
-system. Additionally, we note some challenges we faced.
+aspects of the technology from our preliminary user study and
+sample use-case.
 
-\textbf{Position for Holding the Phone} Our prototype implementation had a relatively 1-to-1
-correspondence between change in cursor location to pitch (rotating
-the phone up and down) and yaw (rotating the phone left and right),
-greatly simplifying the mathematical model. Most users, when given
-instructions to use our system, followed our instinct, and held the
-phone flat in their palm to use as a pointing device to the screen.
-These users found it comfortable and natural to use their phone in
-that fashion. Two users however found that they wanted to hold
-their phones at non-flat angles, which our system did not handle well.
-After some initial confusion, these users were able to successfully
-adapt to holding the phone flat in their hand, but stated afterwards
-that they wish they could have held it at an angle.
-
-\textbf{Location and Size of UI Buttons} One of the biggest design challenges was dealing with placement of
+\textbf{Location and Size of UI Buttons} One of the biggest design challenges
+was dealing with placement of
 buttons for the generic UI, as well as general guidelines for the
 developers of webview specific UIs. The principle goal was that
 users of the system, after some practice, would be able to use
@@ -37,9 +21,9 @@ button, allowing them to know that they hit it. Unfortunately, we
 found during implementation that haptic feedback was only available
 to android users.
 
-\textbf{Permissions} To utilize many of the underlying sensors or capabilities of the
-phone in a web context, permissions are frequently asked, such
-as if attempting to use location, use the camera, etc. However,
+\textbf{Permissions} To utilize many of the underlying sensors or
+capabilities of the phone in a web context, permissions are frequently
+asked, such as if attempting to use location, use the camera, etc. However,
 due to historical reasons, this is not true for the DeviceOrientation
 API on most devices which we rely on for determining where the phone
 is pointing at. Many users found this somewhat disconcerting. We
@@ -49,12 +33,17 @@ and accelerometer. Interestingly, while developing the framework,
 iOS 13 was released which actually does require users to give
 permission to use the sensors, but this is done through system
 settings, which some users found a bit confusing if not provided
-step-by-step instructions. However, in using React, we can utilize the ReactNative library to generate native apps that do not have these issues, at the cost of requiring the user to download and install the app.
+step-by-step instructions. However, in using React, we can utilize
+the ReactNative library to generate native apps that do not have
+these issues, at the cost of requiring the user to download and install
+the app.
 
-\textbf{Providing ``Fluid'' UIs} Among our 10 subjects, very few shared the same phone model, and each had a different amount of
+\textbf{Providing ``Fluid'' UIs} Among our 10 subjects, very few shared
+the same phone model, and each had a different amount of
 available screen real estate. To handle such differences,
-there's a paradigm of ``fluid'' layout according to which the content dimensions are based on percentages of available screen real estate. This allowed
-us to deal with the size differences. Unfortunately, when
+there's a paradigm of ``fluid'' layout according to which the content
+dimensions are based on percentages of available screen real estate. This
+allowed us to deal with the size differences. Unfortunately, when
 opening the keyboard on both iOS and android, the screen size as
 reported to the page changes, causing the content to become messed up
 in location and size. To overcome this, when loading our client
@@ -65,13 +54,13 @@ fixed sizes and positions. Luckily, it is easy to detect screen
 rotation to re-draw all elements as necessary, but we do not need to
 worry about the screen size otherwise changing.
 
-\textbf{Browser and Device Incompatibilities} The biggest challenge we faced was in slight browser
-incompatibilities across a range of devices. The first is that
-each browser provides a different frame of reference for the
-coordinate system used by the DeviceOrientation API. For example,
-Firefox and Chrome browsers on the same device would consistently
-report angles that were 20$\deg$ apart. Additionally, refreshing
-the open page might cause the sensors to ``reset'' and report
+\textbf{Browser and Device Incompatibilities} The biggest challenge
+we faced was in slight browser incompatibilities across a range of
+devices. The first is that each browser provides a different frame
+of reference for the coordinate system used by the DeviceOrientation
+API. For example, Firefox and Chrome browsers on the same device would
+consistently report angles that were 20$\deg$ apart. Additionally,
+refreshing the open page might cause the sensors to ``reset'' and report
 a completely new angle. Finally, on certain devices, the browsers
 would report the orientation in an opposite direction from the way
 the phone was rotating, causing the cursor to go in the opposite

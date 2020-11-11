@@ -1,5 +1,20 @@
 \section{Introduction}
 
-As stated in Chapter~\ref{chap:introduction}, one of the primary impetus
-of this work is the need for a true formalization of these sorts of
-systems and their capabilities. 
+Now that we have established both a framework for building out a CAIS and
+a practical implementation, in this chapter we now establish the formal
+schematics for our framework that we informally defined above. To accomplish
+this, we require a highly expressive language capable of modeling agents'
+cognitive states, including beliefs, knowledge, etc. These cognitive states
+can range over physical details of the world at large, or even about the
+cognitive states of other agents.
+
+To accomplish this task, we introduce the \textit{Cognitive Event
+Calculus} (\CEC), which is a highly expressive intentional logic that fits
+our needs. We briefly provide a definition of the logic, and an description
+of its syntax and sorts. Additionally, we briefly cover how we can handle
+the logic in an automated fashion using ShadowProver. From this, we then
+provide a formalization of the principles of a CAIS, and for how fundamenta
+actions (such as pointing) are captured from the CAIS into the \CEC. We
+close out the chapter tying together these efforts in demonstration of
+solving a psychological test by the CAIS to demonstrate its capacity
+for dealing with theory-of-mind reasoning.

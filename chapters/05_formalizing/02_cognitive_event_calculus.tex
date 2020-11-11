@@ -1,11 +1,14 @@
 \section{The Cognitive Event Calculus}
 
-To capture the room in a formal way, we employ the
+%TODO:
+%   1. go through and expand CEC
+%   2. remove duplicate tables of syntax/sorts
+%   3. Add subsection on shadowprover
+
+To capture the CAIS in a formal way, we employ the
 \textbf{cognitive event calculus} (\CEC), a cognitive calculus and
-intensional logic.  While the full syntax
-and inference schemata are outside the scope of this paper, we give a
-brief overview.\footnote{For a more in-depth primer on the \DCEC, of which the \CEC is a subset of,
-see the appendix in \cite{nsg_sb_dde_ijcai}.} The \CEC\ is a multi-sorted
+intensional logic, which provides a subset of the \DCEC~\cite{nsg_sb_dde_ijcai}.
+The \CEC\ is a multi-sorted
 quantified modal logic with a well-defined syntax and proof calculus.
 \CEC\ subsumes the event calculus~\cite{mueller_commonsense_2014}, a first-order
 calculus used for modeling events and actions and their effects upon
@@ -90,14 +93,26 @@ and $D_{[\common \leadsto \believes]}$ respectively
     \\ 
     \mathit{\phi}&::= \left\{ 
     \begin{aligned}
-     & A(\ldots):\Boolean \sep  \neg \phi \sep \phi \land \psi \sep \phi \lor
-     \psi \sep \forall x \phi(x)\\
-     & \perceives (a,t,\phi)  \sep \knows(a,t,\phi) \sep
-     \common(t,\phi) \sep \says(a,b,t,\phi)  \\ 
-&\says(a,t,\phi)
-     \sep  \believes(a,t,\phi) \sep \desires(a,t,\phi) \sep
-     \intends(a,t,\phi)\\
-     & \ought(a,t,\phi,(\lnot)\happens(action(a^\ast,\alpha),t'))
+     & 
+        A(\ldots):\Boolean \sep 
+        \neg \phi \sep
+        \phi \land \psi \sep
+        \phi \lor \psi \sep \\
+    &
+        \phi \lif \psi \sep
+        \phi \liff \psi \sep
+        \exists x \phi(x) \sep
+        \forall x \phi(x)\\
+     &
+        \perceives (a,t,\phi)  \sep
+        \knows(a,t,\phi) \sep
+        \common(t,\phi) \sep
+        \believes(a,t,\phi) \\
+    &
+        \says(a,t,\phi) \sep
+        \says(a,b,t,\phi)  \sep
+        \desires(a,t,\phi) \sep
+        \intends(a,t,\phi) \\
       \end{aligned}\right.
   \end{aligned}
 \end{equation*}
@@ -123,107 +138,49 @@ syntactic operation that converts any modal formula (or a set of
 formulae) $\phi$ to a non-modal formula $\mathsf{shadow}[\phi]$ by replacing atomic
 modal sub-formuale with propositional atoms.
 
-\begin{table}
-\begin{footnotesize}
-\begin{center}
-\begin{tabular}{lp{10.3cm}}
-\toprule
-\textbf{Function Symbols} $f$& \textbf{Sort}  \\
-\midrule
-$\action$ & $\Agent \times \ActionType \rightarrow \Action$\\
-$ \initially$ & $\Fluent \rightarrow \Boolean$\\
-  $\holds$ & $ \Fluent \times \Moment \rightarrow \Boolean $\\
-  $ \happens$ & $ \Event \times \Moment \rightarrow \Boolean$ \\
-  $ \clipped$ & $ \Moment \times \Fluent \times \Moment \rightarrow \Boolean$ \\
-  $ \initiates$ & $ \Event \times \Fluent \times \Moment \rightarrow \Boolean$\\
-  $ \terminates$ & $ \Event \times \Fluent \times \Moment \rightarrow \Boolean$ \\
-  $ \prior$ & $\Moment \times \Moment \rightarrow \Boolean$\\
-\bottomrule
-\end{tabular}
-\caption{Builtin function symbols in the language}
-\label{syn:defs}
-\end{center}
-\end{footnotesize}
-\end{table}
 
-
-\begin{table}
-\begin{footnotesize}
-\begin{center}
-\begin{tabular}{lp{10.3cm}}
-\toprule
-\textbf{Formula Expressions} $\phi$& \textbf{Explanation}  \\
-\midrule
-$A(\ldots)$ & Atomic formulae such as $\holds(raining, t_2)$\\
-$\neg \phi$ & Negations. E.g., $\lnot\holds(raining, t_2)$\\
-$\phi \lor \psi$ & Disjunctions. E.g., $\holds(cloudy, t_2)
-\lor \holds(sunny, t_2)$\\
-$\phi \lif \psi$ & Implications. E.g.,  $\holds(cloudy, t_2) \lif
-                   \lnot \holds(sunny, t_2)$\\
-$\perceives (a,t,\phi)$ & Agent $a$ perceives at time $t$ that $\phi$
-                          occurs or holds \\
-$\knows (a,t,\phi)$ & Agent $a$ knows at time $t$ that $\phi$
-                          occurs or holds \\
-$\believes (a,t,\phi)$ & Agent $a$ believes at time $t$ that $\phi$
-                          \\
-$\intends (a,t,\phi)$ & Agent $a$ intends at time $t$ that $\phi$
-                          \\
-$\desires (a,t,\phi)$ & Agent $a$ desires at time $t$ that $\phi$
-                          \\
-
-$\says (a,b,t,\phi)$ & Agent $a$ communicates to agent $b$ at time $t$
-                       that $\phi$ \\
-$\common (t,\phi)$ &At time $t$ $\phi$ is common knowledge.
-                          \\
-\bottomrule
-\end{tabular}
-\caption{Syntax for formulae in the language}
-\label{syn:formulae}
-\end{center}
-\end{footnotesize}
-\end{table}
-
-
-
-
-
-{ % begin box to localize effect of arraystretch change
-\renewcommand{\arraystretch}{2}
-
-\begin{table}
-\begin{footnotesize}
-\begin{center}
-  \begin{tabular}{lp{8cm}}
-\toprule
-\textbf{Inference Scheme} $\phi$& \textbf{Explanation}  \\
-\midrule
-$\infer[{[I_{\knows}]}]{\knows(a,t_2,\phi)}{\knows(a,t_1,\Gamma), \
-    \ \Gamma\vdash\phi, \ \ t_1 \leq t_2}$ & From prior knowledge, agents
-                                             can infer new knowledge
-                                             at at later time.\\
-$\infer[{[I_{\believes}]}]{\believes(a,t_2,\phi)}{\believes(a,t_1,\Gamma), \
-    \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} $ & From prior belief, agents
-                                              can infer new beliefs at
-                                              a later time.\\
-$\infer[{[I_1]}]{\common(t,\perceives(a,t,\phi)
-   \lif\knows(a,t,\phi))}{}$ & It is common knowledge that perception
-                               leads to knowledge\\
-$\infer[{[I_2]}]{\common(t,\knows(a,t,\phi)
-    \lif\believes(a,t,\phi))}{}$ & It is common knowledge that
-                                   knowledge leads to belief \\
-$\infer[{[I_3]}]{\knows(a_1, t_1, \ldots
+\begin{figure}[ht!]
+% frametitle=Inference Schemata (snippet),
+\begin{mdframed}[nobreak=true, roundcorner=8pt, frametitlealignment=\centering]
+\begin{equation*}
+\begin{aligned}
+% &\mbox{Sample rules below. For more rules, see
+%   \cite{akratic_robots_ieee_n}.}\\
+  &\infer[{[R_{\knows}]}]{\knows(a,t_2,\phi)}{\knows(a,t_1,\Gamma), \ 
+    \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} \\ 
+& \infer[{[R_{\believes}]}]{\believes(a,t_2,\phi)}{\believes(a,t_1,\Gamma), \ 
+    \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} \\
+ &\infer[{[R_1]}]{\common(t,\perceives(a,t,\phi) \lif\knows(a,t,\phi))}{}\\
+&  \infer[{[R_2]}]{\common(t,\knows(a,t,\phi)
+    \lif\believes(a,t,\phi))}{}\\
+  &\infer[{[R_3]}]{\knows(a_1, t_1, \ldots
     \knows(a_n,t_n,\phi)\ldots)}{\common(t,\phi) \ t\leq t_1 \ldots t\leq
-    t_n}$ & Definition of common knowledge \\
-$\infer[{[I_4]}]{\phi}{\knows(a,t,\phi)}$ & If $\phi$ is known, then
-                                            $\phi$ holds\\
-\bottomrule
-\end{tabular}
-\caption{Inference schema}
-\label{rules}
-\end{center}
-\end{footnotesize}
-\end{table}
-}
+    t_n}\hspace{10pt}
+  \infer[{[R_4]}]{\phi}{\knows(a,t,\phi)}\\
+  & \infer[{[R_5]}]{\common(t,\knows(a,t_1,\phi_1\lif\phi_2))
+    \lif \knows(a,t_2,\phi_1) \lif \knows(a,t_3,\phi_2)}{}\\
+& \infer[{[R_6]}]{\common(t,\believes(a,t_1,\phi_1\lif\phi_2))
+    \lif \believes(a,t_2,\phi_1) \lif \believes(a,t_3,\phi_2)}{}\\
+& \infer[{[R_7]}]{\common(t,\common(t_1,\phi_1\lif\phi_2))
+    \lif \common(t_2,\phi_1) \lif \common(t_3,\phi_2)}{} \\
+& \infer[{[R_8]}]{\common(t, \forall x. \  \phi \lif \phi[x\mapsto
+  t])}{} \hspace{18pt}
+  \infer[{[R_9]}]{\common(t,\phi_1 \liff \phi_2 \lif \neg
+    \phi_2 \lif \neg \phi_1)}{}\\
+& \infer[{[R_{10}]}] {\common(t,[\phi_1\land\ldots\land\phi_n\lif\phi]
+  \lif [\phi_1\lif\ldots\lif\phi_n\lif\psi])}{}\\
+% & \infer[{[R_{11a}]}]{\believes(a,t,\psi)}{\believes(a,t,\phi)\ \ \phi
+%   \lif \psi}\
+%\hspace{6pt} \infer[{[R_{11b}]}]{\believes(a,t,\psi \land \phi)}{\believes(a,t,\phi)\ \ \believes(a,t,\psi)}\\ 
+&\infer[{[R_{12}]}]{\believes(h,t,\believes(s,t,\phi))}{\says(s,h,t,\phi)}
+\\ &\infer[{[R_{13}]}]{\perceives(a,t,\happens(\action(a^\ast,\alpha),t))}{\intends(a,t,\happens(\action(a^\ast,\alpha),t'))}
+\end{aligned}
+\end{equation*}
+\end{mdframed}
+%\end{scriptsize}
+\caption{\CEC Inference Schemata}
+\label{infschem}
+\end{figure}
 
 The prover can be equipped
 with multiple sets of inference schemes $\rho^p_{q}$, where

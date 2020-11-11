@@ -1,14 +1,8 @@
 \section{Introduction}
 
-As the power of AI increases, it is of increasing desire to apply
-it in ways to augment the decision making processes. This process
-may include just a singular human, or that it might involve
-multiple people. As the number of people change, and even the
-domain itself changes, so too does the environment.
-
 In contemporary AI research devoted to decision support, the challenge
-is often taken to be that of providing AI support to a single human.
-However, much human problem solving
+is often taken to be that of providing AI support to a single human on
+their own personal device. However, much human problem solving
 is fundamentally social, in that a group of people must work together
 to solve a problem, and must rely upon machine intelligence that is
 itself highly diverse.  Examples of such activities include: hiring a
@@ -39,13 +33,6 @@ perceived data through reasoning, planning, learning, and language.
 The third element displays both percepts and the results of processing
 these percepts in rich, multi-modal ways.  The particular CAIS we have
 used for our investigations
-%% ``The CAIS''
-%
-%% MATT: It doesn't make any sense to refer to /the/ CAIS unless we
-%% have given it a proper name, etc.  We need a proper
-%% name/designator.  As far as I can see, there hasn't been a proper
-%% name cooked up to refer to a particular CAIS around which CISL work
-%% has centered. //S
 also has access to external machines and services that can process
 requests, queries, and tasks; and this CAIS can incorporate the
 results of its analysis of such information into subsequent decision
@@ -59,11 +46,6 @@ the strengths of both.
 As an initial test of our CAIS architecture, we implement and examine
 two scenarios in which participants have an imbalance of knowledge and
 beliefs, and how their their individual beliefs influence their actions.
-%% MATT2: What would be doing the influencing?  The imbalance itself?
-%% Or the knowledge and beliefs themselves?  I think you need to go
-%% through the entire paper with an eye to this kind of ambiguity,
-%% because actually the one here isn't the first.  I tried to fix the
-%% prior ones.  Thx.  //S
 It is common in group discussions that not all participants are aware
 of everything said, whether because they missed something or
 misconstrued it.  Thus participants may try to act on beliefs of
@@ -76,8 +58,6 @@ do this, the system must have a theory of the minds
 \cite{premack_does_1978,frith_theory_2005,arkoudas_propositional_2009} of participants
 and must track and adjust such theories through time.  On the basis of
 this modeling, the system must
-%% then synthesize this for the agents, and must understand how it
-%% relates to their actions and
 step in as necessary to offer corrective advice, along with
 justifications for doing so.  Most important for us is that the
 particular capacities we have just enumerated as desiderata not be
