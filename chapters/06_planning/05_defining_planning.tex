@@ -8,24 +8,25 @@ fluents that can define the state of world, $I \subseteq F$ is the initial state
 fluents, $G \subseteq F$ is the goal state of fluents, and $A$ is the set of actions
 available to an agent. For each action $a \subseteq A$, it has a list
 of preconditions, and then a list of post conditions to change the current
-state of the world. An example definition of an action from the blocksworld domain is shown
-in Listing~\ref{lst:strips}. Completion of a planning problem is then the computation of
+state of the world. An example definition of an action from the blocks world domain is shown
+in Listing~\ref{lst:strips}. A full listing of all actions of a CAIS defined in the STRIPS format
+is available in Appendix~\ref{apdx:strips}. Completion of a planning problem is then the computation of
 an action sequence, $\pi = a_{1}, a_{2}, ..., a_{m}$, where each
 $a_{i} \subseteq A$, and that following the action sequence starting at $I$
 will arrive at $G$.
 
 \begin{lstlisting}[caption=Stack action defined in STRIPS style,label={lst:strips}]
-    (define-action stack [?x ?y]
+    (define-action stack [(Block ?x) (Block ?y)]
         {
             :preconditions [
-                (On ?x Table)
-                (Clear ?x)
-                (Clear ?y)
+                (on ?x Table)
+                (clear ?x)
+                (clear ?y)
             ]
-            :additions     [(On ?x ?y)]
+            :additions     [(on ?x ?y)]
             :deletions     [
-                (Clear ?y)
-                (On ?x Table)
+                (clear ?y)
+                (on ?x Table)
             ]
         }
     )

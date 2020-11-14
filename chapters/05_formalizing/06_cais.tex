@@ -30,7 +30,7 @@ additional actions and three fluents:
 
 \begin{equation*}
 \begin{aligned}
-  & \register: \Agent \times \Object \rightarrow \ActionType \\
+  & \register: \Agent \rightarrow \ActionType \\
   & \deregister: \Agent \rightarrow \ActionType \\
   & \inCAIS: \Agent \rightarrow \Fluent \\
   & \position: \Agent \times \Numeric \times \Numeric \rightarrow \Fluent \\
@@ -51,11 +51,12 @@ is then in the vicinity of any event or fluent within the CAIS. If the CAIS can 
 positional data, then we may say that the vicinity of an agent is defined as within an
 explicit distance of that agent. In its most strict form, for an environment that is
 able to capture directional head pose information about users (or even more crucially
-eye gaze), we can fully capture a user's perception, and can in some ways not utilize
-vicinity. For our foundational work here, while we mention this case, we do not utilize it
-due to a lack of technology that adequately supports this outside of highly staged
-laboratory environments or the information is so coarse as to be largely equivalent to just
-that the user is in the CAIS for our needs.
+eye gaze), we can fully capture a user's perception, allowing us to achieve the
+type of fidelity as described in our motivating example. Unfortunately, due to
+technological constraints, we are unable to approach this ideal outside of highly-staged
+laboratory environments, and so we currently only concern ourselves with the more
+coarse ideals of being within the CAIS and position for regarding as to whether or not
+a given event happened in an agent's vicinity, and thus that they would have perceived it.
 
 \subsection{Pointing}
 

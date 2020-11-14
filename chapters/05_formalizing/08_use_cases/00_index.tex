@@ -3,9 +3,15 @@
 In this section, we introduce two use-cases for our CAIS to help demonstrate
 its capabilities in the realm of planning and plan recognition. For each
 use case, we first present it in plain, informal discussion, and follow it
-with a formalization within the \CEC. For both use-cases, for information that
-is displayed on the global screen, we utilize a custom Reagent plugin for
-being able to understand what is being shown to users.
+with a formalization within the \CEC. For both use-cases, we utilize a generic
+Reagent parser wherein that each element shown is contained in a div that
+contains an id attribute which corresponds to the element name in the \CEC\
+and that any extra dataset attributes are surfaced then as appropriate axioms.
+We do not explore here necessarily how one might formalize other web content,
+though work done by Fern{\'a}ndez-Villamor et 
+al.~\cite{fernandez-villamor_firstorder_2012} is promising on that front. For
+the information presented in Chapter~\ref{chap:reagent}, one might utilize
+techniques of parsing ontologies into first-order logic~\cite{pease_english_2003}.
 
 %    1. Cognitive Blockworld
 \input{chapters/05_formalizing/08_use_cases/01_blockworld_overview}

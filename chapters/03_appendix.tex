@@ -8,35 +8,95 @@
 %\addcontentsline{toc}{chapter}{APPENDICES}             %toc entry  or:
 \addtocontents{toc}{\parindent0pt\vskip12pt APPENDICES} %toc entry, no page #
 
-\chapter{THIS IS AN APPENDIX}
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
+\chapter{Actions of CAIS in STRIPS}\label{apdx:strips}
 
-\section{A Section Heading}
+\section{General Actions}
 
-This is how equations are numbered in an appendix:
-\begin{equation}
-x^2 + y^2 = z^2
-\end{equation} 
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
- 
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text. 
+\begin{lstlisting}[caption=register]
+    (define-action register [(Agent ?x)]
+        {
+            :preconditions []
+            :additions     [(inCAIS ?x)]
+            :deletions     []
+        }
+    )
+\end{lstlisting}
 
-\chapter{THIS IS ANOTHER APPENDIX} 
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
-This is a sentence to take up space and look like text.
- 
+\begin{lstlisting}[caption=deregister]
+    (define-action deregister [(Agent ?x)]
+        {
+            :preconditions [(inCAIS ?x)]
+            :additions     []
+            :deletions     [(inCAIS ?x)]
+        }
+    )
+\end{lstlisting}
+
+\section{Block world}
+
+\begin{lstlisting}[caption=stack]
+    (define-action stack [(Block ?x) (Block ?y)]
+        {
+            :preconditions [
+                (on ?x Table)
+                (clear ?x)
+                (clear ?y)
+            ]
+            :additions     [(on ?x ?y)]
+            :deletions     [
+                (clear ?y)
+                (on ?x Table)
+            ]
+        }
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[caption=unstack]
+    (define-action unstack [(Block ?x) (Block ?y)]
+        {
+            :preconditions [
+                (on ?x ?y)
+                (clear ?x)
+            ]
+            :additions     [
+                (clear ?y)
+                (on ?x Table)
+            ]
+            :deletions     [
+                (on ?x ?y)
+            ]
+        }
+    )
+\end{lstlisting}
+
+\section{Sticky notes}
+
+\begin{lstlisting}[caption=pickUp]
+    (define-action pickUp [(Note ?x)]
+        {
+            :preconditions [(onScreen ?x)]
+            :additions     [(onDevice ?x)]
+            :deletions     [(onScreen ?x)]
+        }
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[caption=putDown]
+    (define-action putDown [(Note ?x)]
+        {
+            :preconditions [(onDevice ?x)]
+            :additions     [(onScreen ?x)]
+            :deletions     [(onDevice ?x)]
+        }
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[caption=delete]
+    (define-action delete [(Note ?x)]
+        {
+            :preconditions [(onScreen ?x)]
+            :additions     []
+            :deletions     [(onScreen ?x)]
+        }
+    )
+\end{lstlisting}

@@ -30,11 +30,11 @@ we had for our system.
 
 \subsection{Architecture}
 
-It is split into three modules, the display server, the
-mobile client, and the application web-pages as shown in Figure \ref{fig:architecture_muifold},
-specifics of which are detailed below. Communication between the
-client and display server and then display server to web-pages is
-done using WebSockets, which provide a full-duplex
+For explaining the MUIFOLD system, we focus on the interplay between
+Reagent, the display-worker, MUIFOLD, and the application web-pages, as
+shown in Figure~\ref{fig:cais_implementation}.
+Communication between the these components are largely built on top of  WebSockets,
+which provide a full-duplex
 communication channel over a single TCP connection. We utilize the
 JavaScript Object Notation (JSON) format to transmit runtime
 information. While this causes a slight increase on amount of bytes
@@ -46,23 +46,26 @@ get opened that connects the client to a remote server hosting
 the page they are interacting with, allowing for more
 in-depth interaction.
 
+\begin{comment}
+%%% ignored, subsumed by diagram shown in chapter 2
 \begin{figure}
 \centering
   \includegraphics[width=0.8\columnwidth]{chapters/04_muifold/figures/muifold_architecture}
   \caption{Architecture of MUIFOLD. The red lines are WebSockets and the dotted line indicates an optional Web Socket depending on application needs.}
   \label{fig:architecture_muifold}
 \end{figure}
+\end{comment}
 
 \subsection{Mobile Client}
 
-The web-based mobile client, like other frameworks, is presented to the enduser through a simple webpage that the user opens on their
+The web-based mobile client, like other frameworks, is presented to the end-user through a simple webpage that the user opens on their
 mobile device. This
 can be either through scanning a QR code displayed on the large
 display, or by manually typing in the URL. The client is
 written using the React JS
 framework~\footnote{https://reactjs.org/}, which provides a
 high-level interface for building interactive UIs in JavaScript.
-React provides a declartive language for the UI to be built in,
+React provides a declarative language for the UI to be built in,
 and helps to redraw the DOM as necessary as parts of the underlying
 application state changes. Additionally, React allows us to define
 the pieces of our UI as components, which makes it easy for us to

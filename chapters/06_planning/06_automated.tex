@@ -1,0 +1,44 @@
+\section{Automated Reasoner and Planner}\label{sec:automated_reasoner_planner}
+
+\subsection{ShadowProver}
+
+To allow our CAIS utilize the reasoning as defined in 
+chapter~\ref{chap:formalizing}, we employ an automated theorem prover,
+\textsf{ShadowProver}~\cite{govindarajulu_shadowprover_2018}\footnote{The
+  prover is available in both Java and Common Lisp and can be obtained
+  at: \url{https://github.com/naveensundarg/prover}. The underlying
+  first-order prover is SNARK, available at:
+  \url{http://www.ai.sri.com/~stickel/snark.html}.}. Traditionally,
+first-order modal logic theorem provers
+that can work with arbitrary inference schemata are built upon first-order
+theorem provers. They achieve the reduction to first-order logic via two
+methods. In the first method, modal operators are simply represented by
+first-order predicates as in the example shown above. This approach is the
+fastest but can quickly lead to well-known inconsistencies as demonstrated.
+In the second method, the entire proof theory is implemented intricately in 
+first-order logic, and the reasoning is carried out within first-order
+logic. Here, the first-order theorem prover simply functions as a
+general-purpose declarative programming system. This approach, while
+accurate, can be excruciatingly slow.
+
+\textsf{ShadowProver} utilizes a different approach to the above to achieve
+speed without sacrificing consistency in the system. At the core of this
+approach is a technique named ``shadowing'', wherein ShadowProver applies a
+syntactic operation to convert any modal formula (or a set of formulae) $\phi$
+to a non-modal formula $\mathsf{shadow}[\phi]$ by replacing the atomic modal
+sub-formulae with propositional atoms. Through tis, ShadowProver is then able
+to alternate between applying the high-level modal inference schemata and calling
+out to a dedicated first order prover, until a proof has been found or not for the
+given axioms and goal statement.
+
+\subsection{Spectra}
+
+Planning for our CAIS is handled by \textsf{Spectra}~\cite{govindarajulu_spectra_2018},
+and planner based on an \emph{extension} of the STRIPS-style planning language discussed
+above. At the core of \textsf{Spectra} is a backing of \textsf{ShadowProver} for resolving
+actions. Through this, we can extend our planning formalism in several important
+ways, namely that we allow arbitrary formulae of the \CEC\ in the definition
+of states, actions, and goals. For instance, valid states and goals can
+include: \emph{``No three blocks on the table should be of the same
+color.''}  and \emph{``Jack believes that Jill believes there is one block on
+the table.''}.

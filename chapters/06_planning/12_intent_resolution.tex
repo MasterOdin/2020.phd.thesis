@@ -1,6 +1,7 @@
 \section{Intent Resolution}
 
-Given our definitions, we may now attack the problem of intent resolution for our CAIS.
+We now move onto planning, which we utilize here to deal with the problem of intent
+resolution within our CAIS.
 Ideally, any action carried out by our humans within the room would be as explicit
 as possible. Indeed, when using something like MUIFOLD, this explicitness is handled for
 the user under the hood by the app, tying together what note or block they're interacting
@@ -13,7 +14,7 @@ green note, and so utters the sentence ``Delete the green note'' to the CAIS. Fr
 conversation-worker for this sentence, we receive the ``$\delete$'' intent and a ``green''
 entity. Within the orchestrator, our intent is matched with the following candidate action:
 
-\begin{lstlisting}[caption=delete action for the note,label={lst:strips}]
+\begin{lstlisting}[caption=delete action for the note,label={lst:intent_strips}]
     (define-action delete1 [?x] {
             :preconditions [(onScreen ?x)]
             :additions     []
@@ -47,7 +48,7 @@ to use.
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.4\columnwidth]{chapters/06_planning/figures/intent_resolution_fragment.png}
+  \includegraphics[width=0.3\columnwidth]{chapters/06_planning/figures/intent_resolution_fragment.png}
   \caption{Conditional plan fragment to ask clarification from user.}
   \label{fig:intent_resolution_fragment}
 \end{figure}

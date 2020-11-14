@@ -7,7 +7,6 @@
 %% Modified Dec 17 2007; change title page for MS degree as requested by OGS.
 %% Modified Jan 28 2008; provide abstract title page for MS, incorporate 3-advisers.
 %% Modified Jan 6 2009; small change to title page to avoid warning w/hyperref pkg
-%% Modified Aug 2018 by Michael Sofka for new graduate school formatting requirment.
 %% 
 %% On RCS, template files for preparing a thesis are in the directory
 %% /dept/arc/docs/latex-thesis/
@@ -20,9 +19,6 @@
 %  Note that the setspace package is built in (code included near the end of 
 %  this file) to provide "line-and-a half spacing" (1.4 by default) and also
 %  the singlespace environment. 
-
-\RequirePackage{graphicx}
-\RequirePackage{float}
 
 % RPI option chap:
 \newif\ifchap  % true for chap option
@@ -38,6 +34,7 @@
 \ProcessOptions
 \LoadClass[\docsize]{report}  % load report.cls
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %  The following sections are revisions or additions to report.cls
 %
@@ -63,28 +60,28 @@
 % PAGE LAYOUT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SIDE MARGINS:
-%\if@twoside                 % Values for two-sided printing:
-%   \oddsidemargin .55in     %   Left margin on odd-numbered pages.
-%   \evensidemargin .05in    %   Left margin on even-numbered pages.
-%   \marginparwidth 40pt     %   Width of marginal notes.
-%\else                       % Values for one-sided printing:
-%   \oddsidemargin 0.55in    %   Note that \oddsidemargin = \evensidemargin
-%   \evensidemargin 0.55in
-%   \marginparwidth 40pt
-%\fi
-%\marginparsep 10pt          % Horizontal space between outer margin and
-%                            % marginal note
-%\textwidth 5.9in            % width of text
-% 
-%% VERTICAL SPACING:
-%                         % Top of page:
-%\topmargin -.5in         %    distance from top of page to running head
-%\headheight 14pt         %    Height of box containing running head.
-%\headsep .4in            %    Space between running head and text.
-%\textheight 8.8in        %    space for text
-%\footskip 30pt           %    Distance from baseline of box containing foot
-%                         %    to baseline of last line of text.
-\RequirePackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\if@twoside                 % Values for two-sided printing:
+   \oddsidemargin .55in     %   Left margin on odd-numbered pages.
+   \evensidemargin .05in    %   Left margin on even-numbered pages.
+   \marginparwidth 40pt     %   Width of marginal notes.
+\else                       % Values for one-sided printing:
+   \oddsidemargin 0.55in    %   Note that \oddsidemargin = \evensidemargin
+   \evensidemargin 0.55in
+   \marginparwidth 40pt
+\fi
+\marginparsep 10pt          % Horizontal space between outer margin and
+                            % marginal note
+\textwidth 5.9in            % width of text
+ 
+% VERTICAL SPACING:
+                         % Top of page:
+\topmargin -.5in         %    distance from top of page to running head
+\headheight 14pt         %    Height of box containing running head.
+\headsep .4in            %    Space between running head and text.
+\textheight 8.8in        %    space for text
+\footskip 30pt           %    Distance from baseline of box containing foot
+                         %    to baseline of last line of text.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                            SECTION HEADINGS
@@ -370,64 +367,60 @@
 \def\sigblock{
       \numcount=\numcomm
       %\leftline{Approved by the\hfil}
-      Approved by:\\
-      \adviser, Chair\\
+      \leftline{Examining Committee:\hfil}
+      \vskip 28pt \vfil 
+      \hrule width 2.8in \hfil \vskip -3pt
+      \leftline{\adviser, \doctype Adviser\hfil} 
       \advance \numcount by -1
       \if \coadviser * \else % there's a co-adviser
-        \coadviser, Co-Chair\\
+        \vskip 19pt\vfil\hrule width 2.8in\hfil\vskip -3pt
+        \leftline{\coadviser, \doctype Adviser\hfil}
         \advance \numcount by -1
       \fi
       \ifnum\numcount > 0 %
-      \@memberone\\
-      \fi
+      \vskip 19pt\vfil\hrule width 2.8in\hfil\vskip -3pt
+      \leftline{\@memberone, Member\hfil} \fi %
+      \advance \numcount by -1 \ifnum\numcount > 0 %
+      \vskip 19pt\vfil\hrule width 2.8in\hfil\vskip -3pt
+      \leftline{\@membertwo, Member\hfil} \fi %
       \advance \numcount by -1 \ifnum\numcount > 0
-      \@membertwo\\
-      \fi
+      \vskip 19pt\vfil\hrule width 2.8in\hfil\vskip -3pt
+      \leftline{\@memberthree, Member\hfil}  \fi
       \advance \numcount by -1 \ifnum\numcount > 0
-      \@memberthree\\
-      \fi
+      \vskip 19pt\vfil\hrule width 2.8in\hfil\vskip -3pt
+      \leftline{\@memberfour, Member\hfil}   \fi
       \advance \numcount by -1 \ifnum\numcount > 0
-      \@memberfour\\
-      \fi
+      \vskip 19pt\vfil\hrule width 2.8in\hfil\vskip -3pt
+      \leftline{\@memberfive, Member\hfil}  \fi
       \advance \numcount by -1 \ifnum\numcount > 0
-      \@memberfive\\
-      \fi
-      \advance \numcount by -1 \ifnum\numcount > 0
-      \@membersix\\
-      \fi
+      \vskip 19pt\vfil\hrule width 2.8in\hfil\vskip -3pt
+      \leftline{\@membersix, Member\hfil} \fi
 } 
 
  \def\titlepage{%
      \pagenumbering{roman}
      \thispagestyle{empty}
-%     \ifnum\numcomm<4 \vglue .5in\vfil \fi  % masters
-%     \ifnum\numcomm>5 \hbox{ } \vspace{-24pt}\fi % make more space on page
+     \ifnum\numcomm<4 \vglue .5in\vfil \fi  % masters
+     \ifnum\numcomm>5 \hbox{ } \vspace{-24pt}\fi % make more space on page
      \begin{singlespace}
      \begin{center}
          \parindent=0pt
-         {\large\bf\uppercase\expandafter{\@thesistitle}}\\ [20pt]
-         {\large\bf{\@author}}\\ [20pt]
-         Submitted in Partial Fullfillment of the Requirements\\
-         for the Degree of\\ [10pt]
-         \emph{\uppercase\expandafter{\@degree}}\\ [40pt]
-         \sigblock
-%
-         \vfill
-         \includegraphics[width=0.25\linewidth]{rpi/figures/rpi_seal.png}
-         \vskip 20pt
-         \emph{Department of \expandafter{\@department}}\\
+         {\large\uppercase\expandafter{\@thesistitle}}\\ [12pt]
+         By \\ [12pt]
+         \@author\\ [12pt]
+         A \doctype Submitted to the Graduate\\ [8pt]
+         Faculty of Rensselaer Polytechnic Institute\\ [8pt]
+         in Partial Fulfillment of the\\ [8pt]
+         Requirements for the Degree of\\ [8pt]
+         \uppercase\expandafter{\@degree}\\ [8pt]
+         Major Subject:~~\uppercase\expandafter{\@department}\\ 
+         \ifnum\numcomm < 7 \vskip 32pt \else \vskip 24pt \fi
+         \sigblock 
+         \ifnum \numcomm < 7 \vskip 32pt \else \vskip 24pt \fi
          Rensselaer Polytechnic Institute\\
-         Troy, New York
-         \vskip 12pt
+         Troy, New York\\ [14pt]
+         \ifnum\numcomm>6 \vskip -8pt \fi
          \@submitdate
-%
-%         \ifnum\numcomm < 7 \vskip 32pt \else \vskip 24pt \fi
-%         \sigblock 
-%         \ifnum \numcomm < 7 \vskip 32pt \else \vskip 24pt \fi
-%         Rensselaer Polytechnic Institute\\
-%         Troy, New York\\ [14pt]
-%         \ifnum\numcomm>6 \vskip -8pt \fi
-%         \@submitdate
      \end{center}
      \end{singlespace}
      \newpage
@@ -629,12 +622,6 @@
 }
 %%%%%%%%%%%%%%%%%%%%%%  End of setspace.sty %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Setup captions
-%\RequirePackage[justification=centering]{caption}
-%\RequirePackage[justification=centerlast]{caption}
-%\RequirePackage[format=hang,justification=centerlast]{caption}
-\RequirePackage[format=hang,justification=raggedright,singlelinecheck=off]{caption}
-\renewcommand{\captionfont}{\bfseries}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

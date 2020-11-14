@@ -1,7 +1,7 @@
 \section{Reagent}\label{sec:reagent}
 
 The \textit{Reagent} system allows us a way to hook into the content that is
-shown within the Electron framework discussed in Section~\ref{sec:cais}. The
+shown within the Electron framework discussed in Section~\ref{sec:display-worker}. The
 system is broken up into two components, a central server and then the clients.
 The central server is used to handle communication from the clients and the
 larger CAIS architecture, as well as store information coming from the clients
@@ -46,7 +46,7 @@ it was (e.g. mouseover or click).
 
 During the scan of HTML elements, the system is capable of taking advantage of
 content added for accessibility reasons. For example, in
-Fig.~\ref{fig:screenshot}, the column for ``appearances'' was labelled ``APP''.
+Fig.~\ref{fig:reagent_use_case_2}, the column for ``appearances'' was labelled ``APP''.
 \textit{Reagent} identifies tags that may indicate more human-friendly terms,
 such as tooltips that reveal explanatory text when a user hovers over an
 element, and uses approximate text matching to infer likely associations where
@@ -73,11 +73,12 @@ query the system for the contents of the full table, what are the columns in a
 table, as well as asking queries about statistics (e.g. max, min, or average)
 of any given column. By capturing the interactions, it then allows the system
 to handle queries that are for relative locations within the interacted with
-element. For example, Figure~\ref{fig:screenshot} illustrates the state of the
+element. For example, Figure~\ref{fig:reagent_use_case_2} illustrates the state of the
 display after the user has opened an ESPN football team roster webpage and
 asked the system ``Show in a new table rows where \textit{appearances} are
 greater than 35.''. Equivalently, the user might have asked ``Show in a new
 table rows with this column greater than this.'' while pointing to a cell
 under the column `APP' with the value of 35.\footnote{For a fuller set of
 capabilities that includes query, sorting, and simple analytics like averaging,
-a link to a demo video is available at \url{https://bit.ly/20GKvez}}.
+a link to a demo video is available at 
+\url{https://www.youtube.com/watch?v=qVmY3YmNzGE}}.

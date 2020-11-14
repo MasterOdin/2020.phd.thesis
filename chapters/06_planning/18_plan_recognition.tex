@@ -1,0 +1,57 @@
+\section{Plan Recognition for Course Correction}
+
+
+We examine here our example scenario from Section~\ref{sect:false_belief}. In
+the scenario, we have two human agents, $\humana$ and $\humanb$, within our
+CAIS, and they are working in the blocks world domain. On the table, shown
+on the screen are three blocks. This information is represented below:
+
+\begin{center}
+\begin{tabular}{ c c }
+    \holds(\on(\ablock, \ctable), 0) & 
+    \holds(\clear(\ablock), 0)\\
+    \holds(\on(\bblock, \ctable), 0) &     
+    \holds(\clear(\bblock), 0)\\
+    \holds(\on(\cblock, \ctable), 0) & 
+    \holds(\clear(\cblock), 0)
+\end{tabular}
+\end{center}
+
+We consider a modified action sequence though from above. In this new sequence,
+we add in a goal to our system to enable the validation steps in our orchestrator.
+As mentioned above, in this mode, the orchestrator will not allow any actions to
+be undertaken that would move the state of the world away from the goal state.
+
+We now consider this action sequence:
+
+\begin{enumerate}
+  \item{\humana\ and \humanb\ enter the room}
+  \item{\humana\ moves block \ablock\ onto block \bblock}
+  \item{\humanb\ adds the goal of block \cblock\ on block \bblock}
+  \item{\humanb\ leaves the room}
+  \item{\humana\ moves block \ablock\ to the table}
+  \item{\humana\ removes the goal for block \cblock\ and adds the goal of block \ablock\ on block \cblock}
+  \item{\humana\ moves block \ablock\ onto block \cblock}
+  \item{\humanb\ returns to the room}
+  \item{\humanb\ tries to move \ablock\ to the table.}
+\end{enumerate}
+
+For step 9, we know that the move here will fail against the orchestrator as it
+would move the world away from our goal state of $\on(\ablock, \cblock)$. On
+failing the move, the orchestrator launches into a fallback of plan recognition
+over \humanb. The first thing done by the system is to collect the potential goals
+that an agent may be following. In this, the system scans through its knowledge base
+to find goal addition events that happened within the vicinity of \humanb, giving
+us the goals of $\on(\cblock, \bblock)$ and $\on(\ablock, \cblock)$. Next, as per
+our definition, the system generates the sequence of actions that would take the
+state of the world at the start of step 9 to achieve that goal, giving us an
+action sequence. The system finally then takes the action of step 9 and determines
+if it within either plan's action sequence. In this case, it finds it as part of
+the sequence for the goal of $\on(\cblock, \bblock)$. Taking this information, the
+CAIS then scans through its and \humanb's knowledge bases to determine where things
+may have gone awry. In this, it determines that \humanb\ did not perceive the goal
+state change ate step 6. A summary of this information is then all outputted to the
+agents, wherein it shows the agent what plan they were attempting to follow, the plan
+that they should have been following, and why they have a difference of information.
+This catches the agent up, and their knowledge base is now assumed in regards equal
+to that of the room for this sequence.

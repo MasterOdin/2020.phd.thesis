@@ -1,16 +1,22 @@
 \subsection{conversation-worker}
 
-The conversation-worker is responsible for taking in a sentence, usually from the transcript-worker
-and converting into an tuple $<I, E>$ where $I$ is the intent and $E$ is our entities. An intent for our
-purposes is an action to take within our system. The entities then are the elements that make up that action.
-For example, given the sentence "Move block A onto block B", intent would be ``move'' with the entities being
+The conversation-worker is responsible for taking in a sentence, usually from the
+transcript-worker and converting into an tuple $<I, E>$ where $I$ is the intent and
+$E$ is our entities. An intent for our purposes is an action to take within our system.
+The entities then are the elements that make up that action. For example, given the
+sentence "Move block A onto block B", intent would be ``move'' with the entities being
 ``block A'' and ``block B''.
 
-For our implementation of this component, we utilize the Watson Assistant service. Within this service,
-we define intents, and then provide example sentences that would fit that intent to train the system.
-This has the benefit of allowing the system the capacity to handle slightly differently worded sentences
-than what we might expect, as well as gloss over spelling and grammatical errors that arise from the
-transcription process. For entities, we utilize built-in system ones (such as numbers), as well as define
-our own, where then entities are largely detected through from the input sentence using simple pattern matching.
-For this system, we pre-build our worker with a list of intents and entities for a given domain, but also
-allow on-the-fly training by users through mechanisms like Reagent, as explored in Chapter~\ref{chap:reagent}
+For our implementation of this component, we utilize the Watson Assistant service. Within this 
+service, we define intents, and then provide example sentences that would fit that intent
+to train the system. This has the benefit of allowing the system the capacity to handle slightly 
+differently worded sentences than what we might expect, as well as gloss over spelling and 
+grammatical errors that arise from the transcription process. For entities, we utilize built-in 
+system ones (such as numbers), as well as define our own, where then entities are largely detected 
+through from the input sentence using simple pattern matching. For this system, we
+pre-build our worker with a list of intents and entities for a given domain, but also
+allow on-the-fly training by users through mechanisms like Reagent, as explored in 
+Chapter~\ref{chap:reagent} The Watson Assistant service also provides a mechanism
+for designing and constructing dialog trees that such a system could follow, however, we
+do not use this service, relying instead on planning algorithms, to better handle multi-modal
+input and intent resolution related to it.

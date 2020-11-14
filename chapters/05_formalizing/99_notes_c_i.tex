@@ -1,0 +1,93 @@
+    \begin{itemize}
+    \item $\mathbf{C}^f_1$: It is common knowledge that, if an agent
+      $x$ has a false belief $\lnot \phi$, and $\gamma$
+      believes $\phi$, then $\gamma$ communicates to the agent the
+      proposition $\phi$.\footnote{Please note that inference in
+        \DCEC\ is non-monotonic as it includes the event calculus,
+        which is non-monotonic.  If an agent $a$ believes $\phi$ based
+        on prior information, adding new information can cause the
+        agent to not believe $\phi$.}
+
+    \item $\mathbf{C}^f_2$: Parallel to the above condition, it is
+      common knowledge that, if an agent $x$ has a missing belief
+      $\phi$, and $\gamma$ believes $\phi$, then $\gamma$ communicates to
+      the agent the proposition $\phi$.
+
+    \item$\mathbf{I}^f_1$ It is common knowledge that at any point in
+      time $t$ an agent $x$, different from the CAIS system $\gamma$,
+      can observe an event $e$ or condition (fluent) $f$ if and only if
+      it is in its vicinity. This is formalized using the function symbol
+      $\vicinity(x, e)$ or $\vicinity(x, f)$.
+
+      \item $\mathbf{I}^f_2$: It is common knowledge that actions
+        performed by an agent are in its vicinity.
+
+      \item $\mathbf{I}^f_3$: It is common knowledge that all events
+        and fluents are perceived by $\gamma$.
+     \end{itemize}
+
+
+\begin{table}
+\begin{small}
+\begin{center}
+  \begin{tabular}{lp{12cm}}
+\toprule
+\textbf{Condition} & \textbf{Formula}  \\
+\midrule
+$\mathbf{C}^f_1$ &          \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t, \left[\begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \believes\big(x, t, \lnot \phi)\big)
+                \\ & \hspace{50pt} \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*}
+\\
+\midrule
+
+$\mathbf{C}^f_2$ &     \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t,\left[ \begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \lnot \believes\big(x, t, \phi)\big)
+                \\ &  \hspace{50pt}  \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*} \\
+\midrule
+
+$\mathbf{I}^f_1$ &
+ \begin{equation*} \begin{aligned}
+            \common\Bigg(\forall x, t, f:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \holds(f, t)\big) \leftrightarrow
+            \holds(\vicinity(x, f), t)\Big]\Bigg)\\
+            \common\Bigg(\forall x, t, e:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \happens(e, t)\big) \leftrightarrow
+            \holds(\vicinity(x, e), t)\Big]\Bigg)\\
+          \end{aligned}\end{equation*}
+\\
+\midrule
+
+$\mathbf{I}^f_2$ &         \begin{equation*}
+          \common\Big(\forall x, \alpha:  \holds\big(\vicinity(x, \action(a, \alpha)), t\big)\Big)
+        \end{equation*}
+\\
+\midrule
+
+$\mathbf{I}^f_3$ &         \begin{equation*}
+          \begin{aligned}
+       &  (i) \hspace{10pt}  \common\Bigg(\forall  t, f:  \Big[\holds(f, t) \leftrightarrow \perceives\big(\gamma, t, \holds(f, t)\big) \Big]\Bigg)\\
+       & (ii)  \hspace{10pt}   \common\Bigg(\forall  t, e: \Big[\happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \happens(e,
+            t)\big) \Big]\Bigg)\\
+        &   (iii)  \hspace{10pt}   \common\Bigg(\forall  t, f:  \Big[\lnot \holds(f, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \holds(f, t)\big) \Big]\Bigg)\\
+        &   (iv) \hspace{10pt}    \common\Bigg(\forall  t, e:\Big[\lnot \happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \happens(e, t)\big) \Big]\Bigg)
+          \end{aligned}
+        \end{equation*}
+\\
+\bottomrule
+\end{tabular}
+\caption{Formal Requirements}
+\label{formalreqs}
+\end{center}
+\end{small}
+\end{table}

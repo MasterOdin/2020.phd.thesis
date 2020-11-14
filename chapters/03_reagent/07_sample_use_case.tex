@@ -24,7 +24,7 @@ running transcript of the system with queries from the user being prefixed with 
 \centering
 \includegraphics[width=0.8\textwidth]{chapters/03_reagent/figures/use_case_1.png}
 \caption{Display of system after adding Team entity.}
-\label{fig:use_case_1}
+\label{fig:reagent_use_case_1}
 \end{figure*}
 
 To start with, we open a page from SkySports that shows the current standings
@@ -52,7 +52,7 @@ columns and then issue a new name for the column. For example, to update the
 label marked ``D'', the user would point at the column and say ``Rename this column
 name to Draws'', which gets automatically mirrored to our
 ontology. Following this, the user can then repeat a request for the
-average of draws and the system will now successfully respond with ``The average of Draws is 5.4''. The result of this sequence is shown in Figure~\ref{fig:use_case_1}, wherein we still have several more attributes that
+average of draws and the system will now successfully respond with ``The average of Draws is 5.4''. The result of this sequence is shown in Figure~\ref{fig:reagent_use_case_1}, wherein we still have several more attributes that
 have to be renamed due to lacking the title tag, using a similar command as
 above.
 
@@ -65,7 +65,9 @@ the system states ``I do not recognize this entity. Please add it''. Similar
 to the previous entity, the user
 can save the table as a new entity by first pointing at it and then saying ``Add this table as entity 'player''', which
 adds a new entity ``Player'' to our ontology along with all of the columns in the
-table in the same process as before. A new Player entity then appears alongside the Team entity in the Ontology Viewer of the display.
+table in the same process as before. A new Player entity then appears
+alongside the Team entity in the Ontology Viewer of the display, which
+is shown in Figure~\ref{fig:reagent_use_case_2}.
 
 In this case, all of the terms have title tags and so are all properly labeled when they were added, so the user does not have to do any further renaming. The user can
 now query the system about these saved attributes, such as pointing at the first
@@ -76,14 +78,14 @@ the system responds with ``The player has 24 appearances''.
 \centering
 \includegraphics[width=0.8\textwidth]{chapters/03_reagent/figures/use_case_2.png}
 \caption{Display of system after adding the Player entity}
-\label{fig:use_case_2}
+\label{fig:reagent_use_case_2}
 \end{figure*}
 
 To complete our basic ontology, the user can now add a relationship
 between the two saved entities. To do this, the user can simply issue
 the query ``Add relationship part of between entity team and player''. The
 system then adds a new Object Property link between the two marked as 
-``partOf'', as shown in Figure~\ref{fig:use_case_3}. Through this connection,
+``partOf'', as shown in Figure~\ref{fig:reagent_use_case_3}. Through this connection,
 the user can now start issuing queries that utilize information from both of the opened tables. For example,
 the user can ask ``How many wins does the team of this player have?'' while pointing
 at the player table. The system will look up who that player's team is, cross-reference it
@@ -93,7 +95,7 @@ back to the prior table, and extract the requested information, outputting it to
 \centering
 \includegraphics[width=0.8\textwidth]{chapters/03_reagent/figures/use_case_3.png}
 \caption{Display of the system with the final ontology.}
-\label{fig:use_case_3}
+\label{fig:reagent_use_case_3}
 \end{figure*}
 
 After building this ontology, whenever a user goes to a page that contains

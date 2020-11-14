@@ -123,6 +123,17 @@ syntactic operation that converts any modal formula (or a set of
 formulae) $\phi$ to a non-modal formula $\mathsf{shadow}[\phi]$ by replacing atomic
 modal sub-formuale with propositional atoms.
 
+
+The prover can be equipped
+with multiple sets of inference schemes $\rho^p_{q}$, where
+$q\in\mathbb{N}$ denotes the degree of the schemes (e.g. $0$ for
+propositional schemes, $1$ for first-order quantifier schemes, etc.)
+and $p\in\{0,1\}$ denotes the modality of the schemes. For example, pure
+propositional logic and first-order schemes are given by $\rho^0_{0}$
+and $\rho^0_{1}$, while modal
+propositional or modal first-order schemas are given by $\rho^1_{0}$ and
+$\rho^1_{1}$.
+
 \begin{table}
 \begin{footnotesize}
 \begin{center}
@@ -313,4 +324,27 @@ robust representation schemes in extensional logics
 \end{footnotesize}
 \end{footnotesize}
 \end{minipage}
+\end{comment}
+
+
+
+
+\begin{comment}
+Table~\ref{syn:terms} presents the syntax of our language for forming
+terms, while Table~\ref{syn:defs} presents a list of built-in function
+symbols, which come from the standard event calculus, in our language.
+Table~\ref{syn:formulae} shows the syntax for
+formulae in the language, and finally Table~\ref{rules} shows a subset of
+inference schemata needed for our current purpose. The main
+inference schemata needed include $I_{\knows}$ and $I_{\believes}$,
+which state that knowledge and belief are closed under the inference
+system of \CEC.  We also have inference schemata that let us go
+from perception to knowledge ($I_1$), knowledge to belief ($I_2$),
+common knowledge to knowledge ($I_3$), and from knowledge to
+propositions that hold ($I_4$). Below, we also use \emph{derived
+  inference schemata} for converting perceptions to knowledge,
+knowledge to belief, common knowledge to belief,~labeled as
+$D_{[\perceives \leadsto \knows]}$, $D_{[\knows \leadsto \believes]}$,
+and $D_{[\common \leadsto \believes]}$ respectively
+\cite{ArkoudasAndBringsjord2008Pricai}.
 \end{comment}

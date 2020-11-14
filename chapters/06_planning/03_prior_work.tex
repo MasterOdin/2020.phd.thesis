@@ -31,6 +31,11 @@ expressivity~\cite{rintanen_constructing_1999}. As such, we also do
 not concern ourselves with other extensions to classical planners such as 
 probabilistic 
 planners~\cite{boutilier_decision-theoretic_1999,kaelbling_planning_1998}.
+It should be noted that many of these planners operate at a level below
+first-order logic which helps to limit complexity, and is actively suitable
+for purely about actions in the world and only their physical effects. For
+our needs where we look to handle the \CEC, which operates at a level
+\emph{above} first-order, we then need additional machinery.
 
 We now examine applications of planners to related domain as us,
 namely in operating over mental states of agents in group environments.
@@ -46,33 +51,12 @@ of the humans' mental states relevant to the autonomous system's planning
 problems.
 Recent work has adapted these ideas to proactive decision making
 \cite{sengupta_radar_2017,kim_towards_2017} and smart-room environments
-\cite{chakraborti_mr._2017}. \cite{pearce_etal_social_planning_aaai2014}
+\cite{chakraborti_mr._2017}. However, in these cases, an agent's belief
+is implied, but that under the hood, states are represented in a less
+expressive formalization. \cite{pearce_etal_social_planning_aaai2014}
 note the importance of what they call ``social planning,'' which
 includes an agent achieving a goal via the modification of the mental
-states of others.\footnote{Our example here is briefly returned
-to later in ``Prior/Related Work and Novelty.''}
-
-While these papers confirm the importance of formalizing and reasoning
-about mental states within the planning process, they seem to us to lack the formal and
-computational machinery needed to mechanize a full human-level theory
-of mind --- let alone such a theory of mind \emph{and} the
-requirements of a CAIS that we set out below. Note that in
-this work, there is a limit to the theory-of-mind-modeling
-``power'' we insist an overseeing AI have.  For example, we don't require
-that an AI overseeing an environment populated with humans have
-so-called \textit{phenomenal consciousness}, a form of ``what's it's
-like to'' consciousness characterized by \cite{bbs.block}, and
-claimed by \cite{sb_billion_conscious_robot}, to be impossible for a
-mere machine to possess.  In sharp contrast with phenomenal
-consciousness, \textit{cognitive consciousness} consists only in the
-logico-mathematical \emph{structure} of human-level (and, indeed,
-above) cognition, instantiated through time.  While cognitive
-consciousness can be characterized axiomatically with help from the
-formal languages we introduce below for cognitive calculi
-\cite{axiomatizing_consciousness1}, in the present paper we do not
-require the AI overseeing a CAIS have even cognitive consciousness,
-and we specifically do not require, at this early point in our work
-on cognitive-and-immersive systems, cognitive
-\emph{self}-consciousness, despite the fact that the latter is
-something that has been significantly mechanized and implemented
-\cite{roman2015_robot_self-con,sb_on_knowledge_game}.
+states of others. Indeed, they include nested belief operators, but
+their scope does not include unrestricted quantification, rather
+sub-formulae in zero-order logic; and the other intensional operators,
+epistemic and otherwise, are absent.

@@ -7,39 +7,34 @@
 
 To capture the CAIS in a formal way, we employ the
 \textbf{cognitive event calculus} (\CEC), a cognitive calculus and
-intensional logic, which provides a subset of the \DCEC~\cite{nsg_sb_dde_ijcai}.
-The \CEC\ is a multi-sorted
-quantified modal logic with a well-defined syntax and proof calculus.
-\CEC\ subsumes the event calculus~\cite{mueller_commonsense_2014}, a first-order
-calculus used for modeling events and actions and their effects upon
-the world.  The proof calculus of \CEC\ is based on natural deduction
-\cite{gentzen_investigations_1964} and includes all the introduction and elimination
-rules for first-order logic, as well as inference schemata for the
-modal operators and related structures.  \CEC\ is a sorted system and
-includes the built-in sorts shown in Table~\ref{syn:sorts}.
-
-Table~\ref{syn:terms} presents the syntax of our language for forming
-terms, while Table~\ref{syn:defs} presents a list of built-in function
-symbols, which come from the standard event calculus, in our language.
-Table~\ref{syn:formulae} shows the syntax for
-formulae in the language, and finally Table~\ref{rules} shows a subset of
-inference schemata needed for our current purpose. The main
-inference schemata needed include $I_{\knows}$ and $I_{\believes}$,
-which state that knowledge and belief are closed under the inference
-system of \CEC.  We also have inference schemata that let us go
-from perception to knowledge ($I_1$), knowledge to belief ($I_2$),
-common knowledge to knowledge ($I_3$), and from knowledge to
-propositions that hold ($I_4$). Below, we also use \emph{derived
-  inference schemata} for converting perceptions to knowledge,
-knowledge to belief, common knowledge to belief,~labeled as
-$D_{[\perceives \leadsto \knows]}$, $D_{[\knows \leadsto \believes]}$,
-and $D_{[\common \leadsto \believes]}$ respectively
-\cite{ArkoudasAndBringsjord2008Pricai}.
+intensional logic, which provides a subset of the \DCEC~\cite{nsg_sb_dde_ijcai}
+\footnote{For a richer primer on the \DCEC, we invite users to view the
+appendix of that work}. The \CEC\ is a multi-sorted quantified modal logic with a 
+well-defined syntax and proof calculus. The use of sorts here can be thought of
+as being analogous to a typed single-inheritance programming language. The
+proof calculus of \CEC\ is based on natural deduction 
+\cite{gentzen_investigations_1964} and includes all the introduction and
+elimination rules for first-order logic, as well as inference schemata for
+the modal operators and related structures discussed below. At its core, the
+\CEC\ subsumes the event calculus~\cite{mueller_commonsense_2014} (EC), a
+first-order calculus used for
+modeling events and actions and their effects upon the world. The modal
+operators that the \CEC\ adds on top of the EC are that
+$\believes$elief, $\knows$nowledge, $\common$ommon Knowledge, $\perceives$erceiving,
+$\says$aying, $\desires$esiring, and $\intends$ntending. At a surface level,
+the \CEC\ may appear similar to readers to BDI logics~\cite{rao_modeling_1991},
+but  differ in a number of key ways. The most significant is that BDI logics
+utilizes \textit{possisble-worlds semantics} with uninstantiated inference
+schema, but rather utilizes \textit{proof-theoretic sematics} as it is based
+on natural deduction~\cite{gentzen_untersuchungen_1935}\footnote{Bringsjord and
+Govindarajulu~\cite{bringsjord_given_2012} provide a deeper explanation for
+the interested reader.}. Additionally, through the inclusion of operators
+like perception, communication, and intensional operators, the \CEC\ aims
+to facilitate ease of use within fields of computer vision and natural language.
 
 \begin{table}
 \begin{footnotesize}
 \begin{center}
-
 \begin{tabular}{lp{8cm}}
 \toprule
 \textbf{Sort}    & \textbf{Description} \\
@@ -58,13 +53,35 @@ and $D_{[\common \leadsto \believes]}$ respectively
   \bottomrule
 \end{tabular}
 \caption{Basic sorts in the language}
-\label{syn:sorts}
+\label{table:sorts}
 \end{center}
 \end{footnotesize}
 \end{table}
 
+We know provide a brief primer on the event calculus and \CEC\ to make
+accessible the following chapter. The sorts of our logic are shown in 
+Table~\ref{table:sorts}. Most of the sorts shown come from the underlying EC,
+but we add here three additional sorts: \Agent, \Action, and \ActionType.
+The syntax of the \CEC\ is shown in Figure~\ref{fig:cec_syntax}. In our
+syntax, the symbols of the event calculus are contained under $\mathit{f}$.
+An important axiom that drives much of the event calculus is:
+\vspace{-0.4cm}
+\begin{equation}
+    \begin{aligned}
+        \happens(e, t_{1}) \land \initiates(e, f, t_{1}) \land (t_{1} < 1) \land \lnot\clipped(t_{1}, f, t) \rightarrow \holds(f, t)
+    \end{aligned}
+\end{equation}
 
-\begin{figure}[ht!]
+\noindent
+which can be read as "some event $e$ \happens at time $t_{1}$ and that this $e$
+\initiates our fluent $f$ at $t_1$ such that at some later time $t$, and assuming
+that there has not been something causing $f$ to be \clipped (made false) between
+$t_{1}$ and $t$, then $f$ holds at time $t$". From this axiom, we see that the
+event calculus is non-monotonic, such that fluents can hold at some time, but
+not hold at other times, and that this is determined by the events of the
+system at large.
+
+\begin{figure}[h]
 % frametitle=Signature (snippet), 
 \begin{mdframed}[roundcorner=8pt, nobreak=true, frametitlealignment=\centering]
 \begin{equation*}
@@ -118,28 +135,22 @@ and $D_{[\common \leadsto \believes]}$ respectively
 \end{equation*}
 \end{mdframed}
 \caption{\CEC\ Syntax}
-\label{sig}
+\label{fig:cec_syntax}
 \end{figure}
 
-%% Moved the the tables for syntax, formula, and schema into the middle of
-%% the reasoner-planner section
-%% to force latex to put them onto the same page and save some space // Matt
+On top of this, as part of the allowed functions and relations to the system,
+shown as $\mathit{\phi}$, we add the intensional operators which can be read as:
+\perceives\ is an agent $a$ at time $t$ perceives $\mathit{\phi}$, \knows\
+is an agent at time $t$ knows $\mathit{\phi}$, \common\ is at time $t$ that
+$\mathit{\phi}$ is common knowledge to all agents, \believes\ is
+an agent $a$ at time $t$ believes $\mathit{\phi}$ at time $t$, \says\ is
+agent $a$ at time $t$ says $\mathit{\phi}$ or that agent $a$ at time $t$
+says $\mathit{\phi}$ to agent $b$, \desires\ is agent $a$ at time $t$ desires
+$\mathit{\phi}$, and \intends\ is agent $a$ at time $t$ intends $\mathit{\phi}$.
+With our syntax established, we now move to the inference schemata, shown in
+Figure~\ref{fig:cec_schemata}.
 
-To handle reasoning within \CEC\, we utilize a quantified modal logic
-theorem prover, \textsf{ShadowProver}, first presented in
-\cite{nsg_sb_dde_ijcai,uncertaintyized_cognitive_calculus}.\footnote{The
-  prover is available in both Java and Common Lisp and can be obtained
-  at: \url{https://github.com/naveensundarg/prover}. The underlying
-  first-order prover is SNARK, available at:
-  \url{http://www.ai.sri.com/~stickel/snark.html}.}  The prover works
-by utilizing a technique called \textbf{shadowing} to achieve speed
-without sacrificing consistency in the system.  Shadowing is a
-syntactic operation that converts any modal formula (or a set of
-formulae) $\phi$ to a non-modal formula $\mathsf{shadow}[\phi]$ by replacing atomic
-modal sub-formuale with propositional atoms.
-
-
-\begin{figure}[ht!]
+\begin{figure}[h]
 % frametitle=Inference Schemata (snippet),
 \begin{mdframed}[nobreak=true, roundcorner=8pt, frametitlealignment=\centering]
 \begin{equation*}
@@ -150,7 +161,7 @@ modal sub-formuale with propositional atoms.
     \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} \\ 
 & \infer[{[R_{\believes}]}]{\believes(a,t_2,\phi)}{\believes(a,t_1,\Gamma), \ 
     \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} \\
- &\infer[{[R_1]}]{\common(t,\perceives(a,t,\phi) \lif\knows(a,t,\phi))}{}\\
+& \infer[{[R_1]}]{\common(t,\perceives(a,t,\phi) \lif\knows(a,t,\phi))}{}\\
 &  \infer[{[R_2]}]{\common(t,\knows(a,t,\phi)
     \lif\believes(a,t,\phi))}{}\\
   &\infer[{[R_3]}]{\knows(a_1, t_1, \ldots
@@ -164,23 +175,61 @@ modal sub-formuale with propositional atoms.
 & \infer[{[R_7]}]{\common(t,\common(t_1,\phi_1\lif\phi_2))
     \lif \common(t_2,\phi_1) \lif \common(t_3,\phi_2)}{} \\
 & \infer[{[R_8]}]{\common(t, \forall x. \  \phi \lif \phi[x\mapsto
-  t])}{} \hspace{18pt}
-  \infer[{[R_9]}]{\common(t,\phi_1 \liff \phi_2 \lif \neg
+  t])}{} \\
+& \infer[{[R_9]}]{\common(t,\phi_1 \liff \phi_2 \lif \neg
     \phi_2 \lif \neg \phi_1)}{}\\
 & \infer[{[R_{10}]}] {\common(t,[\phi_1\land\ldots\land\phi_n\lif\phi]
   \lif [\phi_1\lif\ldots\lif\phi_n\lif\psi])}{}\\
 % & \infer[{[R_{11a}]}]{\believes(a,t,\psi)}{\believes(a,t,\phi)\ \ \phi
 %   \lif \psi}\
 %\hspace{6pt} \infer[{[R_{11b}]}]{\believes(a,t,\psi \land \phi)}{\believes(a,t,\phi)\ \ \believes(a,t,\psi)}\\ 
-&\infer[{[R_{12}]}]{\believes(h,t,\believes(s,t,\phi))}{\says(s,h,t,\phi)}
-\\ &\infer[{[R_{13}]}]{\perceives(a,t,\happens(\action(a^\ast,\alpha),t))}{\intends(a,t,\happens(\action(a^\ast,\alpha),t'))}
+& \infer[{[R_{12}]}]{\believes(h,t,\believes(s,t,\phi))}{\says(s,h,t,\phi)} \\
+& \infer[{[R_{13}]}]{\perceives(a,t,\happens(\action(a^\ast,\alpha),t))}{\intends(a,t,\happens(\action(a^\ast,\alpha),t'))}
 \end{aligned}
 \end{equation*}
 \end{mdframed}
 %\end{scriptsize}
-\caption{\CEC Inference Schemata}
-\label{infschem}
+\caption{\CEC\ Inference Schemata}
+\label{fig:cec_schemata}
 \end{figure}
+
+$R_\mathbf{K}$ and $R_\mathbf{B}$ state that for knowledge and belief, if an
+agent knows or believes some formula $\Gamma$ at time $t_{1}$, and that $\Gamma$
+entails some formula $\phi$, then at some equal or later time $t_{2}$, the
+agent will know or belief the formula $\phi$. Under these two rules, it
+establishes that knowledge and belief are closed under the inference system of
+\CEC. $R_{1}$ and $R_{2}$ state that it is common knowledge that perception
+leads to knowledge and that knowledge to belief respectively. $R_{3}$ states that
+any formula that is common knowledge, all agents know that formula, and also know
+that all other agents know that formula, iteratively. $R_{4}$ states that
+knowledge  of a formula implies that that formula holds. Through the use of
+$R_{3}$ and $R_{4}$, we can unwind any formula that is common knowledge, such
+as for $R_1$, we could derive
+$\perceives(a, t, \phi) \rightarrow \knows(a, t, \phi)$. $R_5$ to $R_{10}$
+provide for a more restricted form of reasoning for propositions that are common
+knowledge, unlike propositions that are known or believed.  $R_{12}$
+states that if an agent $s$ communicates a proposition $\phi$ to $h$,
+then $h$ believes that $s$ believes $\phi$. $R_{13}$ states that for for some
+action that agent $a$ intends action $\alpha$, then they will perceive that they
+perceive that action at a different time. For our work here, $R_{1}$ to $R_{4}$
+and $R_{12}$ are most important for our formalization and reasoning efforts.
+To utilize our logic as part of the CAIS, past the formalization, we utilize
+an automated theory prover, \textsf{ShadowProver}, which is described in greater
+detail in section~\ref{sec:automated_reasoner_planner}.
+
+\begin{comment}
+To handle reasoning within \CEC\, we utilize a quantified modal logic
+theorem prover, \textsf{ShadowProver}, first presented in
+\cite{nsg_sb_dde_ijcai,uncertaintyized_cognitive_calculus}.\footnote{The
+  prover is available in both Java and Common Lisp and can be obtained
+  at: \url{https://github.com/naveensundarg/prover}. The underlying
+  first-order prover is SNARK, available at:
+  \url{http://www.ai.sri.com/~stickel/snark.html}.}  The prover works
+by utilizing a technique called \textbf{shadowing} to achieve speed
+without sacrificing consistency in the system.  Shadowing is a
+syntactic operation that converts any modal formula (or a set of
+formulae) $\phi$ to a non-modal formula $\mathsf{shadow}[\phi]$ by replacing atomic
+modal sub-formuale with propositional atoms.
 
 The prover can be equipped
 with multiple sets of inference schemes $\rho^p_{q}$, where
@@ -191,7 +240,6 @@ propositional logic and first-order schemes are given by $\rho^0_{0}$
 and $\rho^0_{1}$, while modal
 propositional or modal first-order schemas are given by $\rho^1_{0}$ and
 $\rho^1_{1}$.
-
 
 % Given any arbitrary formula $\phi$, $\mathsf{A}_{[\phi]}$ is a unique
 % atomic (propositional) symbol. We define the \textsf{level} of a
@@ -212,15 +260,6 @@ $\rho^0_{0} $ and $\rho^0_{1}$ to $\mathsf{shadow}[\Gamma]$ and checks whether
 the expanded set contains $\mathsf{shadow}[\phi]$. The two phases are repeated
 till either the goal is reached or no expansions happen.
 
-Planning for the room is handled by \textsf{Spectra}, a planner based
-on an \emph{extension} of the STRIPS-style
-planning language, and backed by \textsf{ShadowProver}. In this planning formalism, arbitrary
-formulae of \CEC\ are allowed in states, actions, and goals.  For
-instance, valid states and goals can include: \emph{``No three blocks
-on the table should be of the same color.''}  and \emph{``Jack
-believes that Jill believes there is one block on the table.''}
-
-\begin{comment}
 \subsection{Non-modal Systems are not Enough}
 \label{sect:prop_not_enough}
  In an \textbf{extensional} system, two

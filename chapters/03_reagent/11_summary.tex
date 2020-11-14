@@ -1,3 +1,30 @@
 \section{Summary}
 
-In this chapter, we have explained and demonstrated the Reagent system.
+In this chapter, we have explained and demonstrated the Reagent system. Reagent
+is capable of taking advantage of commonly-occurring structural motifs and
+human-friendly tagging such as tooltips. This in-turn makes it easier for
+developers to create cognitive application that support natural voice-based
+interactions with pre-existing webpages containing structured data such as tables
+and plots. Backing from this, we also show how Reagent can be used to help
+drive a virtual mouse interface that through how it functions can be fully multi-user
+through pointing and gestures, improving upon limitations of prior work. This interface
+is intended to allow hooking up to a wide range of technologies demonstrated in
+the prior work, including Kinect cameras~\cite{allen_rensselaer_2019},
+Oblong wands~\cite{kephart_embodied_2019}, and HTC Vive controllers~\cite{zhao_immersive_2018},
+as well as for allowing us to explore additional types of input mechanisms, like the
+MUIFOLD system covered in the following chapter.
+
+To demonstrate Reagent, we used it to build an ontology in OWL through two unrelated websites,
+as well as provide an experimental section to showcase how the system handles
+parsing of several popular websites showcasing generalizability. As part of this demonstration,
+we showed how Reagent can readily learn the vocabulary of a domain by asking questions when it
+does not understand the user's or the webpage's terminology.
+
+An future avenue of interest would be in utilization of this technology in ontology building.
+For this work, we assumed that we were starting on a blank slate. In a real-world application,
+one could assume that there may be a pre-existing ontology, or that it would be possible to
+import a relevant one to the domain in question. To accomplish this, we might consider utilization
+of platforms such as DBPedia~\cite{auer2007} or ConceptRDF~\cite{najmi_conceptrdf:_2016}, both
+of which readily translate into OWL. Through these, we could pre-populate an ontology with
+entities and some attributes and as a user browses pages, the system could automatically, or
+ask the user first, append to the imported entities building a larger and more comprehensive super-set.

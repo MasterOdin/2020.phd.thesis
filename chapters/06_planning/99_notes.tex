@@ -1,0 +1,39 @@
+
+
+alternates between
+applying the modal inference schemata and shadowing down the formula to be handled
+by a dedicated first order prover.
+
+
+handles the
+modal inference schemata and then shadows down the formula for
+
+\begin{comment}
+To handle reasoning within \CEC\, we utilize a quantified modal logic
+theorem prover, \textsf{ShadowProver}, first presented in
+\cite{nsg_sb_dde_ijcai,uncertaintyized_cognitive_calculus}.\footnote{The
+  prover is available in both Java and Common Lisp and can be obtained
+  at: \url{https://github.com/naveensundarg/prover}. The underlying
+  first-order prover is SNARK, available at:
+  \url{http://www.ai.sri.com/~stickel/snark.html}.}  The prover works
+by utilizing a technique called \textbf{shadowing} to achieve speed
+without sacrificing consistency in the system.  Shadowing is a
+syntactic operation that converts any modal formula (or a set of
+formulae) $\phi$ to a non-modal formula $\mathsf{shadow}[\phi]$ by replacing atomic
+modal sub-formuale with propositional atoms.
+
+
+The prover can be equipped
+with multiple sets of inference schemes $\rho^p_{q}$, where
+$q\in\mathbb{N}$ denotes the degree of the schemes (e.g. $0$ for
+propositional schemes, $1$ for first-order quantifier schemes, etc.)
+and $p\in\{0,1\}$ denotes the modality of the schemes. For example, pure
+propositional logic and first-order schemes are given by $\rho^0_{0}$
+and $\rho^0_{1}$, while modal
+propositional or modal first-order schemas are given by $\rho^1_{0}$ and
+$\rho^1_{1}$.
+
+The core theory-of-mind reasoning is performed through a quantified modal logic theorem prover, \textsf{ShadowProver}, using a technique called shadowing to achieve speed without sacrificing consistency in the system. While describing the details of the reasoner are beyond the scope here, we give a brief overview below.
+
+ We use a different approach, in which we alternate between calling a first-order theorem prover and applying modal inference schemata. When we call the first-order prover, all modal atoms are converted into propositional atoms (i.e., shadowing), to prevent substitution into modal contexts. This approach achieves speed without sacrificing consistency.
+\end{comment}

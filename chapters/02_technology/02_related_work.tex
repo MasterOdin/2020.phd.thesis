@@ -1,25 +1,58 @@
-\section{Related Work}
+\section{Related Work}\label{sec:cais_prior_work}
 
-There is a rich background of work for the design of multimodal systems, and more broadly the intelligent rooms
-in which these systems are situated.
+There is a rich background of work for the design of multi-modal systems, and 
+more broadly the ``intelligent rooms'' in which these systems are situated. In
+these systems, multi-modal input is seen as a necessity for more ``natural''
+interactions that is afforded by traditional desktop environments.
+Bolt~\cite{bolt_put-that-there:_1980} demonstrated a system that was capable
+of combining pointing with ambiguous uses of "that" and "there" such as in
+the sentence "put that there". This was done utilizing special hardware worn
+by the user, and required the user to sit in a chair that the user could not
+move from. Pentland~\cite{pentland_smart_1996} created a system that was
+capable of tracking users' gestures and facial expressions for interaction
+with a smart board. Brooks~\cite{brooks_intelligent_1997} created a full 
+``intelligent room'' where users could more freely move around, but
+that pointing required a user to go up to a touch the screen on which the
+display is shown to incorporate gestures. This work is interesting in that
+it was built such that users could interact with arbitrary webpages opened
+in the Netscape browser on the display wall, utilizing deep hooks into the X
+display server. While this worked well for their needs, it did limit the system
+to only be able to run on certain OSes, and that maintaining it is complex due
+to these deep hooks. The system was built on the
+SodaBot~\cite{coen_sodabot:_1994} distributed control system, which aimed to 
+overcome the inflexible nature of monothlic applications at the time. Similar
+to Brooks' work, but taken to a further extreme, Roman et 
+al.~\cite{roman_middleware_2002} created an entire OS middleware focused on running
+intelligent rooms that also allowed users to interact with remotely. While very
+powerful, maintaining such an approach is incredibly complex to implement and
+maintain due to having its own file browser, video player, browser, etc.
+However, these approaches were constrained by the technology at the time,
+limiting the capabilities of speech supported, the usable workspace for a
+user, and number of users supported. After a number of significant advances in 
+the underlying technology, Carbini et al.~\cite{carbini_wizard_2006} 
+demonstrate a system that allowed a single user to stand apart from the
+display, and interact with it in multi-modal fashion, utilizing specially
+calibrated stereo 3D cameras. Farrel et al.~\cite{farrell_symbiotic_2016}
+proposes the concept of symbiotic AI that can be embedded into a room, and
+can be seen as a close precursor to this work. Kephart et 
+al.~\cite{kephart_embodied_2019} demonstrated usage of this system combined
+with the ability to resolve ambiguous phrases with gestural information similar
+to Bolt. Both of these supported multi-users but not across all modalities
+simultaneously, such that two users could talk at the same time, but only one
+could be pointing due to a hardware limitation. Allen et 
+al.~\cite{allen_rensselaer_2019} demonstrate an immersive room in which multiple
+users can gesture and speak in simultaneously, but utilizes a display framework
+that is not easy to extend to non-game environments and cannot display certain
+types of content, like web pages.
 
-Historically, these systems have fallen into the category of ``smart rooms''
-where multimodal input is much more of a necessity for more ``natural''
-interaction than traditional desktop environments. In these multimodal
-``smart rooms'', various efforts have been shown for picking up
-where a user is pointing and using it in combination with
-their voice to generate a command
-\cite{bolt_put-that-there:_1980,carbini_wizard_2006,langner_multiple_2019,farrell_symbiotic_2016,kephart_embodied_2019}.
-However, these systems hand-build their display layer and
-content to embed the necessary instrumentation for combining speech
-and gesture. Alternatively, \cite{coen_design_1998,brooks_intelligent_1997} demonstrate a system that
-hooks into the X display server and could act on the content that was passed through
-it from various applications, such as Netscape. While a very powerful approach, it
-does not easily work across platforms, and that the security model of modern
-applications such as Chrome renders the approach
-increasingly impossible. Perhaps the most radical, \cite{roman_middleware_2002} propose an entire middleware infrastructure, similar to an OS,
-to underpin these multimodal applications, but this approach
-even more readily runs into the aforementioned bottleneck
-in that all applications must be built from the ground up to
-utilize this middleware, rendering it hard to reuse existing
-content and displays.
+From the above list of work, we can compile a list of limitations from the above
+work. The first is that many of the above, while supporting gestures such as
+pointing, do so such that only supports one user, and through utilization of
+sensors that require calibration, and in the cases of the cameras, limit wherein
+the space a user can stand. Next, the content that is displayed and interacted
+with in these environments are purpose built for a given domain. As part of this
+process, the content is specially instrumented to support gestural information,
+and as such does not support bringing in third-party content. As part of the
+contributions of the dissertation, we aim for our implementation to avoid such
+limitations, with the creation of novel technology, described below and in
+subsequent chapters.

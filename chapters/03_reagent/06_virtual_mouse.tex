@@ -1,23 +1,42 @@
 \section{Virtual Mouse Interface}
 
-Leveraging the spatial-context and Reagent systems, we enable a \textit{Virtual Mouse Interface} that allows users to interact with content
-as well as to guide multi-modal interactions. This interface gives each user the equivalent of their own personal mouse. The interface itself, under the hood is not one dedicated component, but rather conglomeration of functionality across modules described above. To start, the spatial-context-system provides us with
-an absolute [x,y] coordinate for a given device on
-the screen from a user, which has a unique ID attached to it. This is sent into the
-display-worker, which then displays an icon to
-the user on the screen that represents where they
-are pointing at that time, as well as the mouse
-action they are doing. This icon updates at a
-constant rate for the user, and scales to many concurrent users, where there is (due to RabbitMQ) a delay of about 4-8ms, which is largely imperceptible to users. In addition to the display-worker, the
-spatial-context system sends the pointing and action
-data to the orchestrator. The orchestrator communicates with the display-worker to translate the
-absolute [x,y] coordinate into a relative [x,y] coordinate within a specific webview. From here, it
-communicates with Reagent in a number of ways. For each payload that it sends along, and the subsequent action JavaScript event that Reagent generates against a given WebView, the unique user ID is passed, which Reagent binds to the generated events that are dispatched to the page. First, it is important to denotate that the orchestrator sets a a limiter on the number of actions that can flow through the system, which is roughly 75ms per action type, which allows adequate throughput for the system for a number of users such that they do not notice lag while also not sending too much information to the page and potentially causing a slow-down. Below, we describe the two types of actions with which we concern ourselves with, mouse and scroll.
+Given Reagent, we now describe how we utilize it on building
+a \textit{Virtual Mouse Interface} into the opened pages.
+Leveraging input from a pointing device (e.g. Kinect camera or
+MUIFOLD) and Reagent systems, this interface allows users to
+interact with content as well as to guide multi-modal interactions.
+This interface gives each user the equivalent of their own
+personal mouse. The virtual mouse, under the hood is not one
+dedicated component, but rather conglomeration of functionality
+across modules described above. To start, from our pointing device,
+we expect that it provides us with an absolute [x,y] coordinate for
+the screen at which a user is gesturing, with a unique ID per user.
+This is sent into the display-worker, which then displays an icon to
+the user on the screen that represents where they are pointing at that
+time, as well as the mouse action they are doing. This icon updates at a
+constant rate for the user, and scales to many concurrent users, where
+there is (due to RabbitMQ) a delay of about 4-8ms, which is largely
+imperceptible to users. In addition to the display-worker, our pointer
+system sends the pointing and action data to the orchestrator. The
+orchestrator communicates with the display-worker to translate the
+absolute [x,y] coordinate into a relative [x,y] coordinate within a
+specific webview. From here, it communicates with Reagent in a number of
+ways. For each payload that it sends along, and the subsequent action
+JavaScript event that Reagent generates against a given WebView, the
+unique user ID is passed, which Reagent binds to the generated events
+that are dispatched to the page. First, it is important to denote that
+the orchestrator sets a a limiter on the number of actions that can
+flow through the system, which is roughly 75ms per action type, which
+allows adequate throughput for the system for a number of users such
+that they do not notice lag while also not sending too much information
+to the page and potentially causing a slow-down. Below, we describe 
+the two types of actions with which we concern ourselves with, mouse
+and scroll.
 
 \subsection{Mouse Actions}
 Mouse actions represent the principle way in which people interact with the
 page. This includes the use of the left and right mouse buttons, though we
-mainly focus on the usage of the left button here. The mosue button itself can
+mainly focus on the usage of the left button here. The mouse button itself can
 be thought of as being in three potential states, being held down for any period
 of time (MouseDown), being released after being held down for any period of time
 (MouseUp) and a rapid push down and release of the button (Click). Additionally,

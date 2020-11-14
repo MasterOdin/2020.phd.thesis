@@ -1,12 +1,52 @@
 \section{Introduction}
 
-Within these cognitive and immersive systems, it remains paramount that
-our overseeing AI is capable of providing assistance to the participating
-agents. As agents operate in the room, they are usually operating in pursuit
-of a goal, committing actions to get them closer to accomplishing it. For
-the over-seeing agent to increase in power, the system must be able to help
-the user along their plans. To accomplish this, the system utilizes ``plan
-recognition'', wherein given partial observations of actions, and knowledge
-of possible goals, it infers the plans of its agents. To demonstrate our work,
-we provide some sample scenarios, and how our system is able to handle these,
-moving us towards being able to solve our motivating example.
+In this chapter, given our grounded CAIS implementation in 
+Chapters~\ref{chap:technology},\ref{chap:reagent},\ref{chap:muifold},
+given our formalisms in Chapter~\ref{chap:formalizing} and our grounded
+implementation above, we are now ready to attack problems utilizing
+reasoning, planning, and plan recognition. Through these avenues, we
+aim to demonstrate baseline capacities of a CAIS, especially as it
+operates at a ``theory of mind'' level. For reasoning, we demonstrate
+the technology in solving the false belief 
+task~\cite{premack_does_1978,frith_theory_2005}. In this task, children
+are shown a doll (which children is to pretend is another human),
+a ball, a basket, and a box. Initially, all items are present and
+visible. The ball is placed inside of the basket, and then one of the dolls
+is removed. The ball is then moved to inside the box, and the doll returned
+to the scene. The child is then asked where would that doll say the ball
+is located. Completion of this task is used in animals and children to
+determine their capacity for operating at a ``theory of mind'' level, and
+are able to deal with reasoning about the mental states of others and
+that those mental states differ from their own. As such, as we we want
+our CAIS to operate at a ``theory of mind'' level, so then our
+CAIS should be able to solve then the false belief task. From the
+work of Arkoudas and Bringsjord~\cite{arkoudas_formalizing_2008},
+we already know that the cognitive calculus can handle this task,
+and so this is focused more on a test of the automated mechanisms of
+our CAIS implementation.
+
+Next, we look to see how we may start to use planning and plan recognition
+in our CAIS, allowing it to step in and provide assistance to users, be it
+proactively or reactively for agents. As agents operate within the
+space, they may place goals as they wish to accomplish, and the system
+may work to step in to suggest actions to take in pursuit of that goal.
+Additionally,  As part of its operations, our orchestrator can also
+validate the validity of an available action against any known goals of
+the system at large. If an action were to be at odds to
+a goal or move the state of the world away from it, the orchestrator can
+deny performing that action. While this is useful in preventing our agents
+from operating against their interests, providing a straight refusal is not
+a friendly measure, as it can leave the agent in a confused state, and even
+worse, potentially thinking the CAIS is misbehaving. The simplest solution
+would be to present to the user what it is that they should be doing. However,
+this still may not be appropriate if we assume that perhaps the user missed
+some actions of other agents that set the goal state to one that they were
+unaware of. Even better here is that we want our CAIS to be able to step in
+and tell the user what it was that they were doing, and what what they
+should in fact be doing, and provide an explanation of it. To accomplish this,
+our all-seeing AI needs to incorporate ``plan recognition'' over the
+human agents. From this work, we establish that our CAIS can then act as
+an arbiter when goals of agents conflict, and can act to rectify false or
+missing beliefs. To demonstrate our work, we provide some sample scenarios,
+and how our system is able to handle these, moving us as close as possible to
+solving our motivating example described in Chapter~\ref{chap:introduction}.
