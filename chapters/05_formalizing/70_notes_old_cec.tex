@@ -1,0 +1,93 @@
+\begin{comment}
+To handle reasoning within \CEC\, we utilize a quantified modal logic
+theorem prover, \textsf{ShadowProver}, first presented in
+\cite{nsg_sb_dde_ijcai,uncertaintyized_cognitive_calculus}.\footnote{The
+  prover is available in both Java and Common Lisp and can be obtained
+  at: \url{https://github.com/naveensundarg/prover}. The underlying
+  first-order prover is SNARK, available at:
+  \url{http://www.ai.sri.com/~stickel/snark.html}.}  The prover works
+by utilizing a technique called \textbf{shadowing} to achieve speed
+without sacrificing consistency in the system.  Shadowing is a
+syntactic operation that converts any modal formula (or a set of
+formulae) $\phi$ to a non-modal formula $\mathsf{shadow}[\phi]$ by replacing atomic
+modal sub-formuale with propositional atoms.
+
+The prover can be equipped
+with multiple sets of inference schemes $\rho^p_{q}$, where
+$q\in\mathbb{N}$ denotes the degree of the schemes (e.g. $0$ for
+propositional schemes, $1$ for first-order quantifier schemes, etc.)
+and $p\in\{0,1\}$ denotes the modality of the schemes. For example, pure
+propositional logic and first-order schemes are given by $\rho^0_{0}$
+and $\rho^0_{1}$, while modal
+propositional or modal first-order schemas are given by $\rho^1_{0}$ and
+$\rho^1_{1}$.
+
+% Given any arbitrary formula $\phi$, $\mathsf{A}_{[\phi]}$ is a unique
+% atomic (propositional) symbol. We define the \textsf{level} of a
+% formula: $\mathsf{level}(\phi) = 0$ if $\phi$ is purely propositional;
+% $\mathsf{level} (\phi) = 1$ if $\phi$ is purely first-order; and
+% $\mathsf{level} (\phi) = 2$ if $\phi$ is modal.  Given the above
+% definition, we can define the operation of \textbf{shadowing} a
+% formula to a level.  To shadow a formula $\chi$ to a level $l$,
+% replace all subformulae $\chi'$ in $\chi$ such that
+% $\mathsf{level}(\chi')>l$ with $\mathsf{A}_{[\chi']}$
+% simultaneously. We denote this by $\mathsf{S}[\phi,l]$.
+Starting from a set of modal formula $\Gamma$ as premises and a goal
+$\phi$, the prover operates in two phases. In the first phase, it
+expands $\Gamma$ using the modal schemes $\rho^1_{0}$ and
+$\rho^1_{1}, $ and checks if $\phi$ is contained in the expanded
+set. In the second phase, the prover applies the non-modal schemes
+$\rho^0_{0} $ and $\rho^0_{1}$ to $\mathsf{shadow}[\Gamma]$ and checks whether
+the expanded set contains $\mathsf{shadow}[\phi]$. The two phases are repeated
+till either the goal is reached or no expansions happen.
+
+\subsection{Non-modal Systems are not Enough}
+\label{sect:prop_not_enough}
+ In an \textbf{extensional} system, two
+terms $t_1$ and $t_2$ are considered to be identical if they denote
+the same set of objects. Logics such as propositional logic,
+first-order logic, higher-order logic, etc. are extensional systems
+and are best suited to modeling states of the world. In an
+\textbf{intensional} system, the meaning of a term $t$ is dependent on
+the context $C$ in which it occurs. Modal logics are intensional
+systems. \CEC\ is an {intensional} logic in the sense that it has
+intensional operators.\footnote{Please note that there is a vast difference between
+  intension and intention.} Intensional systems are crucial for modeling
+theory-of-mind reasoning.
+
+For example, using an extensional system such as first-order logic to
+model theory-of-mind reasoning leads to unsound inferences as shown
+below, in which we have an agent $r$ that knows the manager of a team
+is the most responsible person in the team.  Agent $r$ does not know
+that $\mathit{Moe}$ is the manager of the team, but it's true that
+$\mathit{Moe}$ is the manager.  If the knowledge operator $\mathbf{K}$
+is a simple first-order predicate, we get the proof shown below, which
+produces a contradiction (that $r$ knows that $\mathit{Moe}$ is the
+manager) from true premises.  This unsoundness persists even with more
+robust representation schemes in extensional logics
+\cite{selmer_naveen_metaphil_web_intelligence}.
+
+\vspace{10pt}
+
+\begin{minipage}[b]{0.7\textwidth}
+\begin{footnotesize}
+ \begin{footnotesize}
+\begin{equation*}
+\begin{aligned}
+&\fbox{1}\ \ \mathbf{K}\left(r,\
+  \mathsf{Manager}\left(\mathit{team}, \mathit{mostResponsible}\left(\mathit{team}\right) \right)\right) \mbox{
+  {\color{gray}; given}} \\
+&\fbox{2}\ \ \lnot \mathbf{K}\left(r,\mathsf{Manager}\left(\mathit{team}, \mathit{Moe}\right)\right) \mbox{
+  {\color{gray}; given}}\\
+&\fbox{3}\ \ \mathit{Moe} = \mathit{mostResponsible}\left(\mathit{team}\right)  \mbox{
+  {\color{gray}; given}}\\
+&\fbox{4}\ \ \mathbf{K}\left(r,\mathsf{Manager}\left(\mathit{team}, \mathit{Moe}\right)\right)  \mbox{
+  {\color{gray}; first-order inference from \fbox{3} and \fbox{1}}}\\
+& \fbox{5}\ \ \mathbf{\bot}  \mbox{
+  {\color{gray}; first-order inference from \fbox{4} and \fbox{2}}}
+\end{aligned}
+\end{equation*}
+\end{footnotesize}
+\end{footnotesize}
+\end{minipage}
+\end{comment}

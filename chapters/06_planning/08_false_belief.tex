@@ -128,8 +128,8 @@ our overseeing AI three questions, translating them into the \CEC:
 \begin{center}
 \begin{tabular}{l|l}
     Where does the CAIS believe block \ablock\ is? & $\exists x (\believes(CAIS, 5, \holds(\on(\ablock, x), 5)))$ \\
-    Where does the CAIS believe \humana believe block \ablock\ is? & $\exists x (\believes(CAIS, 5, \believes(\humana, 5, \holds(\on(\ablock, x), 5))))$ \\
-    Where does the CAIS believe \humanb believe block \ablock\ is? & $\exists x (\believes(CAIS, 5, \believes(\humanb, 5, \holds(\on(\ablock, x), 5))))$
+    \makecell[l]{Where does the CAIS believe \\ \hspace{1cm}\humana believe block \ablock\ is?} & $\exists x (\believes(CAIS, 5, \believes(\humana, 5, \holds(\on(\ablock, x), 5))))$ \\
+    \makecell[l]{Where does the CAIS believe \\ \hspace{1cm}\humanb believe block \ablock\ is?} & $\exists x (\believes(CAIS, 5, \believes(\humanb, 5, \holds(\on(\ablock, x), 5))))$
 \end{tabular}
 \end{center}
 
@@ -144,9 +144,9 @@ of where each agent believes the block is:
 
 \begin{center}
 \begin{tabular}{l}
-     $\believes(cais, 5, \holds(\on(\ablock, \ctable), 5))$\\
-     $\believes(cais, 5, \believes(\humana, 5, \holds(\on(\ablock, \ctable), 5)))$ \\
-     $\believes(cais, 5, \believes(\humanb, 5, \holds(\on(\ablock, \bblock), 5)))$
+     $\believes(CAIS, 5, \holds(\on(\ablock, \ctable), 5))$\\
+     $\believes(CAIS, 5, \believes(\humana, 5, \holds(\on(\ablock, \ctable), 5)))$ \\
+     $\believes(CAIS, 5, \believes(\humanb, 5, \holds(\on(\ablock, \bblock), 5)))$
 \end{tabular}
 \end{center}
 

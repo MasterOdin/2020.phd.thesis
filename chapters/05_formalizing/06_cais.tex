@@ -91,3 +91,18 @@ our conversation-worker handles converting the sentence into a $<I, E>$ tuple wh
 can then be directly matched onto a defined $\ActionType$ in our system. MUIFOLD in turn is
 similarly augmented within our orchestrator to handle inputs from it into appropriate action
 types.
+
+\subsection{Goals}
+
+Across domains, we expect that the contained agents and the CAIS itself may have goals they
+wish to achieve. Goals within the \CEC\ may be similar to goals of traditional systems, such
+that an agent, be it human or AI, wishes to get some physical fluent to hold in the world.
+We capture this with the following symbol we add to our syntax:
+
+\begin{equation*}
+    \begin{aligned}
+    & \goal: \Fluent \\
+    & \setGoal: \Fluent \rightarrow \Event \\
+    & \removeGoal: \Fluent \rightarrow \Event \\
+    \end{aligned}
+\end{equation*}

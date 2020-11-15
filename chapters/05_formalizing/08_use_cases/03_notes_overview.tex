@@ -31,8 +31,8 @@ available to users are (1) create a note, (2) delete a note, (3) put down a note
 pick up a note. Finally, for each note that is created, it is given a unique numerical
 ID that increments for each additional note added to the system. With our informal definition 
 above, we now proceed to providing our formalization. To begin, we must add two additional
-sorts to our system, one for the note and one for their color. To handle the note's location
-and presence on the screen or on an agent's device, we can add three fluents. Finally,
+sorts to our system, one for the note and one for their color. To handle the note's location on
+either the screen (along with its [x,y] coordinate) or device, we can add three fluents. Finally,
 for picking up and placing the note, we add two actions.
 
 \begin{equation*}
@@ -40,6 +40,7 @@ for picking up and placing the note, we add two actions.
         & \Color \sqsubset \Object \\
         & \Note \sqsubset \Object \\
         & \onScreen: \Note \rightarrow \Fluent \\
+        & \position: \Note \times \Number \times \Number \rightarrow \Fluent \\ 
         & \onDevice: \Note \times \Agent \rightarrow \Fluent \\
     \end{aligned}
     \hspace{30pt}

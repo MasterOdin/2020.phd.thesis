@@ -1,0 +1,91 @@
+\begin{comment}
+For the cognitive condition $\mathcal{C}$ above, we have the following
+concrete requirements that we implement in our system.  Later, we give
+examples of these requirements in action.
+
+  \begin{footnotesize}
+    \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{C}$ ,
+      frametitlebackgroundcolor=gray!25, nobreak,
+      linecolor=white,backgroundcolor=gray!10]
+      Assume $\Gamma \vdash t < t + \Delta$
+      \begin{enumerate}
+      \item[$\mathbf{C}^f_1:$] It is common knowledge that, if an
+        agent $x$ has a false belief, $\gamma$ informs the agent of
+        the belief:\footnote{Please note that inference in \CEC\ is
+          non-monotonic as it includes the event calculus, which is
+          non-monotonic.  If an agent $a$ believes $\phi$ based on
+          prior information, adding new information can cause the
+          agent to not believe $\phi$.}
+         \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t, \left[\begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \believes\big(x, t, \lnot \phi)\big)
+                \\ & \hspace{50pt} \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*}
+
+      \item[$\mathbf{C}^f_2:$] It is common knowledge that, if an
+        agent $x$ has a missing belief, $\gamma$ informs the agent of
+        the belief:
+        \begin{equation*}
+          \common\color{gray!80}\left(\color{black}t,\left[ \begin{aligned}
+                &  \believes(\gamma, t, \phi) \land \believes(\gamma, t,
+                \lnot \believes\big(x, t, \phi)\big)
+                \\ &  \hspace{50pt}  \rightarrow \\
+                & \hspace{30pt}\says(\gamma, x, t + \Delta, \phi)
+              \end{aligned}\right]\color{gray!80}\right)\color{black}
+        \end{equation*} \end{enumerate}
+    \end{mdframed}
+  \end{footnotesize}
+
+  For the immersive condition $\mathcal{I}$ above, we have the
+  following conditions:
+
+  \begin{footnotesize}
+    \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{I}$ ,
+      frametitlebackgroundcolor=gray!25, nobreak,
+      linecolor=white,backgroundcolor=gray!10]
+      \begin{enumerate}
+      \item[$\mathbf{I}^f_1:$] It is common knowledge that at any
+        point in time $t$ an agent $x$, different from the CAIS system
+        $\gamma$, can observe events or conditions (fluents) only in
+        its vicinity.
+        \begin{equation*}
+          \begin{aligned}
+            \common\Bigg(\forall x, t, f:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \holds(f, t)\big) \rightarrow
+            \holds(\vicinity(x, f), t)\Big]\Bigg)\\
+            \common\Bigg(\forall x, t, e:& (x \not = \gamma) \rightarrow \Big[\perceives\big(x, t, \happens(e, t)\big) \rightarrow
+            \holds(\vicinity(x, e), t)\Big]\Bigg)\\
+          \end{aligned}
+        \end{equation*}
+
+      \item[$\mathbf{I}^f_2:$] It is common knowledge that actions
+        performed by the agent are in its vicinity.
+        \begin{equation*}
+          \common\Big(\forall x, \alpha:  \holds\big(\vicinity(x, \action(a, \alpha)), t\big)\Big)
+        \end{equation*}
+      \item[$\mathbf{I}^f_3:$] It is common knowledge that all events
+        and fluents are perceived by $\gamma$.  This is represented by
+        the four conditions below:
+        \begin{equation*}
+          \begin{aligned}
+       &  (i) \hspace{10pt}  \common\Bigg(\forall  t, f:  \Big[\holds(f, t) \leftrightarrow \perceives\big(\gamma, t, \holds(f, t)\big) \Big]\Bigg)\\
+       & (ii)  \hspace{10pt}   \common\Bigg(\forall  t, e: \Big[\happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \happens(e,
+            t)\big) \Big]\Bigg)\\
+        &   (iii)  \hspace{10pt}   \common\Bigg(\forall  t, f:  \Big[\lnot \holds(f, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \holds(f, t)\big) \Big]\Bigg)\\
+        &   (iv) \hspace{10pt}    \common\Bigg(\forall  t, e:\Big[\lnot \happens(e, t)
+            \leftrightarrow \perceives\big(\gamma, t, \lnot \happens(e, t)\big) \Big]\Bigg)
+          \end{aligned}
+        \end{equation*}
+      \end{enumerate}
+    \end{mdframed}
+  \end{footnotesize}
+
+\end{comment}
+  %%% Local Variables:
+  %%% mode: latex
+  %%% TeX-master: "main"
+  %%% End:

@@ -71,32 +71,41 @@
 
 \section{Sticky notes}
 
-\begin{lstlisting}[caption=pickUp]
+\begin{lstlisting}[caption=pickUp,mathescape=true]
     (define-action pickUp [(Note ?x)]
         {
             :preconditions [(onScreen ?x)]
             :additions     [(onDevice ?x)]
-            :deletions     [(onScreen ?x)]
+            :deletions     [
+                (onScreen ?x)
+                $\forall$(y, z) (position ?x y z)
+            ]
         }
     )
 \end{lstlisting}
 
 \begin{lstlisting}[caption=putDown]
-    (define-action putDown [(Note ?x)]
+    (define-action putDown [(Note ?), (Number ?y), (Number ?z)]
         {
             :preconditions [(onDevice ?x)]
-            :additions     [(onScreen ?x)]
+            :additions     [
+                (onScreen ?x)
+                (position ?y ?z)
+            ]
             :deletions     [(onDevice ?x)]
         }
     )
 \end{lstlisting}
 
-\begin{lstlisting}[caption=delete]
+\begin{lstlisting}[caption=delete,mathescape=true]
     (define-action delete [(Note ?x)]
         {
             :preconditions [(onScreen ?x)]
             :additions     []
-            :deletions     [(onScreen ?x)]
+            :deletions     [
+                (onScreen ?x)
+                $\forall$(y, z) (position ?x y z)
+            ]
         }
     )
 \end{lstlisting}

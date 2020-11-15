@@ -1,10 +1,11 @@
 \section{Plan Recognition for Course Correction}
 
-
-We examine here our example scenario from Section~\ref{sect:false_belief}. In
-the scenario, we have two human agents, $\humana$ and $\humanb$, within our
-CAIS, and they are working in the blocks world domain. On the table, shown
-on the screen are three blocks. This information is represented below:
+We finish this chapter with an examination of using plan recognition within our CAIS.
+For this, we re-use our scenario from Section~\ref{sect:false_belief}. To re-iterate
+the situation, we have two human agents, \humana\ and \humanb, and they are working
+in the blocks world domain. Same as before, there are three blocks that are shown
+on the screen and they all initially are on the table. This information is
+shown below:
 
 \begin{center}
 \begin{tabular}{ c c }
@@ -17,28 +18,64 @@ on the screen are three blocks. This information is represented below:
 \end{tabular}
 \end{center}
 
-We consider a modified action sequence though from above. In this new sequence,
-we add in a goal to our system to enable the validation steps in our orchestrator.
-As mentioned above, in this mode, the orchestrator will not allow any actions to
-be undertaken that would move the state of the world away from the goal state.
+This time through, we consider a modified sequence from above, incorporating goals
+into the system. On adding a goal to our system, the orchestrator is now set to also
+validate all actions taken by agents are in line with the current goals of the system.
+Any action that is not valid is then blocked by the orchestrator for proceeding. The
+new action sequence is as follows:
 
-We now consider this action sequence:
+\begin{center}
+\begin{tabular}{l | l | l}
+    $t$ & Event in Natural Language & Event in \CEC\ \\
+    \hline
+    1 & \humana\ enters and registers with the CAIS & \happens(\register(\humana), 1) \\
+    2 & \humanb\ enters and registers with the CAIS & \happens(\register(\humanb), 2) \\
+    3 & \humana\ stacks block \ablock\ onto block \bblock\ & \happens(\stack(\ablock, \bblock), 3) \\
+    4 & \humanb\ adds goal of block \cblock\ on block \bblock] & \happens(\setGoal(\on(\cblock, \bblock)), 4) \\
+    5 & \humanb\ deregisters and leaves the CAIS & \happens(\deregister(\humanb), 5) \\
+    6 & \humana\ unstacks block \ablock\ from block \bblock\ & \happens(\unstack(\ablock, \bblock), 6) \\
+    7 & \humana\ removes the goal of block \cblock\ on block \bblock\ & \happens(\removeGoal(\on(\cblock, \bblock)), 7) \\
+    8 & \humana\ adds the goal of block \ablock\ on block \cblock & \happens(\setGoal(\on(\ablock, \cblock)), 8) \\
+    9 & \humana\ stacks block \ablock\ onto block \cblock & \happens(\stack(\ablock, \cblock), 9) \\
+    10 & \humanb\ re-enters and registers with CAIS & \happens(\register(\humanb), 10) \\
+\end{tabular}\label{table:plan_recognition_actions}
+\end{center}
 
-\begin{enumerate}
-  \item{\humana\ and \humanb\ enter the room}
-  \item{\humana\ moves block \ablock\ onto block \bblock}
-  \item{\humanb\ adds the goal of block \cblock\ on block \bblock}
-  \item{\humanb\ leaves the room}
-  \item{\humana\ moves block \ablock\ to the table}
-  \item{\humana\ removes the goal for block \cblock\ and adds the goal of block \ablock\ on block \cblock}
-  \item{\humana\ moves block \ablock\ onto block \cblock}
-  \item{\humanb\ returns to the room}
-  \item{\humanb\ tries to move \ablock\ to the table.}
-\end{enumerate}
+\begin{center}
+\begin{tabular}{l | l | l}
+    $t$ & Added Fluent & Removed Fluents \\
+    \hline
+    1 & \holds(\inCAIS(\humana), 1) & \\
+    2 & \holds(\inCAIS(\humanb), 2) & \\
+    3 & \holds(\on(\ablock, \bblock)), 3) & \makecell[l]{
+        \holds(\on(\ablock, \ctable), 2) \\
+        \holds(\clear(\bblock), 2) \\
+    }\\
+    4 & \holds(\goal(\on(\cblock, \bblock)), 4) & \\
+    5 & & \holds(\inCAIS(\humanb), 4) \\
+    6 & \makecell[l]{
+        \holds(\on(\ablock, \ctable), 6) \\
+        \holds(\clear(\bblock), 6) \\
+    } & \makecell[l]{
+        \holds(\on(\ablock, \bblock), 5) \\
+    } \\
+    7 & & \holds(\goal(\on(\cblock, \cblock)), 6) \\
+    8 & \holds(\goal(\on(\ablock, \cblock)), 8) &. \\
+    9 & \holds(\on(\ablock, \cblock), 9) & \makecell[l]{
+        \holds(\on(\ablock, \ctable), 8) \\
+        \holds(\clear(\cblock), 8) \\
+    } \\
+    10 & \holds(\inCAIS(\humanb), 10) & \\
+\end{tabular}\label{table:plan_recognition_fluents}
+\end{center}
 
-For step 9, we know that the move here will fail against the orchestrator as it
-would move the world away from our goal state of $\on(\ablock, \cblock)$. On
-failing the move, the orchestrator launches into a fallback of plan recognition
+Our diligent \humanb, having returned to the CAIS, sees the state of the world
+has moved away from the goal that he set in step 4. He, seeking to achieve that
+old goal he still believes is active in the system, attempts to issue the command
+"Unstack block A from block C", as he seeks to stack block C onto block B. Our
+orchestrator in this case refuses to complete that action as to do so would
+move the world away from our goal state of $\on(\ablock, \cblock)$. On refusal
+of executing the move, the orchestrator launches into a fallback of plan recognition
 over \humanb. The first thing done by the system is to collect the potential goals
 that an agent may be following. In this, the system scans through its knowledge base
 to find goal addition events that happened within the vicinity of \humanb, giving
@@ -55,3 +92,18 @@ agents, wherein it shows the agent what plan they were attempting to follow, the
 that they should have been following, and why they have a difference of information.
 This catches the agent up, and their knowledge base is now assumed in regards equal
 to that of the room for this sequence.
+
+In addition to utilizing plan recognition above, our CAIS also provides an instantiation
+of our property of \textit{Expectation of Usefulness}. This property is
+instantiated with the event $e$ being setting a new goal:
+$e \equiv \setGoal(\on(\ablock, \cblock)))$:
+
+\begin{footnotesize}
+\begin{equation*}
+\begin{aligned}
+&\perceives\big(\humana, t_8, \happens\big(\setGoal(\on(\ablock,\cblock)), t_{8}\big)\big) \land \perceives\Big(\humana, t_8, \lnot \holds\big(\vicinity(\humanb, setGoal (On(A,C))), t_8\big)\Big) \\
+& \hspace{90pt} \rightarrow \believes\Big(\humana, t_{11}, \says\big(\gamma, \humanb, t_{11},
+\happens(\setGoal(\on(\ablock,\cblock)), t_8)\big)\Big)
+\end{aligned}
+\end{equation*}
+\end{footnotesize}
