@@ -74,8 +74,8 @@ it looks through perceived actions of the two agents, scanning in time descendin
 our knowledge base until it finds an action that happened against a note. For our example, it
 quickly matches against $\happens(\point(\humanb, n1), 0)$, and given that this action happened
 on the same moment as our utterance, then \Note\ $n1$ is deleted. What about had our other agent,
-\humana, uttered the statement instead? From our definition of \vicinity and its relation to \perceives
-as defined in Chapter~\ref{chap:formalizing}, we know that \humana has perceived the pointing action
+\humana, uttered the statement instead? From our definition of \vicinity\ and its relation to $\perceives$erceiving
+as defined in Chapter~\ref{chap:formalizing}, we know that \humana\ has perceived the pointing action
 by \humanb. Our orchestrator utilizes that to resolve our intent to the same note in this case.
 If both agents were pointing at a note, then the system resolves first to actions committed by that
 agent over the ones committed by other agents at the same moment. Finally, the orchestrator
@@ -93,7 +93,7 @@ our orchestrator generates the query "does there exist a note that is on the scr
 yellow?" which is formalized as following:
 
 \begin{equation*}
-    \exists (\Note\ x, 0) (\holds(\onScreen(x), 0) \land \holds(\isColor(x, green), 0))
+    \exists (\Note\ x) (\holds(\onScreen(x), 0) \land \holds(\isColor(x, yellow), 0))
 \end{equation*}
 
 This query is run through \textsf{ShadowProver} as many time as necessary to determine
