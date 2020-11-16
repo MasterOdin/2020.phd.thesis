@@ -58,30 +58,7 @@ to facilitate ease of use within fields of computer vision and natural language.
 \end{footnotesize}
 \end{table}
 
-We know provide a brief primer on the event calculus and \CEC\ to make
-accessible the following chapter. The sorts of our logic are shown in 
-Table~\ref{table:sorts}. Most of the sorts shown come from the underlying EC,
-but we add here three additional sorts: \Agent, \Action, and \ActionType.
-The syntax of the \CEC\ is shown in Figure~\ref{fig:cec_syntax}. In our
-syntax, the symbols of the event calculus are contained under $\mathit{f}$.
-An important axiom that drives much of the event calculus is:
-\vspace{-0.4cm}
-\begin{equation*}
-    \begin{aligned}
-        \happens(e, t_{1}) \land \initiates(e, f, t_{1}) \land (t_{1} < t) \land \lnot\clipped(t_{1}, f, t) \rightarrow \holds(f, t)
-    \end{aligned}
-\end{equation*}
-
-\noindent
-which can be read as "some event $e$ \happens at time $t_{1}$ and that this $e$
-\initiates our fluent $f$ at $t_1$ such that at some later time $t$, and assuming
-that there has not been something causing $f$ to be \clipped (made false) between
-$t_{1}$ and $t$, then $f$ holds at time $t$". From this axiom, we see that the
-event calculus is non-monotonic, such that fluents can hold at some time, but
-not hold at other times, and that this is determined by the events of the
-system at large.
-
-\begin{figure}[h]
+\begin{figure}[ht]
 % frametitle=Signature (snippet), 
 \begin{mdframed}[roundcorner=8pt, nobreak=true, frametitlealignment=\centering]
 \begin{equation*}
@@ -137,6 +114,29 @@ system at large.
 \caption{\CEC\ Syntax}
 \label{fig:cec_syntax}
 \end{figure}
+
+We know provide a brief primer on the event calculus and \CEC\ to make
+accessible the following chapter. The sorts of our logic are shown in 
+Table~\ref{table:sorts}. Most of the sorts shown come from the underlying EC,
+but we add here three additional sorts: \Agent, \Action, and \ActionType.
+The syntax of the \CEC\ is shown in Figure~\ref{fig:cec_syntax}. In our
+syntax, the symbols of the event calculus are contained under $\mathit{f}$.
+An important axiom that drives much of the event calculus is:
+\vspace{-0.4cm}
+\begin{equation*}
+    \begin{aligned}
+        \happens(e, t_{1}) \land \initiates(e, f, t_{1}) \land (t_{1} < t) \land \lnot\clipped(t_{1}, f, t) \rightarrow \holds(f, t)
+    \end{aligned}
+\end{equation*}
+
+\noindent
+which can be read as "some event $e$ \happens at time $t_{1}$ and that this $e$
+\initiates our fluent $f$ at $t_1$ such that at some later time $t$, and assuming
+that there has not been something causing $f$ to be \clipped (made false) between
+$t_{1}$ and $t$, then $f$ holds at time $t$". From this axiom, we see that the
+event calculus is non-monotonic, such that fluents can hold at some time, but
+not hold at other times, and that this is determined by the events of the
+system at large.
 
 On top of this, as part of the allowed functions and relations to the system,
 shown as $\mathit{\phi}$, we add the intensional operators which can be read as:

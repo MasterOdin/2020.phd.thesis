@@ -18,13 +18,22 @@ To demonstrate Reagent, we used it to build an ontology in OWL through two unrel
 as well as provide an experimental section to showcase how the system handles
 parsing of several popular websites showcasing generalizability. As part of this demonstration,
 we showed how Reagent can readily learn the vocabulary of a domain by asking questions when it
-does not understand the user's or the webpage's terminology.
+does not understand the user's or the webpage's terminology. From this, we note some limitations
+of our system as it applies to pages that have poor accessibility or are constantly altering
+their page's content in such a way as to cause Reagent to time-out in attempting to understand
+the page. Utilizing technologies of ad-blocking may be useful here, as well as for
+introducing the capacity of Reagent to completely ignore portions of the page that are constantly
+changing, but deemed unimportant. Additionally, one fundamental limitation of our approach is
+in handling sites with iframes. Capturing interactions within iframes is not possible due to
+security measures put in place by the chromium engine on Electron. Overcoming them is not
+particularly feasible, but in practice iframes are not utilized heavily and so we do not view
+this as a major deterrent for deploying Reagent.
 
 An future avenue of interest would be in utilization of this technology in ontology building.
 For this work, we assumed that we were starting on a blank slate. In a real-world application,
 one could assume that there may be a pre-existing ontology, or that it would be possible to
 import a relevant one to the domain in question. To accomplish this, we might consider utilization
-of platforms such as DBPedia~\cite{auer2007} or ConceptRDF~\cite{najmi_conceptrdf:_2016}, both
+of platforms such as DBPedia~\cite{auer_dbpedia_2007} or ConceptRDF~\cite{najmi_conceptrdf_2016}, both
 of which readily translate into OWL. Through these, we could pre-populate an ontology with
 entities and some attributes and as a user browses pages, the system could automatically, or
 ask the user first, append to the imported entities building a larger and more comprehensive super-set.

@@ -6,11 +6,13 @@ Within this work, we utilize the STRIPS planning problem formalism, where each p
 tuple $P = \langle F, I, A, G \rangle$. For this tuple, $F$ stands for the set of
 fluents that can define the state of world, $I \subseteq F$ is the initial state of
 fluents, $G \subseteq F$ is the goal state of fluents, and $A$ is the set of actions
-available to an agent. For each action $a \subseteq A$, it has a list
-of preconditions, and then a list of post conditions to change the current
-state of the world. An example definition of an action from the blocks world domain is shown
-in Listing~\ref{lst:strips}. A full listing of all actions of a CAIS defined in the STRIPS format
-is available in Appendix~\ref{apdx:strips}. Completion of a planning problem is then the computation of
+available to an agent. For each action $a \subseteq A$, it has a set
+of preconditions $pre(a)$, add effects $add(a)$, and deletion effects $del(e)$. For a given state
+$s$, it is made up of a number of fluents that all hold true. After an action $a$ is executed
+by the system, we define the successor state of $s$ as
+$\delta(a, s) = ((s \backslash del(a)) \cup add(a))$. An example definition of an
+action from the blocks world domain is shown in Listing~\ref{lst:strips} in the STRIPS-style
+language we employ for our planner. A full listing of all actions for the CAIS is available in Appendix~\ref{apdx:strips}. Completion of a planning problem is then the computation of
 an action sequence, $\pi = a_{1}, a_{2}, ..., a_{m}$, where each
 $a_{i} \subseteq A$, and that following the action sequence starting at $I$
 will arrive at $G$.

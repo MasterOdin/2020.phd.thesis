@@ -1,1 +1,83 @@
 \section{Contributions of the Dissertation, Met}
+
+\begin{enumerate}
+    \item \checkmark\ Create a high-level but rigorous and fertile definition for what
+        constitutes a CAIS, separating it from a physical robot.
+
+    \begin{itemize}
+        \item[] Within this dissertation, we have provided definition for what makes a system
+        \textit{cognitive} ($\mathcal{C}$) and what makes it \textit{immersive} ($\mathcal{I}$).
+        From these definitions, we can see what an idealized version of a CAIS may look like,
+        and indeed, how it a localized physical robot may be able to achieve elements of both
+        $\mathcal{C}$ and $\mathcal{I}$, it is not possible to achieve them both fully, or even
+        the version presented within this thesis.
+    \end{itemize}
+  
+    \item \checkmark\ Define a framework for how one approaches building a CAIS.
+    \begin{itemize}
+        \item[] We presented a high-level conceptual framework in
+        Section~\ref{sec:cais_architecture} for building out these sorts of systems. Due to the
+        high potential number of configurations these systems may be employed into, the framework advocates for
+        a modular event-driven system, wherein fusion of sensor data, such as might be needed
+        happens downstream from any initial parsing of that sensor. In this purpose, the system
+        can handle the loss of a sensor or input mechanism, and that may require the user to
+        interact with the system in a different manner, but even there, we can still achieve our
+        definition of a CAIS.
+    \end{itemize}
+    
+    \item \checkmark\ Create a real-world implementation of a CAIS, demonstrating at a
+  novel level that it:
+        \begin{enumerate}
+            \item \checkmark\ adapts to a number of potential input mechanisms;
+            \item \checkmark\ operates at a true multi-modal and multi-user level; and
+            \item \checkmark\ is capable of interacting with and understanding
+              third-party content.
+        \end{enumerate}
+        
+    \begin{itemize}
+        \item[] Within Chapters~\ref{chap:technology},\ref{chap:reagent},\ref{chap:muifold},
+        we created a real world implementation of our CAIS along with several new novel
+        technologies to achieve our sub-goals above. From \textit{Reagent}, we demonstrated
+        a novel technology that is capable of providing us a functional hook into web-based
+        content within the room, understanding what is shown on the page as well as capturing
+        and driving user interaction withe content. Additionally, because of its design, Reagent
+        can be applied not just to content created specifically for the CAIS, but for most web
+        content one might wish to open. Rising from this, we present the \textit{Virtual Mouse API}, wherein
+        it allows us to provide all users of our system with their own mouse cursor and ability
+        to interact with pages simultaneously with one another. From MUIFOLD, we provide
+        a novel framework for building out a UI for cellphones to be used within the CAIS, both
+        as a generic pointing device for all users, but also for being able to surface deeper
+        interactions with sites that supports it, that would be otherwise impossible on traditional
+        pointing devices such as HTC Vive and Kinect cameras. Additionally, due to the modular design
+        of all modulars of our system as dictated by our framework, pieces of the work have been
+        successfully deployed
+        elsewhere~\cite{allen_rensselaer_2019,chabot_collaborative_2020,divekar_humaine_2020}.
+    \end{itemize}
+
+    \item \checkmark\ Create a formal definition of a CAIS' implementation and
+        its capabilities.
+        
+    \begin{itemize}
+        \item[] In Chapter~\ref{chap:formalizing}, we utilize the \CEC\ drive a formalization of
+        our high-level definition. In this way, we provide in exact terms and formulae of the
+        cognitive and immersive features discussed in this dissertation. Following this, we also
+        provide formalization of the components we utilize in the CAIS, tying together how our
+        implementation works and relates to the formalization. Finally, because we have provided
+        in exact terms our definitions in this fashion, we were able to derive the property of
+        \textit{Expectation of Usefulness}, further separating out a CAIS from a physical robot.
+        The formalization, as well as our defined properties and formuale, are to our knowledge
+        novel compared to prior work in the space of intelligent or smart rooms.
+    \end{itemize}
+
+    \item Utilize the above items to handle tasks of reasoning, planning, and plan recognition
+        in and involving a CAIS.
+    
+    \begin{itemize}
+        \item[] Finally, given our implementation and formalization above, we were able to utilize
+        these to accomplish tasks in reasoning, planning, and plan recognition, operating at a
+        ``theory of mind'' level throughout. Not only that, due to the mechanisms employed, for all
+        decisions made by our system, they are fully explainable via a backing proof. Each of these
+        demonstrations were deployed and demonstrated in the real-world (albeit against toy domains),
+        and that we have shown in highly rigorous terms the power of our cognitive and immersive systems.
+    \end{itemize}
+\end{enumerate}

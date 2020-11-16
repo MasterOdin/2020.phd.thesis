@@ -146,28 +146,25 @@ the above property, the human would need to decide whether or not the robot has
 the required information $\phi$ and needs to believe that the robot believes that
 another agent is missing the relevant information $\phi$. To help illustrate this
 point, we provide a proof sketch using the inference schema of the \CEC\ and
-the above formal requirements to derive the property:
+the above formal requirements to derive the property:\footnote{We add color here
+to ease reading of the proof, and for tracing terms through.}
 
 %\noindent{\textbf{Proof Sketch}}: 
 
-\begin{minipage}[t]{0.45\linewidth}
+
 \begin{footnotesize} 
     \begin{prooftree}
       \AxiomC{$\perceives(a, t, \happens(e, t))$}
       \LeftLabel{$D_{[\perceives \leadsto \knows]}$}   \UnaryInfC{$\knows(a, t, \happens(e, t))$}        
      \LeftLabel{$D_{[\knows \leadsto \believes]}$}     \UnaryInfC{$\believes(a, t, \happens(e, t)) \equiv \boxed{\phi_1}$}   
   \end{prooftree}
-\end{footnotesize}
-\end{minipage}
-\begin{minipage}[t]{0.45\linewidth}
-\begin{footnotesize} 
+
     \begin{prooftree}
       \AxiomC{$\perceives(a, t, \lnot \holds\big(\vicinity(b, e),t\big))$}
    \LeftLabel{$D_{[\perceives \leadsto \knows]}$}   \UnaryInfC{$\knows\Big(a, t, \lnot \holds\big(\vicinity(b, e),t\big)\Big)$}        
      \LeftLabel{$D_{[\knows \leadsto \believes]}$}    \UnaryInfC{$\believes\Big(a, t, \lnot \holds\big(\vicinity(b, e),t\big)\Big) \equiv \boxed{\phi_2}$}   
   \end{prooftree}
 \end{footnotesize}
-\end{minipage}
 
 Using $\mathbf{I}^f_3(ii)$ the CAIS observes all events that happen in
 its enclosure:
@@ -230,7 +227,7 @@ From $\mathbf{I}^f_1$ (and from $\believes\big(a, t, \believes(\gamma, t, b \not
 \end{prooftree}
 \end{footnotesize} 
 From $\mathbf{C}^f_2$, we have:
-\begin{footnotesize} 
+\begin{scriptsize} 
   \begin{prooftree}
     \AxiomC{   
       $ \common\left(t,\left[  
@@ -241,11 +238,11 @@ From $\mathbf{C}^f_2$, we have:
 \LeftLabel{$D_{[\common \leadsto \believes]}$}\UnaryInfC{   
       $ \believes \color{black}\big(\color{black} a, t,\left[  
          \color{violet} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{NavyBlue}\believes(\gamma, t,
-                \lnot \believes\big(b, t, \happens(e,t))) \color{black}\rightarrow 
+                \lnot \believes\big(b, t, \happens(e,t))) \color{black} \rightarrow 
                \color{OliveGreen} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
               \right]\color{black}\big) \color{black} \equiv \boxed{\psi}$}
 \end{prooftree}
-\end{footnotesize} 
+\end{scriptsize} 
 Using the above derived, $\boxed{\psi}$ and using $R_{\mathbf{B}}$:
 
 \begin{footnotesize} 
