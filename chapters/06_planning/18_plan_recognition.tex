@@ -31,7 +31,7 @@ new action sequence is as follows:
     1 & \humana\ enters and registers with the CAIS & \happens(\register(\humana), 1) \\
     2 & \humanb\ enters and registers with the CAIS & \happens(\register(\humanb), 2) \\
     3 & \humana\ stacks block \ablock\ onto block \bblock\ & \happens(\stack(\ablock, \bblock), 3) \\
-    4 & \humanb\ adds goal of block \cblock\ on block \bblock] & \happens(\setGoal(\on(\cblock, \bblock)), 4) \\
+    4 & \humanb\ adds goal of block \cblock\ on block \bblock & \happens(\setGoal(\on(\cblock, \bblock)), 4) \\
     5 & \humanb\ deregisters and leaves the CAIS & \happens(\deregister(\humanb), 5) \\
     6 & \humana\ unstacks block \ablock\ from block \bblock\ & \happens(\unstack(\ablock, \bblock), 6) \\
     7 & \humana\ removes the goal of block \cblock\ on block \bblock\ & \happens(\removeGoal(\on(\cblock, \bblock)), 7) \\
