@@ -148,7 +148,13 @@ agent $a$ at time $t$ says $\mathit{\phi}$ or that agent $a$ at time $t$
 says $\mathit{\phi}$ to agent $b$, \desires\ is agent $a$ at time $t$ desires
 $\mathit{\phi}$, and \intends\ is agent $a$ at time $t$ intends $\mathit{\phi}$.
 With our syntax established, we now move to the inference schemata, shown in
-Figure~\ref{fig:cec_schemata}.
+Figure~\ref{fig:cec_schemata}. It is important to note here
+that the \CEC\ utilizes ``true'' common knowledge wherein any formula that is common
+knowledge is known by all agents. This is separate from ``group common knowledge'' where
+only some agents may know the formula, while others do not~\cite{fagin_reasoning_2004}.
+While this distinction is
+not necessarily reflective of the real world in all cases, it allows us to establish
+some useful properties that all agents can then utilize.
 
 \begin{figure}[h]
 % frametitle=Inference Schemata (snippet),
