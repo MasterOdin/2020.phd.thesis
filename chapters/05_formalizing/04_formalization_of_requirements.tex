@@ -24,7 +24,7 @@ about the properties of such systems, as well as to help distinguish the various
 classes of intelligent rooms and their capabilities that have been historically created.
 %\subsection{Formal Requirements for a CAIS}
 %\label{sect:freqs}
-From the information requirements, we look to translate them into a formalized 
+From the information requirements, we look to translate them into a formalized
 version for a CAIS. The formal requirements are explained below:
 
     \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{C}$ ,
@@ -60,7 +60,7 @@ version for a CAIS. The formal requirements are explained below:
               \end{aligned}\right]\color{gray!80}\right)\color{black}
         \end{equation*} \end{enumerate}
     \end{mdframed}
-    
+
 \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{I}$ ,
   frametitlebackgroundcolor=gray!25, nobreak,
   linecolor=white,backgroundcolor=gray!10]
@@ -146,64 +146,68 @@ the above property, the human would need to decide whether or not the robot has
 the required information $\phi$ and needs to believe that the robot believes that
 another agent is missing the relevant information $\phi$. To help illustrate this
 point, we provide a proof sketch using the inference schema of the \CEC\ and
-the above formal requirements to derive the property:\footnote{We add color here
-to ease reading of the proof, and for tracing terms through.}
+the above formal requirements to derive the property:
 
-%\noindent{\textbf{Proof Sketch}}: 
+% RPI says no color :(
+%\footnote{We add color here
+%to ease reading of the proof, and for tracing terms through.}
+
+%\noindent{\textbf{Proof Sketch}}:
 
 
-\begin{footnotesize} 
+\begin{footnotesize}
     \begin{prooftree}
       \AxiomC{$\perceives(a, t, \happens(e, t))$}
-      \LeftLabel{$D_{[\perceives \leadsto \knows]}$}   \UnaryInfC{$\knows(a, t, \happens(e, t))$}        
-     \LeftLabel{$D_{[\knows \leadsto \believes]}$}     \UnaryInfC{$\believes(a, t, \happens(e, t)) \equiv \boxed{\phi_1}$}   
+      \LeftLabel{$D_{[\perceives \leadsto \knows]}$}   \UnaryInfC{$\knows(a, t, \happens(e, t))$}
+     \LeftLabel{$D_{[\knows \leadsto \believes]}$}     \UnaryInfC{$\believes(a, t, \happens(e, t)) \equiv \boxed{\phi_1}$}
   \end{prooftree}
 
     \begin{prooftree}
       \AxiomC{$\perceives(a, t, \lnot \holds\big(\vicinity(b, e),t\big))$}
-   \LeftLabel{$D_{[\perceives \leadsto \knows]}$}   \UnaryInfC{$\knows\Big(a, t, \lnot \holds\big(\vicinity(b, e),t\big)\Big)$}        
-     \LeftLabel{$D_{[\knows \leadsto \believes]}$}    \UnaryInfC{$\believes\Big(a, t, \lnot \holds\big(\vicinity(b, e),t\big)\Big) \equiv \boxed{\phi_2}$}   
+   \LeftLabel{$D_{[\perceives \leadsto \knows]}$}   \UnaryInfC{$\knows\Big(a, t, \lnot \holds\big(\vicinity(b, e),t\big)\Big)$}
+     \LeftLabel{$D_{[\knows \leadsto \believes]}$}    \UnaryInfC{$\believes\Big(a, t, \lnot \holds\big(\vicinity(b, e),t\big)\Big) \equiv \boxed{\phi_2}$}
   \end{prooftree}
 \end{footnotesize}
 
 Using $\mathbf{I}^f_3(ii)$ the CAIS observes all events that happen in
 its enclosure:
-\begin{footnotesize} 
+\begin{footnotesize}
 \begin{prooftree}
         \AxiomC{$\mathbf{I}^f_3 (ii) \equiv\common\Bigg(\forall t, e: \Big[\happens(e, t) \leftrightarrow \perceives\big(\gamma, t, \happens(e, t)\big) \Big]\Bigg)$}
     \LeftLabel{$D_{[\common \leadsto \believes]}$  }
     \UnaryInfC{$\believes\left(a, t, \forall t, e: \Big[\happens(e, t)
             \leftrightarrow \perceives\big(\gamma, t, \happens(f, t)\big)
-            \Big]\right)$}    \AxiomC{$\boxed{\phi_1}$}    
-     \LeftLabel{$R_{\mathbf{B}}$}   \BinaryInfC{$\believes\Big(a, t, \perceives\big(\gamma, t,
-          \happens(e, t)\big)\Big)$}   
-      \LeftLabel{$R_{\mathbf{B}}$}  \UnaryInfC{$\believes \color{black}\big(\color{black} a, t, \color{violet}\believes\big(\gamma, t, \happens(e,t)\big) \color{black}\big)\color{black} \equiv
-   \boxed{\psi_1}$}   
+            \Big]\right)$}    \AxiomC{$\boxed{\phi_1}$}
+    \LeftLabel{$R_{\mathbf{B}}$}   \BinaryInfC{$\believes\Big(a, t, \perceives\big(\gamma, t,
+          \happens(e, t)\big)\Big)$}
+    \LeftLabel{$R_{\mathbf{B}}$}  \UnaryInfC{$\believes \color{black}\big(\color{black} a, t, \color{black}\believes\big(\gamma, t, \happens(e,t)\big) \color{black}\big)\color{black} \equiv
+    %\LeftLabel{$R_{\mathbf{B}}$}  \UnaryInfC{$\believes \color{black}\big(\color{black} a, t, \color{violet}\believes\big(\gamma, t, \happens(e,t)\big) \color{black}\big)\color{black} \equiv
+   \boxed{\psi_1}$}
 \end{prooftree}
-\end{footnotesize} 
+\end{footnotesize}
 Similarly, using $\mathbf{I}^f_3 (iii)$:
-\begin{footnotesize} 
+\begin{footnotesize}
 \begin{prooftree}
         \AxiomC{$\mathbf{I}^f_3 (iii) \equiv \common\Bigg(\forall t,e : \Big[\lnot
-          \holds(e, t)\leftrightarrow 
+          \holds(e, t)\leftrightarrow
           \perceives\big(\gamma, t,  \lnot
           \holds(e, t)\big) \Big]\Bigg)$}
-    \LeftLabel{$D_{[\common \leadsto \believes]}$  }  
+    \LeftLabel{$D_{[\common \leadsto \believes]}$  }
 \UnaryInfC{$\believes\left(a, t,\forall t, e\Big[\lnot
-          \holds(e,t)\leftrightarrow 
+          \holds(e,t)\leftrightarrow
           \perceives\big(\gamma, t,  \lnot
-          \holds(e, t)\big)\Big]\right)$}        
-\AxiomC{$\boxed{\phi_2}$} 
+          \holds(e, t)\big)\Big]\right)$}
+\AxiomC{$\boxed{\phi_2}$}
      \LeftLabel{$R_{\mathbf{B}}$}   \BinaryInfC{$\believes(a, t,
-       \perceives(\gamma, t, \lnot 
-          \holds\big(\vicinity(b, e), t)))$}   
+       \perceives(\gamma, t, \lnot
+          \holds\big(\vicinity(b, e), t)))$}
     \LeftLabel{$R_{\mathbf{B}}$}     \UnaryInfC{$\believes(a, t,
       \believes\big(\gamma, t,  \lnot \holds\big(\vicinity(b, e), t\big))
-      \equiv \boxed{\phi_3}$}   
+      \equiv \boxed{\phi_3}$}
 \end{prooftree}
-\end{footnotesize} 
+\end{footnotesize}
 From $\mathbf{I}^f_1$ (and from $\believes\big(a, t, \believes(\gamma, t, b \not = \gamma))$):
-\begin{footnotesize} 
+\begin{footnotesize}
 \begin{prooftree}
         \AxiomC{$\common\Big(\forall x, t,e: (x\not = \gamma)\rightarrow\big[
        \perceives\big(x, t,  \happens(e, t)\big) \rightarrow    \holds\big(\vicinity(x, e), t\big)
@@ -215,52 +219,59 @@ From $\mathbf{I}^f_1$ (and from $\believes\big(a, t, \believes(\gamma, t, b \not
 \LeftLabel{    $R_{\believes}$  }
 \UnaryInfC{$\believes\left(a, t, \believes\left(\gamma, t\Big[\lnot
           \holds\big(\vicinity(b, e), t\big)\rightarrow \lnot
-          \perceives\big(b, t,  \happens(e, t)\big)\Big]\right)\right)$}        
-\AxiomC{$\boxed{\phi_3}$} 
+          \perceives\big(b, t,  \happens(e, t)\big)\Big]\right)\right)$}
+\AxiomC{$\boxed{\phi_3}$}
      \LeftLabel{$R_{\mathbf{B}}$}   \BinaryInfC{$\believes\Big(a, t,
        \believes\Big(\gamma, t, \lnot \perceives(b, t,
-           \happens(e, t)\big)\Big)\Big)$}   
-    \LeftLabel{$R_{\mathbf{B}}$}    
- \UnaryInfC{$\believes \color{black}\big(\color{black} a, t, \color{NavyBlue} \believes(\gamma, t, \lnot \believes(b,
+           \happens(e, t)\big)\Big)\Big)$}
+    \LeftLabel{$R_{\mathbf{B}}$}
+ \UnaryInfC{$\believes \color{black}\big(\color{black} a, t, \color{black} \believes(\gamma, t, \lnot \believes(b,
+ %\UnaryInfC{$\believes \color{black}\big(\color{black} a, t, \color{NavyBlue} \believes(\gamma, t, \lnot \believes(b,
   t, \happens(e,t))) \color{black}\big)\color{black}  \equiv
-   \boxed{\psi_2}$}   
+   \boxed{\psi_2}$}
 \end{prooftree}
-\end{footnotesize} 
+\end{footnotesize}
 From $\mathbf{C}^f_2$, we have:
-\begin{scriptsize} 
+\begin{scriptsize}
   \begin{prooftree}
-    \AxiomC{   
-      $ \common\left(t,\left[  
-          \color{violet} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{NavyBlue}\believes(\gamma, t,
-                \lnot \believes\big(b, t, \happens(e,t))) \color{black} \rightarrow 
+    \AxiomC{
+      $ \common\left(t,\left[
+          \color{black} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{black}\believes(\gamma, t,
+          %\color{violet} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{NavyBlue}\believes(\gamma, t,
+                \lnot \believes\big(b, t, \happens(e,t))) \color{black} \rightarrow
                  \color{OliveGreen} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
               \right]\right)$}
-\LeftLabel{$D_{[\common \leadsto \believes]}$}\UnaryInfC{   
-      $ \believes \color{black}\big(\color{black} a, t,\left[  
-         \color{violet} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{NavyBlue}\believes(\gamma, t,
-                \lnot \believes\big(b, t, \happens(e,t))) \color{black} \rightarrow 
-               \color{OliveGreen} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
-              \right]\color{black}\big) \color{black} \equiv \boxed{\psi}$}
+\LeftLabel{$D_{[\common \leadsto \believes]}$}\UnaryInfC{
+      $ \believes \color{black}\big(\color{black} a, t,\left[
+        \color{black} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{black}\believes(\gamma, t,
+        %\color{violet} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{NavyBlue}\believes(\gamma, t,
+              \lnot \believes\big(b, t, \happens(e,t))) \color{black} \rightarrow
+              \color{black} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
+              %\color{OliveGreen} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
+            \right]\color{black}\big) \color{black} \equiv \boxed{\psi}$}
 \end{prooftree}
-\end{scriptsize} 
+\end{scriptsize}
 Using the above derived, $\boxed{\psi}$ and using $R_{\mathbf{B}}$:
 
-\begin{footnotesize} 
+\begin{footnotesize}
   \begin{prooftree}
 
 \AxiomC{$\boxed{\psi}$}
- \AxiomC{ $\believes \color{black}\big(\color{black} a, t, \color{violet}\believes\big(\gamma, t, \happens(e,t)\big) \color{black}\big)\color{black} \equiv
+\AxiomC{ $\believes \color{black}\big(\color{black} a, t, \color{black}\believes\big(\gamma, t, \happens(e,t)\big) \color{black}\big)\color{black} \equiv
+%\AxiomC{ $\believes \color{black}\big(\color{black} a, t, \color{violet}\believes\big(\gamma, t, \happens(e,t)\big) \color{black}\big)\color{black} \equiv
    \boxed{\psi_1}$}
-\AxiomC{$\believes \color{black}\big(\color{black} a, t, \color{NavyBlue} \believes(\gamma, t, \lnot \believes(b,
+\AxiomC{$\believes \color{black}\big(\color{black} a, t, \color{black} \believes(\gamma, t, \lnot \believes(b,
+%\AxiomC{$\believes \color{black}\big(\color{black} a, t, \color{NavyBlue} \believes(\gamma, t, \lnot \believes(b,
   t, \happens(e,t))) \color{black}\big)\color{black}  \equiv
    \boxed{\psi_2}$}
- \LeftLabel{$R_{\mathbf{B}}$} \TrinaryInfC{$\believes(a, t,
-   \color{OliveGreen} \says(\gamma, b, t + \Delta,
-   \happens(e,t))\color{black})$}  
+\LeftLabel{$R_{\mathbf{B}}$} \TrinaryInfC{$\believes(a, t,
+  \color{black} \says(\gamma, b, t + \Delta,
+  %\color{OliveGreen} \says(\gamma, b, t + \Delta,
+  \happens(e,t))\color{black})$}
 
 \end{prooftree} $\blacksquare$
 
-\end{footnotesize} 
+\end{footnotesize}
 
 \noindent The proof sketch given above demonstrates that common
 knowledge that the CAIS will rectify false or missing information is
