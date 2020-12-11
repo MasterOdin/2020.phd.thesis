@@ -20,7 +20,7 @@ changes to the page's content. More specifically,
 
 \begin{enumerate}
     \item Electron pre-loads the \textit{Reagent} system on top of the webview, and injects a websocket connection allowing it to communicate with the open webview and receive JSON-formatted events into an event buffer.
-    \item Electron emits a ``DOM Ready" event to signal that the page has finished loading, whereupon \textit{Reagent} scans the page to see if it can detect any major HTML elements it should parse and bind to (e.g. a table).
+    \item Electron emits a ``DOM Ready'' event to signal that the page has finished loading, whereupon \textit{Reagent} scans the page to see if it can detect any major HTML elements it should parse and bind to (e.g. a table).
     \item \textit{Reagent} injects additional code specific to the detected HTML elements that binds event listeners to these elements as well as assigning each a UUID --- an approach that makes \textit{Reagent} readily extensible to new types of elements. (We have implemented domain-independent layers designed for general tables and for plot.ly plots, and allow for domain specific layers as well.)
     \item Next, \textit{Reagent} creates a MutationObserver\footnote{https://mzl.la/1exU78d} to watch for any changes to the page. If changes are detected, it performs any necessary re-injections and re-bindings to ensure that all relevant elements remain instrumented.
     \item Finally, \textit{Reagent} sets up a listener such that if the webview
@@ -55,7 +55,7 @@ In cases where the system is unable to disambiguate the semantic information, it
 solicits a definition from the user. For example, with the ESPN table, the
 system would ask the user (via synthesized voice) to mouse over ``the column
 labeled  \textit{A}'' and state what is the attribute. Upon hearing ``Assign
-attribute \textit{assists} to this column", \textit{Reagent} stores the
+attribute \textit{assists} to this column'', \textit{Reagent} stores the
 mapping in a dictionary, whereupon it becomes available to any subsequently
 accessed bound elements on the same webpage or host site.
 
@@ -80,5 +80,5 @@ greater than 35.''. Equivalently, the user might have asked ``Show in a new
 table rows with this column greater than this.'' while pointing to a cell
 under the column `APP' with the value of 35.\footnote{For a fuller set of
 capabilities that includes query, sorting, and simple analytics like averaging,
-a link to a demo video is available at 
+a link to a demo video is available at
 \url{https://www.youtube.com/watch?v=qVmY3YmNzGE}}.

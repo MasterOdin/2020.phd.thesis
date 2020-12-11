@@ -6,13 +6,13 @@ Ideally, any action carried out by our humans within the room would be as explic
 as possible. Indeed, when using something like MUIFOLD, this explicitness is handled for
 the user under the hood by the app, tying together what note or block they're interacting
 with, and what action they're attempting to accomplish with it. However, through voice,
-providing the full explicit action may be difficult or 
+providing the full explicit action may be difficult or
 impossible~\cite{kephart_embodied_2019}. To demonstrate this
 behavior in more exact terms, we provide a motivating example. Imagine that within a CAIS, there
 are two agents working with the sticky notes domain. Similar to work shown by
-Bolt~\cite{bolt_put-that-there:_1980} a user may point to a note and say "Delete that
-note". Alternatively, for reference a note by color on the screen, a user may say "Delete the blue
-note". In both cases, while our system provides us with a ``\delete'' intent, we are not
+Bolt~\cite{bolt_put-that-there:_1980} a user may point to a note and say ``Delete that
+note''. Alternatively, for reference a note by color on the screen, a user may say ``Delete the blue
+note''. In both cases, while our system provides us with a ``\delete'' intent, we are not
 provided an exact note we wish to operate on, and the system has to determine it from
 context. We now talk through our algorithm for resolving the intent into something that
 is actionable by our system.
@@ -32,7 +32,7 @@ axiomatize this set-up as follows:
 
 \begin{center}
 \begin{tabular}{ l l l }
-    $\holds(\onScreen(n1), 0)$ & 
+    $\holds(\onScreen(n1), 0)$ &
     $\holds(\position(n1, 50, 50), 0)$ &
     $\holds(\isColor(n1, yellow), 0)$ \\
     $\holds(\onScreen(n2), 0)$ &
@@ -48,7 +48,7 @@ axiomatize this set-up as follows:
 \end{tabular}
 \end{center}
 
-We start first with our example of "Delete that note" as uttered by \humanb. From the conversation-worker,
+We start first with our example of ``Delete that note'' as uttered by \humanb. From the conversation-worker,
 we receive the \delete\ intent with no further entities. Our orchestrator upon receving the intent then
 reaches out to the executor to determine if there are any matching actions to the intent, and receives
 the following action, as defined in our STRIPS-style langauge:
@@ -84,13 +84,13 @@ to capture the length of attention upon which an agent may give to a particular 
 the system. If there is no note that fits our criteria, then the orchestrator issues a request
 to the user to clarify which note that they mean.
 
-We now move to our other example of "Delete the yellow note". Similar to above, the orchestrator
+We now move to our other example of ``Delete the yellow note''. Similar to above, the orchestrator
 gets the same action from the executor and cannot resolve it against any entity in the utterance.
 Unlike above however, our utterance contains the \Color\ entity, which is a property of notes and so the
 orchestrator then knows that it is additionally looking for a yellow note, or as defined in the
 \CEC: $\holds(\isColor(?x, yellow), 0)$. Given this property and the precondition from our action,
-our orchestrator generates the query "does there exist a note that is on the screen and is
-yellow?" which is formalized as following:
+our orchestrator generates the query ``does there exist a note that is on the screen and is
+yellow?'' which is formalized as following:
 
 \begin{equation*}
     \exists (\Note\ x) (\holds(\onScreen(x), 0) \land \holds(\isColor(x, yellow), 0))
@@ -123,4 +123,4 @@ to expect specific answer types here. For example, let's assume we had two notes
 our deletion query. The orchestrator then asks the user for clarification between the two notes
 as shown in Figure~\ref{fig:intent_resolution_fragment}, expecting that the response (ignoring
 any detected intent) contains one of the notes, or is totally unrelated, thus cancelling the
-information request, and continuing as normal. 
+information request, and continuing as normal.

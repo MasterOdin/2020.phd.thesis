@@ -9,10 +9,10 @@ To capture the CAIS in a formal way, we employ the
 \textbf{cognitive event calculus} (\CEC), a cognitive calculus and
 intensional logic, which provides a subset of the \DCEC~\cite{nsg_sb_dde_ijcai}
 \footnote{For a richer primer on the \DCEC, we invite users to view the
-appendix of that work}. The \CEC\ is a multi-sorted quantified modal logic with a 
+appendix of that work}. The \CEC\ is a multi-sorted quantified modal logic with a
 well-defined syntax and proof calculus. The use of sorts here can be thought of
 as being analogous to a typed single-inheritance programming language. The
-proof calculus of \CEC\ is based on natural deduction 
+proof calculus of \CEC\ is based on natural deduction
 \cite{gentzen_investigations_1964} and includes all the introduction and
 elimination rules for first-order logic, as well as inference schemata for
 the modal operators and related structures discussed below. At its core, the
@@ -59,16 +59,16 @@ to facilitate ease of use within fields of computer vision and natural language.
 \end{table}
 
 \begin{figure}[ht]
-% frametitle=Signature (snippet), 
+% frametitle=Signature (snippet),
 \begin{mdframed}[roundcorner=8pt, nobreak=true, frametitlealignment=\centering]
 \begin{equation*}
  \begin{aligned}
-    \mathit{S} &::= 
+    \mathit{S} &::=
     \left\{\begin{aligned}
       & \Object \sep \Agent  \sep \ActionType \sep \Action \sqsubseteq
       \Event \sep \\ &\Moment  \sep \Fluent \sep \Numeric\\
     \end{aligned} \right.
-    \\ 
+    \\
     \hspace{-29pt}\mathit{f} &::= \left\{
     \begin{aligned}
       & \action: \Agent \times \ActionType \rightarrow \Action \\
@@ -84,11 +84,11 @@ to facilitate ease of use within fields of computer vision and natural language.
     \begin{aligned}
       \mathit{x : S} \sep \mathit{c : S} \sep f(t_1,\ldots,t_n)
     \end{aligned}
-    \\ 
-    \mathit{\phi}&::= \left\{ 
+    \\
+    \mathit{\phi}&::= \left\{
     \begin{aligned}
-     & 
-        A(\ldots):\Boolean \sep 
+     &
+        A(\ldots):\Boolean \sep
         \neg \phi \sep
         \phi \land \psi \sep
         \phi \lor \psi \sep \\
@@ -116,7 +116,7 @@ to facilitate ease of use within fields of computer vision and natural language.
 \end{figure}
 
 We know provide a brief primer on the event calculus and \CEC\ to make
-accessible the following chapter. The sorts of our logic are shown in 
+accessible the following chapter. The sorts of our logic are shown in
 Table~\ref{table:sorts}. Most of the sorts shown come from the underlying EC,
 but we add here three additional sorts: \Agent, \Action, and \ActionType.
 The syntax of the \CEC\ is shown in Figure~\ref{fig:cec_syntax}. In our
@@ -130,10 +130,10 @@ An important axiom that drives much of the event calculus is:
 \end{equation*}
 
 \noindent
-which can be read as "some event $e$ \happens at time $t_{1}$ and that this $e$
+which can be read as ``some event $e$ \happens at time $t_{1}$ and that this $e$
 \initiates our fluent $f$ at $t_1$ such that at some later time $t$, and assuming
 that there has not been something causing $f$ to be \clipped (made false) between
-$t_{1}$ and $t$, then $f$ holds at time $t$". From this axiom, we see that the
+$t_{1}$ and $t$, then $f$ holds at time $t$''. From this axiom, we see that the
 event calculus is non-monotonic, such that fluents can hold at some time, but
 not hold at other times, and that this is determined by the events of the
 system at large.
@@ -163,9 +163,9 @@ some useful properties that all agents can then utilize.
 \begin{aligned}
 % &\mbox{Sample rules below. For more rules, see
 %   \cite{akratic_robots_ieee_n}.}\\
-  &\infer[{[R_{\knows}]}]{\knows(a,t_2,\phi)}{\knows(a,t_1,\Gamma), \ 
-    \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} \\ 
-& \infer[{[R_{\believes}]}]{\believes(a,t_2,\phi)}{\believes(a,t_1,\Gamma), \ 
+  &\infer[{[R_{\knows}]}]{\knows(a,t_2,\phi)}{\knows(a,t_1,\Gamma), \
+    \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} \\
+& \infer[{[R_{\believes}]}]{\believes(a,t_2,\phi)}{\believes(a,t_1,\Gamma), \
     \ \Gamma\vdash\phi, \ \ t_1 \leq t_2} \\
 & \infer[{[R_1]}]{\common(t,\perceives(a,t,\phi) \lif\knows(a,t,\phi))}{}\\
 &  \infer[{[R_2]}]{\common(t,\knows(a,t,\phi)
@@ -188,7 +188,7 @@ some useful properties that all agents can then utilize.
   \lif [\phi_1\lif\ldots\lif\phi_n\lif\psi])}{}\\
 % & \infer[{[R_{11a}]}]{\believes(a,t,\psi)}{\believes(a,t,\phi)\ \ \phi
 %   \lif \psi}\
-%\hspace{6pt} \infer[{[R_{11b}]}]{\believes(a,t,\psi \land \phi)}{\believes(a,t,\phi)\ \ \believes(a,t,\psi)}\\ 
+%\hspace{6pt} \infer[{[R_{11b}]}]{\believes(a,t,\psi \land \phi)}{\believes(a,t,\phi)\ \ \believes(a,t,\psi)}\\
 & \infer[{[R_{12}]}]{\believes(h,t,\believes(s,t,\phi))}{\says(s,h,t,\phi)} \\
 & \infer[{[R_{13}]}]{\perceives(a,t,\happens(\action(a^\ast,\alpha),t))}{\intends(a,t,\happens(\action(a^\ast,\alpha),t'))}
 \end{aligned}
