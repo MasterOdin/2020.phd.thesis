@@ -53,8 +53,8 @@ we receive the \delete\ intent with no further entities. Our orchestrator upon r
 reaches out to the executor to determine if there are any matching actions to the intent, and receives
 the following action, as defined in our STRIPS-style langauge:
 
-
-\begin{lstlisting}[caption=delete,mathescape=true]
+\begin{figure}[ht]
+\begin{lstlisting}[mathescape=true]
     (define-action delete [(Note ?x)]
         {
             :preconditions [(onScreen ?x)]
@@ -66,6 +66,8 @@ the following action, as defined in our STRIPS-style langauge:
         }
     )
 \end{lstlisting}
+\caption{The delete action in STRIPS-style language.}
+\end{figure}
 
 From this action, the orchestrator determines that we need a \Note entity to complete the
 action, and that we did not receive any such entity from the parsed statement. As such,

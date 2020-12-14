@@ -5,14 +5,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \appendix    % This command is used only once!
-%\addcontentsline{toc}{chapter}{APPENDICES}             %toc entry  or:
-\addtocontents{toc}{\parindent0pt\vskip12pt APPENDICES} %toc entry, no page #
+\addcontentsline{toc}{chapter}{APPENDICES}             %toc entry  or:
+% \parindent 0pt \vskip 12pt 
+%\addtocontents{toc}{APPENDICES} %toc entry, no page #
 
 \chapter{ACTIONS OF CAIS IN STRIPS-STYLE LANGUAGE}\label{apdx:strips}
 
 \section{General Actions}
 
-\begin{lstlisting}[caption=register]
+\begin{figure}[h]
+\begin{lstlisting}[]
     (define-action register [(Agent ?x)]
         {
             :preconditions []
@@ -21,8 +23,11 @@
         }
     )
 \end{lstlisting}
+\caption{register action}
+\end{figure}
 
-\begin{lstlisting}[caption=deregister]
+\begin{figure}[h]
+\begin{lstlisting}[]
     (define-action deregister [(Agent ?x)]
         {
             :preconditions [(inCAIS ?x)]
@@ -31,10 +36,13 @@
         }
     )
 \end{lstlisting}
+\caption{deregister action}
+\end{figure}
 
 \section{Block World}
 
-\begin{lstlisting}[caption=stack]
+\begin{figure}[h]
+\begin{lstlisting}[]
     (define-action stack [(Block ?x) (Block ?y)]
         {
             :preconditions [
@@ -50,8 +58,11 @@
         }
     )
 \end{lstlisting}
+\caption{stack action}
+\end{figure}
 
-\begin{lstlisting}[caption=unstack]
+\begin{figure}[ht]
+\begin{lstlisting}[]
     (define-action unstack [(Block ?x) (Block ?y)]
         {
             :preconditions [
@@ -68,10 +79,13 @@
         }
     )
 \end{lstlisting}
+\caption{unstack action}
+\end{figure}
 
 \section{Sticky Notes}
 
-\begin{lstlisting}[caption=pickUp,mathescape=true]
+\begin{figure}[h!]
+\begin{lstlisting}[mathescape=true]
     (define-action pickUp [(Note ?x)]
         {
             :preconditions [(onScreen ?x)]
@@ -83,8 +97,11 @@
         }
     )
 \end{lstlisting}
+\caption{pickUp action}
+\end{figure}
 
-\begin{lstlisting}[caption=putDown]
+\begin{figure}[hb]
+\begin{lstlisting}[]
     (define-action putDown [(Note ?), (Number ?y), (Number ?z)]
         {
             :preconditions [(onDevice ?x)]
@@ -96,8 +113,11 @@
         }
     )
 \end{lstlisting}
+\caption{putDown action}
+\end{figure}
 
-\begin{lstlisting}[caption=delete,mathescape=true]
+\begin{figure}[h!]
+\begin{lstlisting}[mathescape=true]
     (define-action delete [(Note ?x)]
         {
             :preconditions [(onScreen ?x)]
@@ -109,3 +129,5 @@
         }
     )
 \end{lstlisting}
+\caption{delete action}
+\end{figure}

@@ -11,13 +11,14 @@ of preconditions $pre(a)$, add effects $add(a)$, and deletion effects $del(e)$. 
 $s$, it is made up of a number of fluents that all hold true. After an action $a$ is executed
 by the system, we define the successor state of $s$ as
 $\delta(a, s) = ((s \backslash del(a)) \cup add(a))$. An example definition of an
-action from the blocks world domain is shown in Listing~\ref{lst:strips} in the STRIPS-style
+action from the blocks world domain is shown in Figure~\ref{fig:strips} in the STRIPS-style
 language we employ for our planner. A full listing of all actions for the CAIS is available in Appendix~\ref{apdx:strips}. Completion of a planning problem is then the computation of
 an action sequence, $\pi = a_{1}, a_{2}, ..., a_{m}$, where each
 $a_{i} \subseteq A$, and that following the action sequence starting at $I$
 will arrive at $G$.
 
-\begin{lstlisting}[caption=Stack action defined in STRIPS style,label={lst:strips}]
+\begin{figure}[ht]
+\begin{lstlisting}[]
     (define-action stack [(Block ?x) (Block ?y)]
         {
             :preconditions [
@@ -33,6 +34,9 @@ will arrive at $G$.
         }
     )
 \end{lstlisting}
+\caption{Stack action defined in STRIPS-style language.}
+\label{fig:strips}
+\end{figure}
 
 As stated above, plan recognition on the other hand is planning in reverse,
 wherein we now have only observations of agents to compare against a given plan.

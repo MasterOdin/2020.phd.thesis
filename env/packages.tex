@@ -10,7 +10,8 @@
 \usepackage{paralist}
 \usepackage{comment}
 \usepackage{lmodern,textcomp}
-\usepackage{subfigure}
+%\usepackage{subfigure}
+\usepackage{subcaption}
 \usepackage{makecell}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
@@ -20,7 +21,9 @@
     linktoc=all
 }
 
-\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[numbers,sort&compress]{natbib}
+\usepackage{cite}
+\renewcommand\citedash{]-[}
 
 \input{env/packages/listings}
 \input{env/packages/tikz}

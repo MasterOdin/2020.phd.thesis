@@ -27,9 +27,12 @@ classes of intelligent rooms and their capabilities that have been historically 
 From the information requirements, we look to translate them into a formalized
 version for a CAIS. The formal requirements are explained below:
 
-    \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{C}$ ,
-      frametitlebackgroundcolor=gray!25, nobreak,
-      linecolor=white,backgroundcolor=gray!10]
+    \begin{mdframed}[frametitle=Formal Requirements for $\mathcal{C}$ ,
+      %frametitlebackgroundcolor=gray!25,
+      nobreak,
+      linecolor=white,
+      %backgroundcolor=gray!10
+      ]
       Assume $\Gamma \vdash t < t + \Delta$
       \begin{enumerate}
       \item[$\mathbf{C}^f_1:$] It is common knowledge that, if an
@@ -62,8 +65,11 @@ version for a CAIS. The formal requirements are explained below:
     \end{mdframed}
 
 \begin{mdframed}[frametitle= Formal Requirements for $\mathcal{I}$ ,
-  frametitlebackgroundcolor=gray!25, nobreak,
-  linecolor=white,backgroundcolor=gray!10]
+  %frametitlebackgroundcolor=gray!25,
+  nobreak,
+  linecolor=white,
+  %backgroundcolor=gray!10
+  ]
   \begin{enumerate}
   \item[$\mathbf{I}^f_1:$] It is common knowledge that at any
     point in time $t$ an agent $x$, different from the CAIS system
@@ -122,8 +128,9 @@ a system satisfies the above requirements, we can derive a foundationally
 important (object-level in \CEC) property that we call:
 
 \begin{small}
-\begin{mdframed}[linecolor=white, frametitle=Expectation of Usefulness , frametitlebackgroundcolor=gray!25,
-  backgroundcolor=gray!10, nobreak=true ,roundcorner=8pt]
+\begin{mdframed}[linecolor=white,frametitle=Expectation of Usefulness , %frametitlebackgroundcolor=gray!25,
+%backgroundcolor=gray!10,
+nobreak=true ,roundcorner=8pt]
   If the above properties hold, then an agent $a$ that perceives that
   another agent $b$ is not aware of an event happening, believes that
   CAIS $\gamma$ will inform $b$ (Assume: $\Gamma \vdash t < t + \Delta$):
@@ -239,7 +246,8 @@ From $\mathbf{C}^f_2$, we have:
           \color{black} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{black}\believes(\gamma, t,
           %\color{violet} \believes(\gamma, t, \happens(e,t)) \color{black} \land \color{NavyBlue}\believes(\gamma, t,
                 \lnot \believes\big(b, t, \happens(e,t))) \color{black} \rightarrow
-                 \color{OliveGreen} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
+                 \color{black} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
+                 %\color{OliveGreen} \says(\gamma, b, t + \Delta, \happens(e,t))\color{black}
               \right]\right)$}
 \LeftLabel{$D_{[\common \leadsto \believes]}$}\UnaryInfC{
       $ \believes \color{black}\big(\color{black} a, t,\left[

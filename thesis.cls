@@ -141,7 +141,7 @@
                       \@afterheading
                     \fi}
 \def\@makechapterhead#1{%
-  \vspace*{0\p@}%
+  \vspace*{-25\p@}%
   {\parindent \z@ \raggedright \centering \normalfont \chaptersize
     \ifnum \c@secnumdepth >\m@ne
       \ifchap
@@ -157,7 +157,7 @@
   }}
 
 \def\@makeschapterhead#1{%    heading for chapter* command (no numbering)
-  \vspace*{0\p@}%
+  \vspace*{-25\p@}%
   {\parindent \z@ \raggedright \centering
     \normalfont  \chaptersize 
     \interlinepenalty\@M
